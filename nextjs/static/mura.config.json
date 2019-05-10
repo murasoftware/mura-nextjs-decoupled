@@ -4,7 +4,19 @@
 			"templateArray":["Default"],
 			"collectionLayoutArray":["NextJSCollectionLayout"],
 			"hashurls":false,
-			"primaryContentTypes":"Page,Link,File"
+			"primaryContentTypes":"Page,Link,File",
+			"editableAttributesArray":[
+				{
+					"attribute":"title",
+					"type":"text",
+					"required":true,
+					"validation":"None",
+					"message":"The content title is required",
+					"enableMuraTag":false
+
+				}
+			],
+			"imageAttributesArray":[],
 		},
 		"modules":{
 			"Example":{

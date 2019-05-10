@@ -16,7 +16,7 @@ export default class extends React.Component {
 		if(this.props.content.contentid){
 			template=<Layout {...this.props}>
 				<script dangerouslySetInnerHTML={{__html: MuraJSPlaceholder}}></script>
-				<h1>{this.props.content.title}</h1>
+				<h1 dangerouslySetInnerHTML={{__html: this.props.content.title}}></h1>
 				<div dangerouslySetInnerHTML={{__html: this.props.content.body}}></div>
 				<div dangerouslySetInnerHTML={{__html: this.props.region.maincontent}}></div>
 				<div id="htmlqueues"></div>
