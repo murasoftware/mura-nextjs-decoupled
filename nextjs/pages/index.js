@@ -136,8 +136,8 @@ export default class extends React.Component {
 				}
 
 				Mura.loader()
-				.loadcss(Mura.rootpath + '/core/modules/v1/core_assets/css/mura.7.2.min.css')
-				.loadcss(Mura.rootpath + '/core/modules/v1/core_assets/css/mura.7.2.skin.css');
+				.loadcss(Mura.rootpath + '/core/modules/v1/core_assets/css/mura.8.min.css')
+				.loadcss(Mura.rootpath + '/core/modules/v1/core_assets/css/mura.8.skin.css');
 			},
 			50
 		)
