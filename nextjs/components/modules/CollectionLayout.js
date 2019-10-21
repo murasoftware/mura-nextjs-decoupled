@@ -13,7 +13,7 @@ export default class CollectionLayout extends React.Component {
 				<div>
 				<ul>
 				{this.state.collection.get('items').map(function(item, i){
-					return <li><Link key={item.get('contentid').toString()} href="/" as={'/' + item.get('filename')}>
+					return <li key={item.get('contentid').toString()}><Link  href="/" as={'/' + item.get('filename')}>
 					<a>{item.get('menutitle')}</a>
 					</Link></li>;
 				})}
