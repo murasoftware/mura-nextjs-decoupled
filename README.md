@@ -4,7 +4,7 @@
 
 First you need to start Mura up:
 ```
-git clone https://github.com/blueriver/MuraNextJSDecoupled.git
+git clone https://github.com/murasoftware/mura-nextjs-decoupled.git
 cd MuraNextJSDecoupled
 git checkout master
 cd mura
@@ -55,7 +55,7 @@ https://docs.getmura.com/v7-1/mura-developers/mura-rendering/murajs/
 
 ## Docker Image
 
-https://hub.docker.com/r/blueriver/muracms/
+https://hub.docker.com/r/murasoftware/mura/
 
 ## Theming
 
@@ -65,17 +65,17 @@ With this use case Mura modules, templates and content type includes are now loc
 
 There is a mura.config.json file that the Mura service reads in when loading to get what it needs to know from the client.
 
-https://github.com/blueriver/MuraNextJSDecoupled/blob/master/nextjs/static/mura.config.json
+https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/nextjs/static/mura.config.json
 
 You tell Mura about it as an environment variable
 
-https://github.com/blueriver/MuraNextJSDecoupled/blob/master/mura/docker-compose.yml#L22
+https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/mura/docker-compose.yml#L22
 
 Here you can see an example of registering a module created from within NextJS and registered via the mura.config.json and mura.config.js
 
-https://github.com/blueriver/MuraNextJSDecoupled/blob/master/nextjs/mura.config.js#L7-L13
+https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/nextjs/mura.config.js#L7-L13
 
-https://github.com/blueriver/MuraNextJSDecoupled/blob/master/nextjs/static/mura.config.json#L8-L13
+https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/nextjs/static/mura.config.json#L8-L13
 
 ## Mura ORM Assembler and Scaffolder
 
