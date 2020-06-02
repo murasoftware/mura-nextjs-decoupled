@@ -12,6 +12,7 @@ RUN ln -sf /dev/stdout /opt/lucee/web/logs/application.log \
 	&& ln -sf /dev/stdout /opt/lucee/web/logs/exception.log
 
 COPY web.xml /usr/local/tomcat/conf/
+COPY mura.config.json /var/www/config/
 
 # Copy Mura files
 # COPY . /var/www

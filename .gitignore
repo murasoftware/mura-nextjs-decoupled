@@ -25,3 +25,5 @@
 */.next
 */node_modules
 */sftp-config.json
+.next
+node_modules

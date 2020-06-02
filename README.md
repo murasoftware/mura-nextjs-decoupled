@@ -7,7 +7,6 @@ First you need to start Mura up:
 git clone https://github.com/murasoftware/mura-nextjs-decoupled.git
 cd MuraNextJSDecoupled
 git checkout master
-cd mura
 docker-compose up
 ```
 
@@ -23,7 +22,6 @@ Second you need to start Angular up:
 
 Then in terminal go to the ./nextjs directory within the project root:
 ```
-cd {project_root}/nextjs
 npm install
 ```
 
@@ -44,14 +42,15 @@ The intergration is entirely done with Mura.js installed as an npm within the an
 
 ## Mura Version
 
-You must use Mura 7.1.328 of higher
+You must use Mura 10.0.80 of higher
 
 ## NPM
 https://www.npmjs.com/package/mura.js
 
 ## Mura.js documentation
 
-https://docs.getmura.com/v7-1/mura-developers/mura-rendering/murajs/
+https://docs.getmura.com/v10/mura-api/#section-murajs
+https://docs.getmura.com/v10/mura-api/decoupled-mura-js-frameworks/
 
 ## Docker Image
 
@@ -65,17 +64,17 @@ With this use case Mura modules, templates and content type includes are now loc
 
 There is a mura.config.json file that the Mura service reads in when loading to get what it needs to know from the client.
 
-https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/nextjs/static/mura.config.json
+https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/mura.config.json
 
 You tell Mura about it as an environment variable
 
-https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/mura/docker-compose.yml#L22
+https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/docker-compose.yml#L22
 
 Here you can see an example of registering a module created from within NextJS and registered via the mura.config.json and mura.config.js
 
-https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/nextjs/mura.config.js#L7-L13
+https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/mura.config.js#L7-L13
 
-https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/nextjs/static/mura.config.json#L8-L13
+https://github.com/murasoftware/mura-nextjs-decoupled/blob/master/mura.config.json#L8-L13
 
 ## Mura ORM Assembler and Scaffolder
 
@@ -85,4 +84,4 @@ https://docs.getmura.com/v7-1/mura-developers/mura-beans-objects/custom-objects/
 
 ## Mura Module Configurator Markup Conventions
 
-https://docs.getmura.com/v7-1/mura-ui-markup-conventions/custom-module-display-object-configurators/
+https://docs.getmura.com/v10/extending-mura/#section-configurators
