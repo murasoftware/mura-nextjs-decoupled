@@ -5,7 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "eslint src && echo \"no test specified\"",
+    "lint": "eslint src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test"
+    }
   },
   "dependencies": {
     "next": "9.4.4",
@@ -13,6 +21,7 @@
     "react-dom": "16.13.1"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.3.0",
