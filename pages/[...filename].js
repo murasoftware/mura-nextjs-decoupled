@@ -97,12 +97,12 @@ export async function getServerSideProps(context) {
     function getPrimaryNavData(){
         return Mura.getFeed('content')
             .where()
-            .prop('parentid').isEQ('00000000000000000000000000000000001')
+            .prop('parentid').isEQ(Mura.homeid)
             .sort('orderno')
             .getQuery()
             .then(collection=>{
                 let tempArray=collection.getAll().items;
-                tempArray.unshift({url:"/",menutitle:"Home",title:"Home",filename:"",contentid:"00000000000000000000000000000000001"});
+                tempArray.unshift({url:"/",menutitle:"Home",title:"Home",filename:"",contentid:Mura.homeid});
                 return tempArray;
             });
     }
