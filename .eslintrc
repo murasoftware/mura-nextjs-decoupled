@@ -83,7 +83,8 @@
           ["context", "./src/context"],
           ["config", "./src/config"],
           ["hooks", "./src/hooks"],
-          ["queries", "./src/queries"]
+          ["queries", "./src/queries"],
+          ["helpers", "./src/helpers"]
         ],
         "extensions": [".ts", ".js", ".jsx", ".json"]
       }
