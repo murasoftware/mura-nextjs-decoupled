@@ -4,9 +4,11 @@ function Image(props) {
   const { src, alt } = props;
   return (
     <MuraDecorator {...props}>
-      <figure>
-        <img src={src} alt={alt} loading="lazy" />
-      </figure>
+      <div className="mura-object-content">
+        <figure>
+          <img src={src} alt={alt} loading="lazy" />
+        </figure>
+      </div>
     </MuraDecorator>
   );
 }

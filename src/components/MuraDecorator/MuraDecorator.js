@@ -23,7 +23,7 @@ function MuraDecorator(props) {
 
   return (
     <div {...domObject}>
-      <div className="mura-object-content">{props.children}</div>
+      {props.children}
     </div>
   );
 }
