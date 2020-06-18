@@ -1,14 +1,11 @@
 module.exports = {
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Note: we provide webpack above so you should not `require` it
-    // Perform customizations to webpack config
-    // Important: return the modified config
-    // config.plugins.push(new webpack.IgnorePlugin(/\/pages/edit/))
-    return config
+  exportPathMap: async function(
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId },
+  ) {
+
+    let newPathMap = {...defaultPathMap};
+    delete newPathMap['/edit/[...page]'];
+    return newPathMap;
   },
-  webpackDevMiddleware: (config) => {
-    // Perform customizations to webpack dev middleware config
-    // Important: return the modified config
-    return config
-  },
-}
+};
