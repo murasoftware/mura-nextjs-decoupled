@@ -24,7 +24,7 @@ function MuraDecorator(props) {
   });
 
   return (
-     <div {...domObject}>
+     <div {...domObject} className="mura-object">
       {props.label ?
         <MuraMeta label={props.label} labeltag={props.labeltag}></MuraMeta>
         :
