@@ -1,19 +1,15 @@
 import MuraDecorator from '../MuraDecorator';
 import React from 'react';
 
-function HeadingText({ element, value }) {
-  const HeadingEl = element;
-  return <HeadingEl>{value}</HeadingEl>;
-}
-
 function Text(props) {
-  const { label, labeltag } = props;
+  //console.log("Component -> Text: ", props);
 
   return (
     <MuraDecorator {...props}>
       <div className="mura-object-meta-wrapper">
         <div className="mura-object-meta">
-          <HeadingText element={labeltag} value={label} />
+        <div dangerouslySetInnerHTML={{__html: props.source}}></div>
+          {/* <MarkdownModule>{props.source}</MarkdownModule> */}
         </div>
       </div>
     </MuraDecorator>

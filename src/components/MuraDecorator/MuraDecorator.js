@@ -1,10 +1,12 @@
 import React, { Fragment, useContext } from "react";
 import GlobalContext from "../GlobalContext";
+import MuraMeta from "../MuraMeta";
 
 function MuraDecorator(props) {
   const [isEditMode] = useContext(GlobalContext);
-  console.log("MuraDecorator -> isEditMode", isEditMode);
+ // console.log("MuraDecorator -> isEditMode", isEditMode);
   let domObject = {};
+
   Object.keys(props).forEach((key) => {
     if (isEditMode) {
       if (typeof props[key] === "string") {
@@ -22,8 +24,15 @@ function MuraDecorator(props) {
   });
 
   return (
-    <div {...domObject}>
-      {props.children}
+     <div {...domObject}>
+      {props.label ?
+        <MuraMeta label={props.label} labeltag={props.labeltag}></MuraMeta>
+        :
+        null
+      }
+      <div className="mura-object-content">
+          {props.children}
+      </div>
     </div>
   );
 }

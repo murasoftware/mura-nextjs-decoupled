@@ -12,11 +12,10 @@
     "help": "next export --help"
   },
   "husky": {
-    "hooks": {
-     
-    }
+    "hooks": {}
   },
   "dependencies": {
+    "mura.js": "^1.0.237",
     "next": "^9.4.5-canary.12",
     "react": "16.13.1",
     "react-dom": "16.13.1",

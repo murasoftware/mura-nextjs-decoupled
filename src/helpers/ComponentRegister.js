@@ -2,9 +2,13 @@ import Image from '../components/Image';
 import Container from '../components/Container';
 import Video from '../components/Video';
 import Text from '../components/Text';
+import TextComponent from '../components/TextComponent';
 
 const getComponent = item => {
   let Component;
+
+//  console.log("getComponent -> item.objectname: ",item.objectname);
+
   switch (item.objectname) {
     case 'Image':
       Component = <Image key={item.instanceid} {...item} />;
@@ -13,7 +17,11 @@ const getComponent = item => {
       Component = <Container key={item.instanceid} {...item} />;
       break;
     case '':
-      if (item.videoid) {
+      if(item.sourcetype == 'component') {
+        Component = <TextComponent key={item.instanceid} {...item} />;
+        break;
+      }
+      else if (item.videoid) {
         Component = <Video key={item.instanceid} {...item} />;
         break;
       }
