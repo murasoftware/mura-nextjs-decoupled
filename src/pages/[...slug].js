@@ -18,14 +18,19 @@ export async function getStaticPaths(context) {
 }
 
 export async function getStaticProps(context) {
+  // console.log("getStaticProps -> context", context)
   let props = await MuraFetch(context);
-//  console.log(props);
+  
+  
   return props;
 }
 
 export default function Slug(props) { 
   const { route, content, title, children, navigation } = props;
+  
   const router = useRouter();
+  
+  
 
   return (
     <MainLayout {...props}>
