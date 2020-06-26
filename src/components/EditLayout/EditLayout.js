@@ -1,16 +1,16 @@
-
-import { useContext } from "react";
+import React,{ useContext, useEffect } from "react";
 import GlobalContext from "../GlobalContext";
-
 const EditLayout = (props) => {
     const [isEditMode, setIsEditMode]  = useContext(GlobalContext);
-    setIsEditMode(true);
+
+    useEffect(()=>{
+        setIsEditMode(true);
+    },[setIsEditMode])
     return (
-    <div className="mura-editable">
-        <h1>This is your edit layout</h1>
-        {props.children}
-    </div>
+        <div>
+            {props.children}
+            <div id="htmlqueues"></div>
+        </div>
     )
 }
-
 export default EditLayout;

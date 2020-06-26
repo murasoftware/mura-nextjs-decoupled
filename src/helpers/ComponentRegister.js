@@ -7,7 +7,7 @@ import TextComponent from '../components/TextComponent';
 const getComponent = item => {
   let Component;
 
-//  console.log("getComponent -> item.objectname: ",item.objectname);
+//  console.log("getComponent -> item.objectname: ",item);
 
   switch (item.objectname) {
     case 'Image':

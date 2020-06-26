@@ -5,11 +5,10 @@ import {getData} from "../helpers/DataFetch";
 import Link from "next/link";
 import React,{Fragment} from "react";
 import { useRouter } from "next/router";
-import MuraHelper from "../helpers/MuraFetch";
-import MuraFetch,{getMuraPaths} from "../helpers/MuraFetch";
+import MuraHelper,{getMuraPaths} from "../helpers/MuraHelper";
 
-export async function getStaticPaths(context) {
-  const paths = await getMuraPaths(context);
+export async function getStaticPaths() {
+  const paths = await getMuraPaths();
   
   return {
     paths: paths,
@@ -18,19 +17,18 @@ export async function getStaticPaths(context) {
 }
 
 export async function getStaticProps(context) {
-  let props = await MuraFetch(context);
-//  console.log(props);
+  let props = await MuraHelper(context);
   return props;
 }
 
 export default function Slug(props) { 
-  const { route, content, title, children, navigation } = props;
+  const { modules, navigation } = props;
   const router = useRouter();
 
   return (
     <MainLayout {...props}>
     <MainRouter items={navigation} />
-      {content && <DisplayRegion {...props} />}
+      {modules && <DisplayRegion {...props} />}
     </MainLayout>
   );
 

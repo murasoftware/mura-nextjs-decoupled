@@ -2,7 +2,7 @@ import MuraDecorator from '../MuraDecorator';
 import React from 'react';
 
 function TextComponent(props) {
-  console.log("Component -> TextComponent: ", props);
+//  console.log("Component -> TextComponent: ", props);
 
   return (
     <MuraDecorator {...props}>

@@ -4,11 +4,11 @@ import MuraMeta from "../MuraMeta";
 
 function MuraDecorator(props) {
   const [isEditMode] = useContext(GlobalContext);
- // console.log("MuraDecorator -> isEditMode", isEditMode);
+//  console.log("MuraDecorator -> isEditMode", props);
   let domObject = {};
 
   Object.keys(props).forEach((key) => {
-    if (isEditMode) {
+    if (isEditMode || true) {
       if (typeof props[key] === "string") {
         domObject[`data-${key}`] = props[key];
       }
@@ -24,7 +24,7 @@ function MuraDecorator(props) {
   });
 
   return (
-     <div {...domObject} className="mura-object">
+     <div {...domObject}>
       {props.label ?
         <MuraMeta label={props.label} labeltag={props.labeltag}></MuraMeta>
         :

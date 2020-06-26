@@ -2,10 +2,7 @@ import Mura from 'mura.js';
 
 let muraIsInit = false;
 
-export const getMuraPaths = async(context) => {
-	context = context === null ? {} : context;
-	muraInit(context);
-
+export const getMuraPaths = async() => {
 	const pathList = await getPrimaryNavData();
 
 	const paths = pathList.map((item) => {
@@ -14,25 +11,20 @@ export const getMuraPaths = async(context) => {
 	return paths;
 }
 
-function muraInit(context) {
-	console.log("MURA INIT: ", muraIsInit);
-
+const muraInit = (init) => {
 	if(muraIsInit)
 		return;
 
-	console.log("PATHS CONTEXT: ",context);
+	Mura.init(init);
 
-	Mura.init({
-		rootpath:"http://localhost:8888",
-		siteid:"default",
-		processMarkup:false
-	});
 	muraIsInit = true;
 }
 
-const MuraFetch = async (context) => {
-	muraInit(context);
-	
+export const getRootPath = () => {
+	return Mura.rootpath;
+}
+
+const MuraHelper = async (context) => {
 	//Don't rely on ready event for when to fire
 	Mura.holdReady(true);
 
@@ -47,23 +39,22 @@ const MuraFetch = async (context) => {
 	  });
 	}
 
-
 	Mura.holdReady(false);
 
+	const props = {
+		navigation,
+		title: "in [name.js]",
+		modules: modules,
+		content: content
+	  } 
+
 	return {
-		props: {
-		  navigation,
-		  title: "in [name.js]",
-		  content: modules,
-		  url: "http://localhost:8888//index.cfm/_api/json/v1/default//content",
-		},
+		props
 	};
 }
 
 function renderContent(context) {
 	let query={};
-
-//	console.log(context);
 
 	if(context.browser) {
 		query=Mura.getQueryStringParams()
@@ -79,9 +70,11 @@ function renderContent(context) {
 	else if(context.params && context.params.slug) {
 		filename = context.params.slug;
 	}
+	else if(context.params && context.params.page) {
+		filename = context.params.page;
+	}
 
 	return Mura.renderFilename(filename,query).then((rendered)=>{
-//		console.log("FETCHED: ", rendered.properties.displayregions.primarycontent);
 
 		return rendered;
 	},(rendered)=>{
@@ -120,4 +113,11 @@ function getPrimaryNavData() {
 		});
 }
 
-export default MuraFetch;
+muraInit({
+	rootpath:"http://localhost:8888",
+	siteid:"default",
+	processMarkup:false
+});
+
+
+export default MuraHelper;

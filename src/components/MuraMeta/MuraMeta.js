@@ -1,6 +1,5 @@
 const MuraMeta = ({label,labeltag}) => {
 	const LabelHeader = labeltag ? `${labeltag}` : 'h2';
-	console.log("META!");
 
 	return (
 		<div>
