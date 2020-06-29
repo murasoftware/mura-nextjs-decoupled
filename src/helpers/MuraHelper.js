@@ -1,6 +1,7 @@
 import Mura from 'mura.js';
 
 let muraIsInit = false;
+let contextIsInit = false;
 
 export const getMuraPaths = async() => {
 	const pathList = await getPrimaryNavData();
@@ -12,14 +13,48 @@ export const getMuraPaths = async() => {
 }
 
 export const getRootPath = () => {
+	if(!muraIsInit) {
+		Mura.init({
+			rootpath:"http://localhost:8888",
+			siteid:"default",
+			processMarkup:false
+		});
+		muraIsInit = true;
+	}
+
 	return Mura.rootpath;
 }
 
 const MuraHelper = async (context) => {
+
+	console.log("CONTEXT",context);
+	let modules = [];
+
+	if(context.res && !contextIsInit) {
+		Mura.init({
+			rootpath:"http://localhost:8888",
+			siteid:"default",
+			processMarkup:false,
+			response:context.res,
+			request:context.req
+		});
+		contextIsInit = true;
+		muraIsInit = true;
+	}
+	else if(!muraIsInit) {
+		Mura.init({
+			rootpath:"http://localhost:8888",
+			siteid:"default",
+			processMarkup:false
+		});
+		muraIsInit = true;
+	}
+
+
 	//Don't rely on ready event for when to fire
 	Mura.holdReady(true);
 
-	let modules = [];
+
 	const muraObject = await renderContent(context);
 	const navigation = await getPrimaryNavData();
 	const content = muraObject.getAll();
@@ -91,6 +126,15 @@ async function renderContent(context) {
 }
 
 async function getPrimaryNavData() {
+
+	if(!muraIsInit) {
+		Mura.init({
+			rootpath:"http://localhost:8888",
+			siteid:"default",
+			processMarkup:false
+		});		
+	}
+
 	return Mura.getFeed('content')
 		.where()
 		.prop('parentid').isEQ(Mura.homeid)
@@ -102,12 +146,6 @@ async function getPrimaryNavData() {
 			return tempArray;
 		});
 }
-
-Mura.init({
-	rootpath:"http://localhost:8888",
-	siteid:"default",
-	processMarkup:false
-});
 
 console.log("MIN: ",Mura.isInNode());
 
