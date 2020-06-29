@@ -14,7 +14,7 @@ function Edit(props) {
   const router = useRouter();
 
   return (
-    <EditLayout>
+    <EditLayout {...props}>
       <Head>
         <link href={getRootPath() + '/core/modules/v1/core_assets/css/mura.10.min.css'} rel="stylesheet" key="test"/>
         <link href={getRootPath() + '/core/modules/v1/core_assets/css/mura.10.skin.css'} rel="stylesheet" key="test"/>

@@ -11,15 +11,6 @@ export const getMuraPaths = async() => {
 	return paths;
 }
 
-const muraInit = (init) => {
-	if(muraIsInit)
-		return;
-
-	Mura.init(init);
-
-	muraIsInit = true;
-}
-
 export const getRootPath = () => {
 	return Mura.rootpath;
 }
@@ -31,7 +22,7 @@ const MuraHelper = async (context) => {
 	let modules = [];
 	const muraObject = await renderContent(context);
 	const navigation = await getPrimaryNavData();
-	const content = muraObject.properties;
+	const content = muraObject.getAll();
 
 	if(content.displayregions && content.displayregions.primarycontent) {
 		modules = content.displayregions.primarycontent.local.items.map((item) => {  
@@ -48,12 +39,12 @@ const MuraHelper = async (context) => {
 		content: content
 	  } 
 
-	return {
+	  return {
 		props
 	};
 }
 
-function renderContent(context) {
+async function renderContent(context) {
 	let query={};
 
 	if(context.browser) {
@@ -75,7 +66,6 @@ function renderContent(context) {
 	}
 
 	return Mura.renderFilename(filename,query).then((rendered)=>{
-
 		return rendered;
 	},(rendered)=>{
 		if(!rendered){
@@ -100,7 +90,7 @@ function renderContent(context) {
     })
 }
 
-function getPrimaryNavData() {
+async function getPrimaryNavData() {
 	return Mura.getFeed('content')
 		.where()
 		.prop('parentid').isEQ(Mura.homeid)
@@ -113,11 +103,12 @@ function getPrimaryNavData() {
 		});
 }
 
-muraInit({
+Mura.init({
 	rootpath:"http://localhost:8888",
 	siteid:"default",
 	processMarkup:false
 });
 
+console.log("MIN: ",Mura.isInNode());
 
 export default MuraHelper;
