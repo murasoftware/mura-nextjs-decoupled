@@ -10,11 +10,7 @@ const getVideoPlayer = props => {
 
 function Video(props) {
   const { instanceid, videoid, videoplatform } = props;
-  return (
-    <MuraDecorator {...props}>
-      <div className="mura-object-content">{getVideoPlayer(props)}</div>
-    </MuraDecorator>
-  );
+  return getVideoPlayer(props);
 }
 
 export default Video;

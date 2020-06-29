@@ -2,7 +2,6 @@ import Image from '../components/Image';
 import Container from '../components/Container';
 import Video from '../components/Video';
 import Text from '../components/Text';
-import TextComponent from '../components/TextComponent';
 
 const getComponent = item => {
   let Component;

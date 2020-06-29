@@ -1,4 +1,5 @@
 import React,{ useContext, useEffect } from "react";
+import Mura from 'mura.js'
 
 const MainLayout = (props) => {
     const {content} = props;

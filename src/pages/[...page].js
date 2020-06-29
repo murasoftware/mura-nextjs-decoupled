@@ -16,12 +16,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  console.log("CON",context);
+  //console.log("CON",context);
   let props = await MuraHelper(context);
   return props;
 }
 
-export default function Slug(props) { 
+export default function Page(props) { 
   const { modules, navigation } = props;
   const router = useRouter();
 
@@ -32,7 +32,7 @@ export default function Slug(props) {
         <link href={getRootPath() + '/core/modules/v1/core_assets/css/mura.10.skin.css'} rel="stylesheet" key="skin"/>
       </Head>
       <MainRouter items={navigation} />
-        {modules && <DisplayRegion {...props} />}
+      {props.content && props.content.displayregions && props.content.displayregions.primarycontent && <DisplayRegion region={props.content.displayregions.primarycontent} />}
     </MainLayout>
   );
 

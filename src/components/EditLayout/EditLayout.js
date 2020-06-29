@@ -31,10 +31,9 @@ function contentDidChange(_content){
     setTimeout(
         ()=>{
 
-            console.log("timeout",_content);
+           // console.log("timeout",_content);
 
             Mura('#htmlqueues').html(content.get('htmlheadqueue') + content.get('htmlfootqueue'));
-            
             Mura.init(Mura.extend({queueObjects:false,content:content}));
             Mura.holdReady(false)
         },

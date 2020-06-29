@@ -7,7 +7,7 @@ export const getMuraPaths = async() => {
 	const pathList = await getPrimaryNavData();
 
 	const paths = pathList.map((item) => {
-		return { params: { slug: item.filename.split('/') } };
+		return { params: { page: item.filename.split('/') } };
 	});
 	return paths;
 }
@@ -27,7 +27,7 @@ export const getRootPath = () => {
 
 const MuraHelper = async (context) => {
 
-	console.log("CONTEXT",context);
+	//"CONTEXT",context);
 	let modules = [];
 
 	if(context.res && !contextIsInit) {
@@ -59,18 +59,11 @@ const MuraHelper = async (context) => {
 	const navigation = await getPrimaryNavData();
 	const content = muraObject.getAll();
 
-	if(content.displayregions && content.displayregions.primarycontent) {
-		modules = content.displayregions.primarycontent.local.items.map((item) => {  
-		return item;
-	  });
-	}
-
 	Mura.holdReady(false);
 
 	const props = {
 		navigation,
 		title: "in [name.js]",
-		modules: modules,
 		content: content
 	  } 
 
@@ -90,15 +83,10 @@ async function renderContent(context) {
 	
 	let filename='';
 
-	if(context.params && context.params.filename) {
-		filename=context.params.filename.join('/');
-	}
-	else if(context.params && context.params.slug) {
-		filename = context.params.slug;
-	}
-	else if(context.params && context.params.page) {
+	if(context.params && context.params.page) {
 		filename = context.params.page;
 	}
+	console.log(filename);
 
 	return Mura.renderFilename(filename,query).then((rendered)=>{
 		return rendered;
@@ -147,6 +135,6 @@ async function getPrimaryNavData() {
 		});
 }
 
-console.log("MIN: ",Mura.isInNode());
+//console.log("MIN: ",Mura.isInNode());
 
 export default MuraHelper;

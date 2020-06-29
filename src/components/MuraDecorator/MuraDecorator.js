@@ -5,7 +5,9 @@ import MuraMeta from "../MuraMeta";
 function MuraDecorator(props) {
   const [isEditMode] = useContext(GlobalContext);
 //  console.log("MuraDecorator -> isEditMode", props);
-  let domObject = {};
+  let domObject = {
+    className : 'mura-object mura-async-object'
+  };
 
   Object.keys(props).forEach((key) => {
     if (isEditMode || true) {
@@ -19,7 +21,7 @@ function MuraDecorator(props) {
     }
 
     if (key === "class") {
-      domObject[`className`] = `mura-object mura-async-object ${props[key]}`;
+      domObject.className += ` ${props[key]}`;
     }
   });
 

@@ -1,0 +1,46 @@
+{
+	"global":{
+		"rendererProperties":{
+			"templateArray":["default"],
+			"collectionLayoutArray":["NextJSCollectionLayout"],
+			"hashurls":false,
+			"primaryContentTypes":"Page,Link,File",
+			"editableAttributesArray":[
+				{
+					"attribute":"title",
+					"type":"text",
+					"required":true,
+					"validation":"None",
+					"message":"The content title is required",
+					"enableMuraTag":false
+
+				}
+			],
+			"imageAttributesArray":[],
+		},
+		"modules":{
+			"Example":{
+				"name":"My Module",
+				"contenttypes":"*",
+				"configurator":[
+					{"type":"text","name":"myvar","label":"My Label"}
+				]
+			},
+			"NextJSCollectionLayout":{
+				"name":"NextJS Collection Layout",
+				"contenttypes":"",
+				"configurator":""
+			}
+		},
+	"sites":{
+		"default":{
+			"rendererProperties":{
+
+			},
+			"modules":{
+
+			}
+		}
+	}
+	}
+}
