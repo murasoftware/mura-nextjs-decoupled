@@ -18,9 +18,11 @@ const MainLayout = (props) => {
 function contentDidChange(_content){
     const content=Mura.getEntity('content').set(_content);
 
-    //The setTimeout was used to prevent mysterious double processing of previous html in element
+    if(content.get('redirect')){
+        location.href=content.get('redirect')
+        return;
+    }
     
-    //The setTimeout was used to prevent mysterious double processing of previous html in element
     setTimeout(
         ()=>{
 

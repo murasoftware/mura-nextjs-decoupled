@@ -4,11 +4,9 @@ import Mura from "mura.js";
 
 const EditLayout = (props) => {
     const [isEditMode, setIsEditMode]  = useContext(GlobalContext);
-    const {content} = props;
 
     useEffect(()=>{
         setIsEditMode(true);
-        contentDidChange(content);
     },[setIsEditMode])
 
     return (
@@ -18,15 +16,5 @@ const EditLayout = (props) => {
         </div>
     )
 }
-
-function contentDidChange(_content){
-    const content=Mura.getEntity('content').set(_content);
-
-    if(content.get('redirect')){
-        location.href=content.get('redirect')
-        return;
-    }
-}
-
 
 export default EditLayout;
