@@ -1,6 +1,5 @@
 import React, { Fragment, useContext } from "react";
 import GlobalContext from "../GlobalContext";
-import MuraHelper from "../../helpers/MuraHelper";
 import MuraMeta from "../MuraMeta";
 import Mura from "mura.js";
 
@@ -11,8 +10,11 @@ function MuraDecorator(props) {
     className : 'mura-object mura-async-object'
   };
 
+  const {setStyleRegions} = props;
+
   if(Mura.isInNode()){
     const myStyleSheet=Mura.recordModuleStyles(Object.assign({},props));
+    setStyleRegions(myStyleSheet);
   }
 
   Object.keys(props).forEach((key) => {
@@ -32,6 +34,7 @@ function MuraDecorator(props) {
   });
 
   return (
+    
      <div {...domObject}>
       {props.label ?
         <MuraMeta label={props.label} labeltag={props.labeltag}></MuraMeta>
@@ -41,6 +44,7 @@ function MuraDecorator(props) {
       <div className="mura-object-content">
           {props.children}
       </div>
+      <div className="footer"></div>
     </div>
   );
 }

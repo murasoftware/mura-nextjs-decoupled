@@ -32,7 +32,7 @@ export default function Page(props) {
         <link href={getRootPath() + '/core/modules/v1/core_assets/css/mura.10.skin.css'} rel="stylesheet" key="skin"/>
       </Head>
       <MainRouter items={navigation} />
-      {props.content && props.content.displayregions && props.content.displayregions.primarycontent && <DisplayRegion region={props.content.displayregions.primarycontent} />}
+      {props.content && props.content.displayregions && props.content.displayregions.primarycontent && <DisplayRegion props={props} region={props.content.displayregions.primarycontent} />}
     </MainLayout>
   );
 

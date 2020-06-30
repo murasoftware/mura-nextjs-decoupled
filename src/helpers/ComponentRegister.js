@@ -3,17 +3,17 @@ import Container from '../components/Container';
 import Video from '../components/Video';
 import Text from '../components/Text';
 
-const getComponent = item => {
+const getComponent = (item,setStyleRegions) => {
   let Component;
 
-//  console.log("getComponent -> item.objectname: ",item);
+//  console.log("getComponent -> item.objectname: ",setStyleRegions);
 
   switch (item.objectname) {
     case 'Image':
       Component = <Image key={item.instanceid} {...item} />;
       break;
     case 'Container':
-      Component = <Container key={item.instanceid} {...item} />;
+      Component = <Container key={item.instanceid} {...item} setStyleRegions={setStyleRegions}/>;
       break;
     case '':
       if(item.sourcetype == 'component') {

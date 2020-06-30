@@ -28,8 +28,6 @@ export const getRootPath = () => {
 }
 
 const MuraHelper = async (context) => {
-
-	//"CONTEXT",context);
 	let modules = [];
 
 	if(context.res && !contextIsInit) {
@@ -51,7 +49,6 @@ const MuraHelper = async (context) => {
 		});
 		muraIsInit = true;
 	}
-
 
 	//Don't rely on ready event for when to fire
 	Mura.holdReady(true);
@@ -115,7 +112,6 @@ async function renderContent(context) {
 }
 
 async function getPrimaryNavData() {
-
 	if(!muraIsInit) {
 		Mura.init({
 			rootpath:"http://localhost:8888",
