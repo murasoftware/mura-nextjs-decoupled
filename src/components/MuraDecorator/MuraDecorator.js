@@ -1,6 +1,8 @@
 import React, { Fragment, useContext } from "react";
 import GlobalContext from "../GlobalContext";
+import MuraHelper from "../../helpers/MuraHelper";
 import MuraMeta from "../MuraMeta";
+import Mura from "mura.js";
 
 function MuraDecorator(props) {
   const [isEditMode] = useContext(GlobalContext);
@@ -9,14 +11,18 @@ function MuraDecorator(props) {
     className : 'mura-object mura-async-object'
   };
 
-  Object.keys(props).forEach((key) => {
-    if (isEditMode || true) {
-      if (typeof props[key] === "string") {
-        domObject[`data-${key}`] = props[key];
-      }
+  if(Mura.isInNode()){
+    Mura.recordModuleStyles(Object.assign({},props));
+  }
 
+  Object.keys(props).forEach((key) => {
+    if ((isEditMode || true) && key !== "children") {
       if (typeof props[key] === "object" && key !== "children") {
         domObject[`data-${key}`] = JSON.stringify(props[key]);
+      } else if(typeof props[key] != 'undefined'
+      && !(typeof props[key] === "string" && props[key] == ''))
+      {
+        domObject[`data-${key}`] = props[key];
       }
     }
 

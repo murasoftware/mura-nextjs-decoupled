@@ -6,7 +6,7 @@ function Example(props) {
 
   return (
     <div>
-        <h3>{this.props.myvar || 'Enter example variable in configurator'}</h3>
+        <h3>{props.myvar || 'Enter example variable in configurator'}</h3>
     </div>
   );
 }

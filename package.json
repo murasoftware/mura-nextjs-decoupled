@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "test": "eslint src && echo \"no test specified\"",
@@ -15,7 +15,7 @@
     "hooks": {}
   },
   "dependencies": {
-    "mura.js": "^1.0.240",
+    "mura.js": "^1.0.241",
     "next": "^9.4.5-canary.23",
     "react": "16.13.1",
     "react-dom": "16.13.1",

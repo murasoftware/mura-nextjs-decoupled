@@ -1,5 +1,7 @@
 import Mura from 'mura.js';
 
+require('../../mura.config.js');
+
 let muraIsInit = false;
 let contextIsInit = false;
 
@@ -53,7 +55,6 @@ const MuraHelper = async (context) => {
 
 	//Don't rely on ready event for when to fire
 	Mura.holdReady(true);
-
 
 	const muraObject = await renderContent(context);
 	const navigation = await getPrimaryNavData();
