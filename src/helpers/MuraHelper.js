@@ -19,7 +19,8 @@ export const getRootPath = () => {
 		Mura.init({
 			rootpath:"http://localhost:8888",
 			siteid:"default",
-			processMarkup:false
+			processMarkup:false,
+			editroute:"/edit"
 		});
 		muraIsInit = true;
 	}
@@ -36,7 +37,8 @@ const MuraHelper = async (context) => {
 			siteid:"default",
 			processMarkup:false,
 			response:context.res,
-			request:context.req
+			request:context.req,
+			editroute:"/edit"
 		});
 		contextIsInit = true;
 		muraIsInit = true;
@@ -45,7 +47,8 @@ const MuraHelper = async (context) => {
 		Mura.init({
 			rootpath:"http://localhost:8888",
 			siteid:"default",
-			processMarkup:false
+			processMarkup:false,
+			editroute:"/edit"
 		});
 		muraIsInit = true;
 	}
@@ -116,7 +119,8 @@ async function getPrimaryNavData() {
 		Mura.init({
 			rootpath:"http://localhost:8888",
 			siteid:"default",
-			processMarkup:false
+			processMarkup:false,
+			editroute:"/edit"
 		});		
 	}
 

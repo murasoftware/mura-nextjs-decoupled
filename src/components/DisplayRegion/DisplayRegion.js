@@ -4,29 +4,35 @@ import MuraStyles from '../MuraStyles';
 import Head from 'next/head';
 
 
+
 const DisplayRegionSection = ({children,region,section}) => {
+   
     if(section=='inherited' && !region.inherited.items.length){
         return (
             <div className="mura-region-inherited">
                 <div class="frontEndToolsModal mura">
-                    <span class="mura-edit-label mi-lock">{region.name.toUpperCase()}: Inherited</span>
+                    <span class="mura-edit-label mi-lock">{section}: Inherited</span>
                 </div>
                     {children}
             </div>
         )
     } else if (section=='local') {
-        return (
-            <div className="mura-editable mura-inactive">
-            <div className="mura-region-local mura-inactive mura-editable-attribute" data-loose="false" data-regionid={region.regionid} data-inited="false" data-perm="true">
-                <label className="mura-editable-label" style={{display:"none"}}>
-                    {region.name ? region.name.toUpperCase() : "Unnamed"}
-                </label>
-                {children}
-                </div>
+        return (<div className="mura-editable mura-inactive">
+        <div className="mura-region-local mura-inactive mura-editable-attribute" data-loose="false" data-regionid={region.regionid} data-inited="false" data-perm="true">
+            <label className="mura-editable-label" style={{display:"none"}}>
+                {section.toUpperCase()}
+            </label>
+            {children}
             </div>
         )
     } else {
-        return '';
+        const regionName="mura-region-" + section;
+
+        return (       
+            <div className={regionName}>
+                 {children}
+            </div>
+        );
     }
 }
 
