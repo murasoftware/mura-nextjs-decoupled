@@ -12,7 +12,6 @@ Mura.Module.Example=Mura.UI.React.extend({
 	component:Example
 });
 
-
 Mura.Module.Text=Mura.UI.React.extend({
 	component:Text
 });

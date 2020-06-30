@@ -1,21 +1,6 @@
 import {getComponent} from '../../helpers/ComponentRegister'
 import MuraDecorator from '../MuraDecorator';
 
-
-/*
-	function buildRegionSectionHeader(section,name,perm,regionid){
-		if(name){ 
-			if(section=='inherited'){
-				return "<div class=\"mura-region-inherited\"><div class=\"frontEndToolsModal mura\"><span class=\"mura-edit-label mi-lock\">" +  escapeHTML(name.toUpperCase()) + ": Inherited</span></div>";
-			} else {
-				return "<div class=\"mura-editable mura-inactive\"><div class=\"mura-region-local mura-inactive mura-editable-attribute\" data-loose=\"false\" data-regionid=\"" + escapeHTML(regionid) + "\" data-inited=\"false\" data-perm=\"" + escapeHTML(perm) + "\"><label class=\"mura-editable-label\" style=\"display:none\">" +  escapeHTML(name.toUpperCase()) + "</label>";
-			}
-		} else {
-			return "<div class=\"mura-region-" + escapeHTML(section) + "\">";	
-		}
-	}
-*/
-
 const DisplayRegionSection = ({children,region,section}) => {
     if(section=='inherited' && !region.inherited.items.length){
         return (
