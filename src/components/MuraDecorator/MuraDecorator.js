@@ -12,7 +12,7 @@ function MuraDecorator(props) {
   };
 
   if(Mura.isInNode()){
-    Mura.recordModuleStyles(Object.assign({},props));
+    const myStyleSheet=Mura.recordModuleStyles(Object.assign({},props));
   }
 
   Object.keys(props).forEach((key) => {
