@@ -24,6 +24,7 @@ const DisplayRegionSection = ({children,region,section}) => {
             </label>
             {children}
             </div>
+         </div>
         )
     } else {
         const regionName="mura-region-" + section;
