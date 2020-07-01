@@ -1,6 +1,5 @@
 import React, { Fragment, useContext } from "react";
 import GlobalContext from "../GlobalContext";
-import MuraMeta from "../MuraMeta";
 import Mura from "mura.js";
 
 function MuraDecorator(props) {
@@ -25,21 +24,29 @@ function MuraDecorator(props) {
       domObject.className += ` ${props[key]}`;
     }
   });
-  
+
   return (
-    
      <div {...domObject}>
-      {props.label ?
-        <MuraMeta label={props.label} labeltag={props.labeltag}></MuraMeta>
-        :
-        null
-      }
+      {props.label ? <MuraMeta label={props.label} labeltag={props.labeltag}></MuraMeta> : null }
+      {props.label ? <div className="mura-flex-break"></div> : null}
       <div className="mura-object-content">
           {props.children}
       </div>
       <div className="footer"></div>
     </div>
   );
+}
+
+const MuraMeta = ({label,labeltag}) => {
+	const LabelHeader = labeltag ? `${labeltag}` : 'h2';
+
+	return (
+		<div className="mura-object-meta-wrapper">
+			<div className="mura-object-meta">
+				<LabelHeader>{label}</LabelHeader>
+			</div>
+		</div>	
+	)
 }
 
 export default MuraDecorator;
