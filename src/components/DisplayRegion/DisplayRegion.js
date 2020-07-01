@@ -1,9 +1,5 @@
 import {getComponent} from '../../helpers/ComponentRegister'
 import MuraDecorator from '../MuraDecorator';
-import MuraStyles from '../MuraStyles';
-import Head from 'next/head';
-
-
 
 const DisplayRegionSection = ({children,region,section}) => {
    
@@ -37,10 +33,6 @@ const DisplayRegionSection = ({children,region,section}) => {
             </div>
         );
     }
-}
-
-const styleFooter = (styleList) => {
-    console.log("LIST",styleList);
 }
 
 const DisplayRegion = ({region}) => {

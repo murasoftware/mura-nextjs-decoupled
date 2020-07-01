@@ -1,6 +1,5 @@
 import React,{ useContext, useEffect } from "react";
 import GlobalContext from "../GlobalContext";
-import Mura from "mura.js";
 
 const EditLayout = (props) => {
     const [isEditMode, setIsEditMode]  = useContext(GlobalContext);
