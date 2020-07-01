@@ -10,16 +10,9 @@ function MuraDecorator(props) {
     className : 'mura-object mura-async-object'
   };
 
-  const {setStyleRegions} = props;
-
-  if(Mura.isInNode()){
-    const myStyleSheet=Mura.recordModuleStyles(Object.assign({},props));
-    setStyleRegions(myStyleSheet);
-  }
-
   Object.keys(props).forEach((key) => {
     if ((isEditMode || true) && key !== "children") {
-      if (typeof props[key] === "object" && key !== "children") {
+      if (typeof props[key] === "object" && key !== "children" && key !='flashdata') {
         domObject[`data-${key}`] = JSON.stringify(props[key]);
       } else if(typeof props[key] != 'undefined'
       && !(typeof props[key] === "string" && props[key] == ''))
@@ -32,7 +25,7 @@ function MuraDecorator(props) {
       domObject.className += ` ${props[key]}`;
     }
   });
-
+  
   return (
     
      <div {...domObject}>

@@ -25,13 +25,12 @@ function contentDidChange(_content){
     
     setTimeout(
         ()=>{
-
            // console.log("timeout",_content);
             const htmlQueueContainer=Mura('#htmlqueues');
             if(htmlQueueContainer.length){
                 Mura('#htmlqueues').html(content.get('htmlheadqueue') + content.get('htmlfootqueue'));
             }
-             Mura.init(Mura.extend({queueObjects:false,content:content}));
+            Mura.init(Mura.extend({queueObjects:false,content:content}));
             Mura.holdReady(false)
         },
         5

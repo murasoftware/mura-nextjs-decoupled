@@ -7,12 +7,10 @@ function Container(props) {
   // console.log('Container -> props', props);
   if(!items) return ('');
 
-  const {setStyleRegions} = props;
-
   return (items.map(item => {
           let obj=Object.assign({},item);
           obj.key=obj.instanceid;
-          return  (<MuraDecorator {...obj} setStyleRegions={setStyleRegions}> {getComponent(obj,setStyleRegions)} </MuraDecorator>)
+          return  (<MuraDecorator {...obj}> {getComponent(obj)} </MuraDecorator>)
       })
    
   );

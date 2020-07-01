@@ -47,22 +47,18 @@ const DisplayRegion = ({region}) => {
 
     let dynamicCSS = [];
 
-    const setStyleRegions = (val) => {
-        dynamicCSS.push(val);
-    }
-
     //   console.log("DisplayRegion -> content", content);
     let inherited='';
     // Mura inheritance, where modules are inherited from parent content
     if(region.inherited.items.length){
         inherited=(
-        <DisplayRegionSection region={region} section="inherited" setStyleRegions={setStyleRegions}>
+        <DisplayRegionSection region={region} section="inherited">
             {region.inherited.items.map((item) => {
                 let obj=Object.assign({},item);
                 obj.key=obj.instanceid;
                 return (
-                <MuraDecorator {...obj} setStyleRegions={setStyleRegions}>
-                    {getComponent(obj,setStyleRegions)}
+                <MuraDecorator {...obj}>
+                    {getComponent(obj)}
                 </MuraDecorator>
                 )
             })}
@@ -73,19 +69,18 @@ const DisplayRegion = ({region}) => {
     return (
         <div className="mura-region" data-regionid={region.regionid}>
             {inherited}
-            <DisplayRegionSection region={region} section="local" setStyleRegions={setStyleRegions}>
+            <DisplayRegionSection region={region} section="local">
                 {region.local.items.map((item) => {
                     let obj=Object.assign({},item);
                     obj.key=obj.instanceid;
                     return (
-                    <MuraDecorator {...obj} setStyleRegions={setStyleRegions}>
-                        {getComponent(obj,setStyleRegions)}
+                    <MuraDecorator {...obj}>
+                        {getComponent(obj)}
                     </MuraDecorator>
                     )
                 })
                 }
             </DisplayRegionSection>
-            <MuraStyles dynamicCSS={dynamicCSS}></MuraStyles>
         </div>
     )
 }
