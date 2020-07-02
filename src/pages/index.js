@@ -3,7 +3,7 @@ import MainLayout from "../components/MainLayout";
 import DisplayRegion from "../components/DisplayRegion";
 import React from "react";
 import { useRouter } from "next/router";
-import MuraHelper,{getRootPath,getMuraPaths} from "../helpers/MuraHelper";
+import {getMuraProps,getRootPath,getMuraPaths} from "../helpers/MuraHelper";
 import Head from 'next/head';
 
 export async function getStaticPaths() {
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   //console.log("CON",context);
-  let props = await MuraHelper(context);
+  let props = await getMuraProps(context);
   return props;
 }
 

@@ -1,9 +1,65 @@
-import Mura from 'mura.js';
+import Mura from 'mura.js'
+import Example from '../components/Example'
+import Text from '../components/Text'
+import Video from '../components/Video'
+import Image from '../components/Image'
+import Container from '../components/Container'
 
-require('../../mura.config.js');
+require('mura.js/src/core/ui.react');
+
+//This module is also registered with Mura via the ./static/mura.config.json
+
+let moduleRegistry=[
+	{	
+		name:'Example',
+		component:Example
+	},
+	{	
+		name:'Text',
+		component:Text
+	},
+	{	
+		name:'Video',
+		component:Video
+	},
+	{	
+		name:'Image',
+		component:Image
+	},
+	{	
+		name:'Container',
+		component:Container,
+		excludeFromClient:true
+	}
+];
+
+let moduleLookup={};
+
+moduleRegistry.forEach((module)=>{
+	moduleLookup[module.name]=module.component;
+	if(!module.excludeFromClient){
+		Mura.Module[module.name]=Mura.UI.React.extend({
+			component:module.component
+		});
+	}
+});
 
 let muraIsInit = false;
 let contextIsInit = false;
+
+export const getComponent = (item) => {
+	getMura();
+
+	const objectkey=Mura.firstToUpperCase(item.object);
+	
+	if(typeof moduleLookup[objectkey] != 'undefined'){
+		const ComponentVariable=moduleLookup[objectkey]
+		return  <ComponentVariable key={item.instanceid} {...item} />;
+	} 
+
+	return <p key={item.instanceid}>DisplayRegion: {item.objectname}</p>;
+
+  };
 
 export const getMuraPaths = async() => {
 	const pathList = await getPrimaryNavData();
@@ -14,24 +70,8 @@ export const getMuraPaths = async() => {
 	return paths;
 }
 
-export const getRootPath = () => {
-	if(!muraIsInit) {
-		Mura.init({
-			rootpath:"http://localhost:8888",
-			siteid:"default",
-			processMarkup:false,
-			editroute:"/edit"
-		});
-		muraIsInit = true;
-	}
-
-	return Mura.rootpath;
-}
-
-const MuraHelper = async (context) => {
-	let modules = [];
-
-	if(context.res && !contextIsInit) {
+export const getMura = (context) => {
+	if(context && context.res && !contextIsInit) {
 		Mura.init({
 			rootpath:"http://localhost:8888",
 			siteid:"default",
@@ -52,6 +92,17 @@ const MuraHelper = async (context) => {
 		});
 		muraIsInit = true;
 	}
+	return Mura;
+}
+
+export const getRootPath = () => {
+	return getMura().rootpath;
+}
+
+export const getMuraProps = async (context) => {
+	let modules = [];
+
+	getMura(context);
 
 	//Don't rely on ready event for when to fire
 	Mura.holdReady(true);
@@ -64,7 +115,6 @@ const MuraHelper = async (context) => {
 
 	const props = {
 		navigation,
-		title: "in [name.js]",
 		content: content
 	  } 
 
@@ -115,14 +165,7 @@ async function renderContent(context) {
 }
 
 async function getPrimaryNavData() {
-	if(!muraIsInit) {
-		Mura.init({
-			rootpath:"http://localhost:8888",
-			siteid:"default",
-			processMarkup:false,
-			editroute:"/edit"
-		});		
-	}
+	getMura();
 
 	return Mura.getFeed('content')
 		.where()
@@ -135,7 +178,3 @@ async function getPrimaryNavData() {
 			return tempArray;
 		});
 }
-
-//console.log("MIN: ",Mura.isInNode());
-
-export default MuraHelper;

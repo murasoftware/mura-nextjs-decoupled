@@ -1,6 +1,5 @@
 import React, { Fragment, useContext } from "react";
 import GlobalContext from "../GlobalContext";
-import Mura from "mura.js";
 
 function MuraDecorator(props) {
   const [isEditMode] = useContext(GlobalContext);

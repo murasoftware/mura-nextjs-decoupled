@@ -1,4 +1,4 @@
-import {getComponent} from '../../helpers/ComponentRegister'
+import {getComponent} from '../../helpers/MuraHelper';
 import MuraDecorator from '../MuraDecorator';
 
 const DisplayRegionSection = ({children,region,section}) => {

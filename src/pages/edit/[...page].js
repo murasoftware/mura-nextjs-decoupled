@@ -1,11 +1,11 @@
 import EditLayout from "../../components/EditLayout";
 import { useRouter } from "next/router";
 import Page from "../[...page]";
-import MuraHelper,{getRootPath} from "../../helpers/MuraHelper";
+import {getMuraProps, getRootPath} from "../../helpers/MuraHelper";
 import Head from 'next/head';
 
 export async function getServerSideProps(context) {
-  let props = await MuraHelper(context);
+  let props = await getMuraProps(context);
 
   return props;
 }
