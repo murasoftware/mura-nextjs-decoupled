@@ -1,5 +1,6 @@
 import MuraDecorator from '../MuraDecorator';
 import { getComponent } from '../../helpers/ComponentRegister';
+import Mura from 'mura.js/src/core/core';
 
 function Container(props) {
   const { items  } = props;
@@ -9,6 +10,9 @@ function Container(props) {
 
   return (items.map(item => {
           let obj=Object.assign({},item);
+          if(Mura.cloning){
+            obj.instanceid=Mura.createUUID();
+          }
           obj.key=obj.instanceid;
           return  (<MuraDecorator {...obj}> {getComponent(obj)} </MuraDecorator>)
       })

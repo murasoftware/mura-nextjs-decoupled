@@ -1,15 +1,14 @@
 import React, { Fragment, useContext } from "react";
-import GlobalContext from "../GlobalContext";
 
 function MuraDecorator(props) {
-  const [isEditMode] = useContext(GlobalContext);
+
 //  console.log("MuraDecorator -> isEditMode", props);
   let domObject = {
     className : 'mura-object mura-async-object'
   };
 
   Object.keys(props).forEach((key) => {
-    if ((isEditMode || true) && key !== "children") {
+    if ((props.isEditMode || true) && key !== "children" && key !== "isEditMode") {
       if (typeof props[key] === "object" && key !== "children" && key !='flashdata') {
         domObject[`data-${key}`] = JSON.stringify(props[key]);
       } else if(typeof props[key] != 'undefined'

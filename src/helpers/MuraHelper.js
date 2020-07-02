@@ -28,8 +28,7 @@ let moduleRegistry=[
 	},
 	{	
 		name:'Container',
-		component:Container,
-		excludeFromClient:true
+		component:Container
 	}
 ];
 
@@ -43,6 +42,28 @@ moduleRegistry.forEach((module)=>{
 		});
 	}
 });
+
+Mura.Module.Container.reopen({
+	reset(self,empty){ 
+        self.find('.mura-object:not([data-object="container"])').html('');
+        self.find('.frontEndToolsModal').remove();
+        self.find('.mura-object-meta').html('');
+        var content = self.children('div.mura-object-content');
+
+        if (content.length) {
+            var nestedObjects=[];
+            content.children('.mura-object').each(
+                function() {
+                    Mura.resetAsyncObject(this,empty);	
+                    //console.log(Mura(this).data())
+                    nestedObjects.push(Mura(this).data());
+                }
+            );
+            self.data('items', JSON.stringify(nestedObjects));
+            self.removeAttr('data-content');
+        }
+    }
+})
 
 let muraIsInit = false;
 let contextIsInit = false;

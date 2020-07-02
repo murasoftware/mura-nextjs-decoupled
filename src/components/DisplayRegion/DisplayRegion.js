@@ -1,8 +1,10 @@
+import React, { Fragment, useContext } from "react";
 import {getComponent} from '../../helpers/MuraHelper';
 import MuraDecorator from '../MuraDecorator';
+import GlobalContext from "../GlobalContext";
 
 const DisplayRegionSection = ({children,region,section}) => {
-   
+
     if(typeof region.name != 'undefined'){
         if(section=='inherited' && !region.inherited.items.length){
             return (
@@ -36,7 +38,7 @@ const DisplayRegionSection = ({children,region,section}) => {
 }
 
 const DisplayRegion = ({region}) => {
-
+    const [isEditMode] = useContext(GlobalContext);
     let dynamicCSS = [];
 
     //   console.log("DisplayRegion -> content", content);
@@ -48,6 +50,7 @@ const DisplayRegion = ({region}) => {
             {region.inherited.items.map((item) => {
                 let obj=Object.assign({},item);
                 obj.key=obj.instanceid;
+                obj.isEditMode=isEditMode;
                 return (
                 <MuraDecorator {...obj}>
                     {getComponent(obj)}
