@@ -1,23 +1,21 @@
 function MuraStyles(props){
     const {dynamicCSS} = props;
         
-    //console.log("DIN: ",dynamicCSS);
+    // console.log("DIN: ",dynamicCSS);
    
-    if(typeof dynamicCSS != 'undefined' && Array.isArray(dynamicCSS)){
+    if(typeof dynamicCSS !== 'undefined' && Array.isArray(dynamicCSS)){
         return (
         <div>   
-            {dynamicCSS.map((rules) => {
-                return (
-                    <style id={rules.id}  key={rules.id} dangerouslySetInnerHTML={{__html:rules.cssRules.join('\n')}}></style>
-                )
-            })
+            {dynamicCSS.map((rules) => (
+                    <style id={rules.id}  key={rules.id} dangerouslySetInnerHTML={{__html:rules.cssRules.join('\n')}} />
+                ))
             }
         </div>
         )
-    } else {
-        //console.log("DYN IS NOT ARRAY: ");
-        return  (<div></div>)
-    }
+    } 
+        // console.log("DYN IS NOT ARRAY: ");
+        return  (<div />)
+    
 }
 
 export default MuraStyles;

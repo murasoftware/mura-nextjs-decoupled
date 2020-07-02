@@ -3,17 +3,17 @@ import MuraDecorator from '../MuraDecorator';
 
 const DisplayRegionSection = ({children,region,section}) => {
    
-    if(typeof region.name != 'undefined'){
+    if(typeof region.name !== 'undefined'){
         if(section=='inherited' && !region.inherited.items.length){
             return (
                 <div className="mura-region-inherited">
-                    <div class="frontEndToolsModal mura">
-                        <span class="mura-edit-label mi-lock">{region.name.toUpperCase()}: Inherited</span>
+                    <div className="frontEndToolsModal mura">
+                        <span className="mura-edit-label mi-lock">{region.name.toUpperCase()}: Inherited</span>
                     </div>
                         {children}
                 </div>
             )
-        } else if (section=='local') {
+        } if (section=='local') {
             return (<div className="mura-editable mura-inactive">
             <div className="mura-region-local mura-inactive mura-editable-attribute" data-loose="false" data-regionid={region.regionid} data-inited="false" data-perm="true">
                 <label className="mura-editable-label" style={{display:"none"}}>
@@ -25,7 +25,7 @@ const DisplayRegionSection = ({children,region,section}) => {
             )
         }
     } else {
-        const regionName="mura-region-" + section;
+        const regionName=`mura-region-${  section}`;
 
         return (       
             <div className={regionName}>
@@ -37,7 +37,7 @@ const DisplayRegionSection = ({children,region,section}) => {
 
 const DisplayRegion = ({region}) => {
 
-    let dynamicCSS = [];
+    const dynamicCSS = [];
 
     //   console.log("DisplayRegion -> content", content);
     let inherited='';
@@ -46,7 +46,7 @@ const DisplayRegion = ({region}) => {
         inherited=(
         <DisplayRegionSection region={region} section="inherited">
             {region.inherited.items.map((item) => {
-                let obj=Object.assign({},item);
+                const obj=Object.assign({},item);
                 obj.key=obj.instanceid;
                 return (
                 <MuraDecorator {...obj}>
@@ -63,7 +63,7 @@ const DisplayRegion = ({region}) => {
             {inherited}
             <DisplayRegionSection region={region} section="local">
                 {region.local.items.map((item) => {
-                    let obj=Object.assign({},item);
+                    const obj=Object.assign({},item);
                     obj.key=obj.instanceid;
                     return (
                     <MuraDecorator {...obj}>

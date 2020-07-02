@@ -11,7 +11,7 @@ const EditLayout = (props) => {
     return (
         <div>
             {props.children}
-            <div id="htmlqueues"></div>
+            <div id="htmlqueues" />
         </div>
     )
 }

@@ -2,7 +2,7 @@
 import React from 'react';
 
 function Example(props) {
-  //console.log("Component -> Text: ", props);
+  // console.log("Component -> Text: ", props);
 
   return (
     <div>

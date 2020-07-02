@@ -8,7 +8,7 @@ function Container(props) {
   if(!items) return ('');
 
   return (items.map(item => {
-          let obj=Object.assign({},item);
+          const obj=Object.assign({},item);
           obj.key=obj.instanceid;
           return  (<MuraDecorator {...obj}> {getComponent(obj)} </MuraDecorator>)
       })

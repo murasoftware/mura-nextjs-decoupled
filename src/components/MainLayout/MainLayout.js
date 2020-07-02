@@ -30,7 +30,7 @@ function contentDidChange(_content){
             if(htmlQueueContainer.length){
                 Mura('#htmlqueues').html(content.get('htmlheadqueue') + content.get('htmlfootqueue'));
             }
-            Mura.init(Mura.extend({queueObjects:false,content:content}));
+            Mura.init(Mura.extend({queueObjects:false,content}));
             Mura.holdReady(false)
         },
         5

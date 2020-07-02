@@ -1,8 +1,7 @@
 
 import Link from "next/link"
 
-const MainRouter = ({items}) => {
-  return (
+const MainRouter = ({items}) => (
     <div>
       <nav>
         <ul>
@@ -15,6 +14,5 @@ const MainRouter = ({items}) => {
       </nav>
     </div>
   );
-};
 
 export default MainRouter;

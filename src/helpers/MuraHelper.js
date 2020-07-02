@@ -7,9 +7,9 @@ import Container from '../components/Container'
 
 require('mura.js/src/core/ui.react');
 
-//This module is also registered with Mura via the ./static/mura.config.json
+// This module is also registered with Mura via the ./static/mura.config.json
 
-let moduleRegistry=[
+const moduleRegistry=[
 	{	
 		name:'Example',
 		component:Example
@@ -33,7 +33,7 @@ let moduleRegistry=[
 	}
 ];
 
-let moduleLookup={};
+const moduleLookup={};
 
 moduleRegistry.forEach((module)=>{
 	moduleLookup[module.name]=module.component;
@@ -52,7 +52,7 @@ export const getComponent = (item) => {
 
 	const objectkey=Mura.firstToUpperCase(item.object);
 	
-	if(typeof moduleLookup[objectkey] != 'undefined'){
+	if(typeof moduleLookup[objectkey] !== 'undefined'){
 		const ComponentVariable=moduleLookup[objectkey]
 		return  <ComponentVariable key={item.instanceid} {...item} />;
 	} 
@@ -64,9 +64,7 @@ export const getComponent = (item) => {
 export const getMuraPaths = async() => {
 	const pathList = await getPrimaryNavData();
 
-	const paths = pathList.map((item) => {
-		return { params: { page: item.filename.split('/') } };
-	});
+	const paths = pathList.map((item) => ({ params: { page: item.filename.split('/') } }));
 	return paths;
 }
 
@@ -95,16 +93,14 @@ export const getMura = (context) => {
 	return Mura;
 }
 
-export const getRootPath = () => {
-	return getMura().rootpath;
-}
+export const getRootPath = () => getMura().rootpath
 
 export const getMuraProps = async (context) => {
-	let modules = [];
+	const modules = [];
 
 	getMura(context);
 
-	//Don't rely on ready event for when to fire
+	// Don't rely on ready event for when to fire
 	Mura.holdReady(true);
 
 	const muraObject = await renderContent(context);
@@ -115,7 +111,7 @@ export const getMuraProps = async (context) => {
 
 	const props = {
 		navigation,
-		content: content
+		content
 	  } 
 
 	  return {
@@ -139,9 +135,7 @@ async function renderContent(context) {
 	}
 	console.log(filename);
 
-	return Mura.renderFilename(filename,query).then((rendered)=>{
-		return rendered;
-	},(rendered)=>{
+	return Mura.renderFilename(filename,query).then((rendered)=>rendered,(rendered)=>{
 		if(!rendered){
 			return Mura
 				.getEntity('Content')
@@ -158,9 +152,9 @@ async function renderContent(context) {
 					contenthistid: Mura.createUUID(),
 					filename:"404"
 				})
-		} else {
+		} 
 			return rendered
-		}
+		
     })
 }
 
@@ -173,7 +167,7 @@ async function getPrimaryNavData() {
 		.sort('orderno')
 		.getQuery()
 		.then(collection=>{
-			let tempArray=collection.getAll().items;
+			const tempArray=collection.getAll().items;
 			tempArray.unshift({url:"/",menutitle:"Home",title:"Home",filename:"",contentid:Mura.homeid});
 			return tempArray;
 		});

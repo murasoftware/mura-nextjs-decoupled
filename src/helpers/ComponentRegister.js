@@ -1,9 +1,11 @@
+import Mura from 'mura.js';
+import React from 'react';
+
 import Image from '../components/Image';
 import Container from '../components/Container';
 import Example from '../components/Example';
 import Video from '../components/Video';
 import Text from '../components/Text';
-import Mura from 'mura.js';
 
 const getComponent = (item) => {
   let Component;

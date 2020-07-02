@@ -4,7 +4,7 @@ import GlobalContext from "../GlobalContext";
 function MuraDecorator(props) {
   const [isEditMode] = useContext(GlobalContext);
 //  console.log("MuraDecorator -> isEditMode", props);
-  let domObject = {
+  const domObject = {
     className : 'mura-object mura-async-object'
   };
 
@@ -12,7 +12,7 @@ function MuraDecorator(props) {
     if ((isEditMode || true) && key !== "children") {
       if (typeof props[key] === "object" && key !== "children" && key !='flashdata') {
         domObject[`data-${key}`] = JSON.stringify(props[key]);
-      } else if(typeof props[key] != 'undefined'
+      } else if(typeof props[key] !== 'undefined'
       && !(typeof props[key] === "string" && props[key] == ''))
       {
         domObject[`data-${key}`] = props[key];
@@ -26,12 +26,12 @@ function MuraDecorator(props) {
 
   return (
      <div {...domObject}>
-      {props.label ? <MuraMeta label={props.label} labeltag={props.labeltag}></MuraMeta> : null }
-      {props.label ? <div className="mura-flex-break"></div> : null}
+      {props.label ? <MuraMeta label={props.label} labeltag={props.labeltag} /> : null }
+      {props.label ? <div className="mura-flex-break" /> : null}
       <div className="mura-object-content">
           {props.children}
       </div>
-      <div className="footer"></div>
+      <div className="footer" />
     </div>
   );
 }
