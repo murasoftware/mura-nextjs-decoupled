@@ -1,11 +1,11 @@
 import Mura from 'mura.js'
 import Example from '../components/Example'
-import Text from '../components/Text'
+import Text,{getTextProps} from '../components/Text'
 import Video from '../components/Video'
 import Image from '../components/Image'
 import Container from '../components/Container'
-
-require('mura.js/src/core/ui.react');
+import  React from 'react'
+import ReactDOM from 'react-dom'
 
 //This module is also registered with Mura via the ./static/mura.config.json
 
@@ -16,7 +16,8 @@ let moduleRegistry=[
 	},
 	{	
 		name:'Text',
-		component:Text
+		component:Text,
+		getDynamicProps:getTextProps
 	},
 	{	
 		name:'Video',
@@ -35,10 +36,22 @@ let moduleRegistry=[
 let moduleLookup={};
 
 moduleRegistry.forEach((module)=>{
-	moduleLookup[module.name]=module.component;
+	module.getDynamicProps=module.getDynamicProps || (()=>{});
+	moduleLookup[module.name]={
+		component:module.component,
+		getDynamicProps:module.getDynamicProps
+	};
+
 	if(!module.excludeFromClient){
-		Mura.Module[module.name]=Mura.UI.React.extend({
-			component:module.component
+		Mura.Module[module.name]=Mura.UI.extend({
+			component:module.component,
+			renderClient(){
+				ReactDOM.render(
+					React.createElement(this.component, this.context),
+					this.context.targetEl,
+					()=>{this.trigger('afterRender')}
+				);
+			}
 		});
 	}
 });
@@ -74,13 +87,13 @@ export const getComponent = (item) => {
 	const objectkey=Mura.firstToUpperCase(item.object);
 	
 	if(typeof moduleLookup[objectkey] != 'undefined'){
-		const ComponentVariable=moduleLookup[objectkey]
+		const ComponentVariable=moduleLookup[objectkey].component;
 		return  <ComponentVariable key={item.instanceid} {...item} />;
 	} 
 
 	return <p key={item.instanceid}>DisplayRegion: {item.objectname}</p>;
 
-  };
+}
 
 export const getMuraPaths = async() => {
 	const pathList = await getPrimaryNavData();
@@ -160,9 +173,12 @@ async function renderContent(context) {
 	}
 	console.log(filename);
 
-	return Mura.renderFilename(filename,query).then((rendered)=>{
+	return await Mura.renderFilename(filename,query).then(async (rendered)=>{
+		
+		await getRegionProps(rendered);
+		
 		return rendered;
-	},(rendered)=>{
+	},async (rendered)=>{
 		if(!rendered){
 			return Mura
 				.getEntity('Content')
@@ -180,6 +196,9 @@ async function renderContent(context) {
 					filename:"404"
 				})
 		} else {
+
+			await getRegionProps(rendered);
+			
 			return rendered
 		}
     })
@@ -199,3 +218,36 @@ async function getPrimaryNavData() {
 			return tempArray;
 		});
 }
+
+async function getRegionProps(content) {
+	getMura();
+	Object.values(content.get('displayregions')).forEach(async (region)=>{
+		if(
+			typeof region.inherited != 'undefined'
+			&& Array.isArray(region.inherited.items)
+		){
+			region.inherited.items.forEach(async(item)=>{
+				await getModuleProps(item)
+			})
+		}
+		region.local.items.forEach(async(item)=>{
+			await getModuleProps(item)
+		});
+	});
+	
+}
+
+async function getModuleProps(item) {
+	getMura();
+	const objectkey=Mura.firstToUpperCase(item.object);
+	if(typeof moduleLookup[objectkey] != 'undefined'){
+		item.dynamicprops=moduleLookup[objectkey].getDynamicProp(item);
+		if(item.object=='container' && Array.isArray(item.object.items)){
+			item.items.forEach(async(item)=>{
+				await getModuleProps(item)
+			});
+		}
+	}
+}
+
+
