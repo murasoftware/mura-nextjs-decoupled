@@ -1,5 +1,5 @@
 import MuraDecorator from '../MuraDecorator';
-import { getComponent } from '../../helpers/ComponentRegister';
+import { getComponent } from '../../helpers/MuraHelper';
 import Mura from 'mura.js/src/core/core';
 
 function Container(props) {
