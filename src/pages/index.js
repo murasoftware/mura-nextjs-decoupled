@@ -8,7 +8,6 @@ import Head from 'next/head';
 
 export async function getStaticPaths() {
   const paths = await getMuraPaths();
-  
   return {
     paths: paths,
     fallback: false,

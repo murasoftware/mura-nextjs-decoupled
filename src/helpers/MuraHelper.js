@@ -36,7 +36,7 @@ let moduleRegistry=[
 let moduleLookup={};
 
 moduleRegistry.forEach((module)=>{
-	module.getDynamicProps=module.getDynamicProps || (()=>{});
+	module.getDynamicProps=module.getDynamicProps || function(){return {}};
 	moduleLookup[module.name]={
 		component:module.component,
 		getDynamicProps:module.getDynamicProps
@@ -97,10 +97,12 @@ export const getComponent = (item) => {
 
 export const getMuraPaths = async() => {
 	const pathList = await getPrimaryNavData();
-
+	
 	const paths = pathList.map((item) => {
+		console.log(item.filename)
 		return { params: { page: item.filename.split('/') } };
 	});
+	
 	return paths;
 }
 
@@ -241,7 +243,7 @@ async function getModuleProps(item) {
 	getMura();
 	const objectkey=Mura.firstToUpperCase(item.object);
 	if(typeof moduleLookup[objectkey] != 'undefined'){
-		item.dynamicprops=moduleLookup[objectkey].getDynamicProp(item);
+		item.dynamicprops=await moduleLookup[objectkey].getDynamicProps(item);
 		if(item.object=='container' && Array.isArray(item.object.items)){
 			item.items.forEach(async(item)=>{
 				await getModuleProps(item)
