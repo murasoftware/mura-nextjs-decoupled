@@ -3,9 +3,9 @@ import {getComponent} from '../../helpers/MuraHelper';
 import MuraDecorator from '../MuraDecorator';
 import GlobalContext from "../GlobalContext";
 
-const DisplayRegionSection = ({children,region,section}) => {
+const DisplayRegionSection = ({children,region,section,iseditmode}) => {
 
-    if(typeof region.name != 'undefined'){
+    if(typeof region.name != 'undefined' && iseditmode){
         if(section=='inherited' && !region.inherited.items.length){
             return (
                 <div className="mura-region-inherited">
@@ -46,7 +46,7 @@ const DisplayRegion = ({region}) => {
     // Mura inheritance, where modules are inherited from parent content
     if(region.inherited.items.length){
         inherited=(
-        <DisplayRegionSection region={region} section="inherited">
+        <DisplayRegionSection region={region} iseditmode={isEditMode} section="inherited">
             {region.inherited.items.map((item) => {
                 let obj=Object.assign({},item);
                 obj.key=obj.instanceid;
@@ -64,7 +64,7 @@ const DisplayRegion = ({region}) => {
     return (
         <div className="mura-region" data-regionid={region.regionid}>
             {inherited}
-            <DisplayRegionSection region={region} section="local">
+            <DisplayRegionSection region={region} iseditmode={isEditMode} section="local">
                 {region.local.items.map((item) => {
                     let obj=Object.assign({},item);
                     obj.key=obj.instanceid;
