@@ -75,7 +75,7 @@ Mura.Module.Container.reopen({
             self.data('items', JSON.stringify(nestedObjects));
             self.removeAttr('data-content');
         }
-    }
+	}	
 })
 
 let muraIsInit = false;
