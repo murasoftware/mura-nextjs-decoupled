@@ -4,7 +4,7 @@ import Text,{getTextProps} from '../components/Text'
 import Video from '../components/Video'
 import Image from '../components/Image'
 import Container from '../components/Container'
-import  React from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 
 //This module is also registered with Mura via the ./static/mura.config.json
