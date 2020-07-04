@@ -100,13 +100,13 @@ export const getMuraPaths = async() => {
 	
 	const paths = pathList.map((item) => {
 		return { params: { page: item.filename.split('/') } };
+	}).filter(function(item){
+		return item.params.page.length;
 	});
+	console.log(paths)
+
+	return paths;
 	
-	if(paths){
-		return paths;
-	} else {
-	 	return [];
-	}
 }
 
 export const getMura = (context) => {
@@ -247,7 +247,20 @@ async function getModuleProps(item) {
 	const objectkey=Mura.firstToUpperCase(item.object);
 	if(typeof moduleLookup[objectkey] != 'undefined'){
 		item.dynamicProps=await moduleLookup[objectkey].getDynamicProps(item);
-		if(item.object=='container' && Array.isArray(item.object.items)){
+		
+		
+		if(item.object=='container'){
+			if(
+				typeof item.object.items != 'undefined' 
+				&& !Array.isArray(item.object.items)
+			){
+				try{
+					item.object.items=JSON.parse(item.object.items);
+				} catch(e){
+					item.object.items=[];
+				}
+			}
+		
 			item.items.forEach(async(item)=>{
 				await getModuleProps(item)
 			});

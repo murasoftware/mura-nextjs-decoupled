@@ -3,7 +3,7 @@ import Mura from 'mura.js';
 
 function Text(props) {
   let objectparams=Object.assign({},props);
-
+  
   if(typeof objectparams.dynamicProps == 'undefined'){
     objectparams.dynamicProps=(async ()=>{ return await getDynamicProps(objectparams)})();
   }
