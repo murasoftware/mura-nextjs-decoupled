@@ -11,7 +11,7 @@ function MuraDecorator(props) {
     if ((props.isEditMode || true) 
       && !['children','isEditMode','dynamicProps'].find((restrictedkey)=>{return restrictedkey==key})
     ) {
-      if (typeof props[key] === "object" && key !== "children" && key !='flashdata') {
+      if (typeof props[key] === "object") {
         domObject[`data-${key}`] = JSON.stringify(props[key]);
       } else if(typeof props[key] != 'undefined'
       && !(typeof props[key] === "string" && props[key] == ''))
