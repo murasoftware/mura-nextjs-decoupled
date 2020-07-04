@@ -8,10 +8,10 @@ import Head from 'next/head';
 
 export async function getStaticPaths() {
   const paths = await getMuraPaths();
-  
+  console.log(paths)
   return {
     paths: paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -22,7 +22,7 @@ export async function getStaticProps(context) {
 }
 
 export default function Page(props) { 
-  const { modules, navigation } = props;
+  const { navigation } = props;
   const router = useRouter();
 
   return (

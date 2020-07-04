@@ -99,11 +99,14 @@ export const getMuraPaths = async() => {
 	const pathList = await getPrimaryNavData();
 	
 	const paths = pathList.map((item) => {
-		console.log(item.filename)
 		return { params: { page: item.filename.split('/') } };
 	});
 	
-	return paths;
+	if(paths){
+		return paths;
+	} else {
+	 	return [];
+	}
 }
 
 export const getMura = (context) => {
@@ -243,7 +246,7 @@ async function getModuleProps(item) {
 	getMura();
 	const objectkey=Mura.firstToUpperCase(item.object);
 	if(typeof moduleLookup[objectkey] != 'undefined'){
-		item.dynamicprops=await moduleLookup[objectkey].getDynamicProps(item);
+		item.dynamicProps=await moduleLookup[objectkey].getDynamicProps(item);
 		if(item.object=='container' && Array.isArray(item.object.items)){
 			item.items.forEach(async(item)=>{
 				await getModuleProps(item)

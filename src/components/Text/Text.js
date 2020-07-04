@@ -4,13 +4,13 @@ import Mura from 'mura.js';
 function Text(props) {
   let objectparams=Object.assign({},props);
 
-  if(typeof objectparams.dynamicprops == 'undefined'){
-    objectparams.dynamicprops=(async ()=>{ return await getDynamicProps(objectparams)})();
+  if(typeof objectparams.dynamicProps == 'undefined'){
+    objectparams.dynamicProps=(async ()=>{ return await getDynamicProps(objectparams)})();
   }
   
-  if(typeof objectparams.dynamicprops.source != 'undefined'){
+  if(typeof objectparams.dynamicProps.source != 'undefined'){
     return (
-      <div dangerouslySetInnerHTML={{__html:  objectparams.dynamicprops.source}}></div>
+      <div dangerouslySetInnerHTML={{__html:  objectparams.dynamicProps.source}}></div>
     );
   } else {
     return (

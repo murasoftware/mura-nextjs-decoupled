@@ -6,14 +6,6 @@ import { useRouter } from "next/router";
 import {getMuraProps,getRootPath,getMuraPaths} from "../helpers/MuraHelper";
 import Head from 'next/head';
 
-export async function getStaticPaths() {
-  const paths = await getMuraPaths();
-  return {
-    paths: paths,
-    fallback: false,
-  };
-}
-
 export async function getStaticProps(context) {
   //console.log("CON",context);
   let props = await getMuraProps(context);
@@ -21,7 +13,7 @@ export async function getStaticProps(context) {
 }
 
 export default function Page(props) { 
-  const { modules, navigation } = props;
+  const { navigation } = props;
   const router = useRouter();
 
   return (

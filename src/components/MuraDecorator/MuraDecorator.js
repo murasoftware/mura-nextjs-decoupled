@@ -9,7 +9,7 @@ function MuraDecorator(props) {
 
   Object.keys(props).forEach((key) => {
     if ((props.isEditMode || true) 
-      && !['children','isEditMode','dynamicprops'].find((restrictedkey)=>{return restrictedkey==key})
+      && !['children','isEditMode','dynamicProps'].find((restrictedkey)=>{return restrictedkey==key})
     ) {
       if (typeof props[key] === "object" && key !== "children" && key !='flashdata') {
         domObject[`data-${key}`] = JSON.stringify(props[key]);
