@@ -1,17 +1,17 @@
 function MuraStyles(props){
-    const {dynamicCSS} = props;
+    const {moduleStyleData} = props;
         
     //console.log("DIN: ",dynamicCSS);
    
-    if(typeof dynamicCSS != 'undefined' && Array.isArray(dynamicCSS)){
+    if(typeof moduleStyleData != 'undefined'){
         return (
         <div>   
-            {dynamicCSS.map((rules) => {
+            {Object.keys(moduleStyleData).map((instanceid) => {
+                let rules=moduleStyleData[instanceid];
                 return (
                     <style id={rules.id}  key={rules.id} dangerouslySetInnerHTML={{__html:rules.cssRules.join('\n')}}></style>
                 )
-            })
-            }
+            })}
         </div>
         )
     } else {

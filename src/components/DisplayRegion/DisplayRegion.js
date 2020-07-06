@@ -37,9 +37,9 @@ const DisplayRegionSection = ({children,region,section,iseditmode}) => {
     }
 }
 
-const DisplayRegion = ({region}) => {
+const DisplayRegion = ({region,moduleStyleData}) => {
     const [isEditMode] = useContext(GlobalContext);
-    let dynamicCSS = [];
+    //console.log(moduleStyleData)
 
     //   console.log("DisplayRegion -> content", content);
     let inherited='';
@@ -50,7 +50,7 @@ const DisplayRegion = ({region}) => {
             {region.inherited.items.map((item) => {
                 let obj=Object.assign({},item);
                 obj.key=obj.instanceid;
-                obj.isEditMode=isEditMode;
+                obj.moduleStyleData=moduleStyleData;
                 return (
                 <MuraDecorator {...obj}>
                     {getComponent(obj)}
@@ -68,6 +68,7 @@ const DisplayRegion = ({region}) => {
                 {region.local.items.map((item) => {
                     let obj=Object.assign({},item);
                     obj.key=obj.instanceid;
+                    obj.moduleStyleData=moduleStyleData;
                     return (
                     <MuraDecorator {...obj}>
                         {getComponent(obj)}

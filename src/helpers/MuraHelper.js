@@ -103,7 +103,6 @@ export const getMuraPaths = async() => {
 	}).filter(function(item){
 		return item.params.page.length;
 	});
-	console.log(paths)
 
 	return paths;
 	
@@ -131,6 +130,9 @@ export const getMura = (context) => {
 		});
 		muraIsInit = true;
 	}
+
+	Mura.holdReady(true);
+
 	return Mura;
 }
 
@@ -139,22 +141,18 @@ export const getRootPath = () => {
 }
 
 export const getMuraProps = async (context) => {
-	let modules = [];
 
 	getMura(context);
-
-	//Don't rely on ready event for when to fire
-	Mura.holdReady(true);
 
 	const muraObject = await renderContent(context);
 	const navigation = await getPrimaryNavData();
 	const content = muraObject.getAll();
-
-	Mura.holdReady(false);
+	const moduleStyleData=await getRegionProps(muraObject);
 
 	const props = {
 		navigation,
-		content: content
+		content: content,
+		moduleStyleData:moduleStyleData
 	  } 
 
 	  return {
@@ -176,12 +174,8 @@ async function renderContent(context) {
 	if(context.params && context.params.page) {
 		filename = context.params.page;
 	}
-	console.log(filename);
-
-	return await Mura.renderFilename(filename,query).then(async (rendered)=>{
-		
-		await getRegionProps(rendered);
-		
+	
+	return await Mura.renderFilename(filename,query).then(async (rendered)=>{		
 		return rendered;
 	},async (rendered)=>{
 		if(!rendered){
@@ -201,9 +195,6 @@ async function renderContent(context) {
 					filename:"404"
 				})
 		} else {
-
-			await getRegionProps(rendered);
-			
 			return rendered
 		}
     })
@@ -226,29 +217,33 @@ async function getPrimaryNavData() {
 
 async function getRegionProps(content) {
 	getMura();
+	let moduleStyleData={};
+
 	Object.values(content.get('displayregions')).forEach(async (region)=>{
 		if(
 			typeof region.inherited != 'undefined'
 			&& Array.isArray(region.inherited.items)
 		){
 			region.inherited.items.forEach(async(item)=>{
-				await getModuleProps(item)
+				item.instanceid=item.instanceid || Mura.createUUID();
+				moduleStyleData[item.instanceid]=await getModuleProps(item,moduleStyleData)
 			})
 		}
 		region.local.items.forEach(async(item)=>{
-			await getModuleProps(item)
+			item.instanceid=item.instanceid || Mura.createUUID();
+			moduleStyleData[item.instanceid]=await getModuleProps(item,moduleStyleData)
 		});
 	});
 	
+	return moduleStyleData;
+	
 }
 
-async function getModuleProps(item) {
+async function getModuleProps(item,moduleStyleData) {
 	getMura();
 	const objectkey=Mura.firstToUpperCase(item.object);
 	if(typeof moduleLookup[objectkey] != 'undefined'){
 		item.dynamicProps=await moduleLookup[objectkey].getDynamicProps(item);
-		
-		
 		if(item.object=='container'){
 			if(
 				typeof item.object.items != 'undefined' 
@@ -260,12 +255,21 @@ async function getModuleProps(item) {
 					item.object.items=[];
 				}
 			}
-		
 			item.items.forEach(async(item)=>{
-				await getModuleProps(item)
+				item.instanceid=item.instanceid || Mura.createUUID();
+				moduleStyleData[item.instanceid]=await getModuleProps(item,moduleStyleData)
 			});
 		}
 	}
+
+	const styleData=Mura.recordModuleStyles(item);
+
+	return {
+		cssRules: styleData.cssRules,
+		targets: styleData.targets,
+		id:"mura-styles" + item.instanceid,
+		stylesupport:item.stylesupport || {}
+	};
 }
 
 

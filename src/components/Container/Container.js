@@ -14,6 +14,7 @@ function Container(props) {
             obj.instanceid=Mura.createUUID();
           }
           obj.key=obj.instanceid;
+          obj.moduleStyleData=props.moduleStyleData;
           return  (<MuraDecorator {...obj}> {getComponent(obj)} </MuraDecorator>)
       })
    
