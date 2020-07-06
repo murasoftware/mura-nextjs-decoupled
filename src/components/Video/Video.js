@@ -1,6 +1,4 @@
-import MuraDecorator from '../MuraDecorator';
-import Youtube from './Youtube'
-
+import Youtube from './Youtube';
 
 const getVideoPlayer = props => {
   const players = {};
@@ -9,9 +7,7 @@ const getVideoPlayer = props => {
 };
 
 function Video(props) {
-  const { instanceid, videoid, videoplatform } = props;
   return getVideoPlayer(props);
 }
 
 export default Video;
-

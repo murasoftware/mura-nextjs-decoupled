@@ -1,51 +1,72 @@
-import React, { Fragment, useContext } from "react";
-import GlobalContext from "../GlobalContext";
+import React, { useContext } from 'react';
+import GlobalContext from '../GlobalContext';
 
 function MuraDecorator(props) {
   const [isEditMode] = useContext(GlobalContext);
-//  console.log("MuraDecorator -> isEditMode", props);
+  const { label, labeltag, children } = props;
+  //  console.log("MuraDecorator -> isEditMode", props);
+
   const domObject = {
-    className : 'mura-object mura-async-object'
+    className: 'mura-object mura-async-object',
   };
 
-  Object.keys(props).forEach((key) => {
-    if ((isEditMode || true) && key !== "children") {
-      if (typeof props[key] === "object" && key !== "children" && key !='flashdata') {
-        domObject[`data-${key}`] = JSON.stringify(props[key]);
-      } else if(typeof props[key] !== 'undefined'
-      && !(typeof props[key] === "string" && props[key] == ''))
-      {
-        domObject[`data-${key}`] = props[key];
-      }
-    }
+  const domContent = {
+    className: 'mura-object-content',
+  };
 
-    if (key === "class") {
-      domObject.className += ` ${props[key]}`;
-    }
-  });
+  if (isEditMode) {
+    Object.keys(props).forEach(key => {
+      if (
+        !['children', 'isEditMode', 'dynamicProps', 'moduleStyleData'].find(
+          restrictedkey => restrictedkey === key,
+        )
+      ) {
+        if (typeof props[key] === 'object') {
+          domObject[`data-${key}`] = JSON.stringify(props[key]);
+        } else if (
+          typeof props[key] !== 'undefined' &&
+          !(typeof props[key] === 'string' && props[key] === '')
+        ) {
+          domObject[`data-${key}`] = props[key];
+        }
+      }
+      if (key === 'class') {
+        domObject.className += ` ${props[key]}`;
+      }
+    });
+  } else {
+    domObject['data-instanceid'] = props.instanceid;
+    domObject.className =
+      props.moduleStyleData[props.instanceid].targets.object.class;
+    domObject.id = props.moduleStyleData[props.instanceid].targets.object.id;
+    domObject['data-inited'] = true;
+    domObject.className += ` mura-object-${props.object}`;
+
+    domContent.className =
+      props.moduleStyleData[props.instanceid].targets.content.class;
+    domContent.id = props.moduleStyleData[props.instanceid].targets.content.id;
+  }
 
   return (
-     <div {...domObject}>
-      {props.label ? <MuraMeta label={props.label} labeltag={props.labeltag} /> : null }
-      {props.label ? <div className="mura-flex-break" /> : null}
-      <div className="mura-object-content">
-          {props.children}
-      </div>
-      <div className="footer" />
+    <div {...domObject}>
+      {label ? (
+        <MuraMeta label={label} labeltag={labeltag} />
+      ) : null}
+      {label ? <div className="mura-flex-break" /> : null}
+      <div {...domContent}>{children}</div>
     </div>
   );
 }
 
-const MuraMeta = ({label,labeltag}) => {
-	const LabelHeader = labeltag ? `${labeltag}` : 'h2';
-
-	return (
-		<div className="mura-object-meta-wrapper">
-			<div className="mura-object-meta">
-				<LabelHeader>{label}</LabelHeader>
-			</div>
-		</div>	
-	)
-}
+const MuraMeta = ({ label, labeltag }) => {
+  const LabelHeader = labeltag ? `${labeltag}` : 'h2';
+  return (
+    <div className="mura-object-meta-wrapper">
+      <div className="mura-object-meta">
+        <LabelHeader>{label}</LabelHeader>
+      </div>
+    </div>
+  );
+};
 
 export default MuraDecorator;
