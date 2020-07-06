@@ -33,7 +33,7 @@ function contentDidChange(_content){
 
     //Ensure edit classes are removed
     Mura('html,body').attr('class','');
-    
+
     setTimeout(
         ()=>{
            // console.log("timeout",_content);
@@ -45,11 +45,10 @@ function contentDidChange(_content){
             Mura.init(Mura.extend({queueObjects:false,content:content}));
             Mura.holdReady(false)
         
-            /*
             if(!htmlQueueContainer.length){
-                Mura.loader().loadjs(Mura.rootpath + "/core/modules/v1/core_assets/js/variation.js?siteid=" + Mura.siteid)
+               // Mura.loader().loadjs(Mura.rootpath + "/core/modules/v1/core_assets/js/variation.js?siteid=" + Mura.siteid)
             }
-            */
+
         },
         5
     )

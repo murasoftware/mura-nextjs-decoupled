@@ -46,7 +46,7 @@ const DisplayRegion = ({region,moduleStyleData}) => {
     // Mura inheritance, where modules are inherited from parent content
     if(region.inherited.items.length){
         inherited=(
-        <DisplayRegionSection region={region} iseditmode={isEditMode} section="inherited">
+        <DisplayRegionSection region={region} section="inherited">
             {region.inherited.items.map((item) => {
                 let obj=Object.assign({},item);
                 obj.key=obj.instanceid;

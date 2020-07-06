@@ -2,7 +2,14 @@ import React, { Fragment, useContext } from "react";
 import GlobalContext from "../GlobalContext";
 
 function MuraDecorator(props) {
-  const [isEditMode] = useContext(GlobalContext);
+
+  let isEditMode=true;
+
+  try{
+    [isEditMode] = useContext(GlobalContext);
+  }catch(e){
+    isEditMode=true;
+  }
   //  console.log("MuraDecorator -> isEditMode", props);
 
   let domObject = {
