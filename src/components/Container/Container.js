@@ -1,19 +1,20 @@
+import React from 'react';
+
+// eslint-disable-next-line
+import { getComponent } from 'helpers/ComponentRegister';
 import MuraDecorator from '../MuraDecorator';
-import { getComponent } from '../../helpers/ComponentRegister';
 
 function Container(props) {
-  const { items  } = props;
+  const { items } = props;
   // console.log('Container -> items', items);
   // console.log('Container -> props', props);
-  if(!items) return ('');
+  if (!items) return '';
 
-  return (items.map(item => {
-          const obj=Object.assign({},item);
-          obj.key=obj.instanceid;
-          return  (<MuraDecorator {...obj}> {getComponent(obj)} </MuraDecorator>)
-      })
-   
-  );
+  return items.map(item => {
+    const obj = Object.assign({}, item);
+    obj.key = obj.instanceid;
+    return <MuraDecorator {...obj}> {getComponent(obj)} </MuraDecorator>;
+  });
 }
 
 export default Container;
