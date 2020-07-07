@@ -8,7 +8,7 @@ const MainRouter = ({ items }) => (
         {items &&
           items.map(item => (
             <Link key={item.contentid} href={`/${item.filename}`}>
-              {item.menutitle}
+              <a>{item.menutitle}</a>
             </Link>
           ))}
       </ul>
