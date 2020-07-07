@@ -1,16 +1,16 @@
 /* eslint-disable */
 import Mura from 'mura.js';
-import React from 'react';
-import ReactDOM from 'react-dom';
 import Example from '../components/Example';
 import Text, { getTextProps } from '../components/Text';
 import Video from '../components/Video';
 import Image from '../components/Image';
 import Container from '../components/Container';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-// This module is also registered with Mura via the ./static/mura.config.json
+//This module is also registered with Mura via the ./static/mura.config.json
 
-const moduleRegistry = [
+let moduleRegistry = [
   {
     name: 'Example',
     component: Example,
@@ -34,7 +34,7 @@ const moduleRegistry = [
   },
 ];
 
-const moduleLookup = {};
+let moduleLookup = {};
 
 moduleRegistry.forEach(module => {
   module.getDynamicProps =
@@ -68,13 +68,13 @@ Mura.Module.Container.reopen({
     self.find('.mura-object:not([data-object="container"])').html('');
     self.find('.frontEndToolsModal').remove();
     self.find('.mura-object-meta').html('');
-    const content = self.children('div.mura-object-content');
+    var content = self.children('div.mura-object-content');
 
     if (content.length) {
-      const nestedObjects = [];
+      var nestedObjects = [];
       content.children('.mura-object').each(function() {
         Mura.resetAsyncObject(this, empty);
-        // console.log(Mura(this).data())
+        //console.log(Mura(this).data())
         nestedObjects.push(Mura(this).data());
       });
       self.data('items', JSON.stringify(nestedObjects));
@@ -91,7 +91,7 @@ export const getComponent = item => {
 
   const objectkey = Mura.firstToUpperCase(item.object);
 
-  if (typeof moduleLookup[objectkey] !== 'undefined') {
+  if (typeof moduleLookup[objectkey] != 'undefined') {
     const ComponentVariable = moduleLookup[objectkey].component;
     return <ComponentVariable key={item.instanceid} {...item} />;
   }
@@ -103,7 +103,9 @@ export const getMuraPaths = async () => {
   const pathList = await getPrimaryNavData();
 
   const paths = pathList
-    .map(item => ({ params: { page: item.filename.split('/') } }))
+    .map(item => {
+      return { params: { page: item.filename.split('/') } };
+    })
     .filter(function(item) {
       return item.params.page.length;
     });
@@ -138,7 +140,9 @@ export const getMura = context => {
   return Mura;
 };
 
-export const getRootPath = () => getMura().rootpath;
+export const getRootPath = () => {
+  return getMura().rootpath;
+};
 
 export const getMuraProps = async context => {
   getMura(context);
@@ -150,8 +154,8 @@ export const getMuraProps = async context => {
 
   const props = {
     navigation,
-    content,
-    moduleStyleData,
+    content: content,
+    moduleStyleData: moduleStyleData,
   };
 
   return {
@@ -175,7 +179,9 @@ async function renderContent(context) {
   }
 
   return await Mura.renderFilename(filename, query).then(
-    async rendered => rendered,
+    async rendered => {
+      return rendered;
+    },
     async rendered => {
       if (!rendered) {
         return Mura.getEntity('Content').set({
@@ -191,8 +197,9 @@ async function renderContent(context) {
           contenthistid: Mura.createUUID(),
           filename: '404',
         });
+      } else {
+        return rendered;
       }
-      return rendered;
     },
   );
 }
@@ -207,7 +214,7 @@ async function getPrimaryNavData() {
     .sort('orderno')
     .getQuery()
     .then(collection => {
-      const tempArray = collection.getAll().items;
+      let tempArray = collection.getAll().items;
       tempArray.unshift({
         url: '/',
         menutitle: 'Home',
@@ -221,11 +228,11 @@ async function getPrimaryNavData() {
 
 async function getRegionProps(content) {
   getMura();
-  const moduleStyleData = {};
+  let moduleStyleData = {};
 
   Object.values(content.get('displayregions')).forEach(async region => {
     if (
-      typeof region.inherited !== 'undefined' &&
+      typeof region.inherited != 'undefined' &&
       Array.isArray(region.inherited.items)
     ) {
       region.inherited.items.forEach(async item => {
@@ -251,11 +258,11 @@ async function getRegionProps(content) {
 async function getModuleProps(item, moduleStyleData) {
   getMura();
   const objectkey = Mura.firstToUpperCase(item.object);
-  if (typeof moduleLookup[objectkey] !== 'undefined') {
+  if (typeof moduleLookup[objectkey] != 'undefined') {
     item.dynamicProps = await moduleLookup[objectkey].getDynamicProps(item);
     if (item.object == 'container') {
       if (
-        typeof item.object.items !== 'undefined' &&
+        typeof item.object.items != 'undefined' &&
         !Array.isArray(item.object.items)
       ) {
         try {
@@ -279,7 +286,7 @@ async function getModuleProps(item, moduleStyleData) {
   return {
     cssRules: styleData.cssRules,
     targets: styleData.targets,
-    id: `mura-styles${item.instanceid}`,
+    id: 'mura-styles' + item.instanceid,
     stylesupport: item.stylesupport || {},
   };
 }

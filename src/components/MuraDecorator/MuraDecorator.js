@@ -2,8 +2,14 @@ import React, { useContext } from 'react';
 import GlobalContext from '../GlobalContext';
 
 function MuraDecorator(props) {
-  const [isEditMode] = useContext(GlobalContext);
-  const { label, labeltag, children } = props;
+  const { label, instanceid, labeltag, children } = props;
+  let isEditMode = true;
+
+  try {
+    [isEditMode] = useContext(GlobalContext);
+  } catch (e) {
+    isEditMode = true;
+  }
   //  console.log("MuraDecorator -> isEditMode", props);
 
   const domObject = {
@@ -35,9 +41,9 @@ function MuraDecorator(props) {
       }
     });
   } else {
-    domObject['data-instanceid'] = props.instanceid;
+    domObject['data-instanceid'] = instanceid;
     domObject.className =
-      props.moduleStyleData[props.instanceid].targets.object.class;
+      props.moduleStyleData[instanceid].targets.object.class;
     domObject.id = props.moduleStyleData[props.instanceid].targets.object.id;
     domObject['data-inited'] = true;
     domObject.className += ` mura-object-${props.object}`;
@@ -46,12 +52,9 @@ function MuraDecorator(props) {
       props.moduleStyleData[props.instanceid].targets.content.class;
     domContent.id = props.moduleStyleData[props.instanceid].targets.content.id;
   }
-
   return (
     <div {...domObject}>
-      {label ? (
-        <MuraMeta label={label} labeltag={labeltag} />
-      ) : null}
+      {label ? <MuraMeta label={label} labeltag={labeltag} /> : null}
       {label ? <div className="mura-flex-break" /> : null}
       <div {...domContent}>{children}</div>
     </div>

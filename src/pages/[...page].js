@@ -1,9 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
+import { getMuraProps, getRootPath, getMuraPaths } from '@helpers/MuraHelper';
+
 import MainRouter from '../components/MainRouter';
 import MainLayout from '../components/MainLayout';
 import DisplayRegion from '../components/DisplayRegion';
-import { getMuraProps, getRootPath, getMuraPaths } from '../helpers/MuraHelper';
 
 export async function getStaticPaths() {
   const paths = await getMuraPaths();

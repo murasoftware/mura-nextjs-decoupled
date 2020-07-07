@@ -20,9 +20,10 @@ function MuraStyles(props) {
         })}
       </div>
     );
-  }
-  // console.log("DYN IS NOT ARRAY: ");
-  return <div />; 
+  } 
+    // console.log("DYN IS NOT ARRAY: ");
+    return <div />;
+  
 }
 
 export default MuraStyles;

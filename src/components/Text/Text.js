@@ -5,18 +5,20 @@ function Text(props) {
   const objectparams = Object.assign({}, props);
 
   if (typeof objectparams.dynamicProps === 'undefined') {
-    objectparams.dynamicProps = (async () =>
-      getDynamicProps(objectparams))();
+    objectparams.dynamicProps = (async () => getDynamicProps(objectparams))();
   }
 
   if (typeof objectparams.dynamicProps.source !== 'undefined') {
     return (
       <div
         dangerouslySetInnerHTML={{ __html: objectparams.dynamicProps.source }}
-      />
+       />
     );
-  }
-  return <div dangerouslySetInnerHTML={{ __html: objectparams.source }} />;
+  } 
+    return (
+      <div dangerouslySetInnerHTML={{ __html: objectparams.source }} />
+    );
+  
 }
 
 export const getDynamicProps = async props => {
