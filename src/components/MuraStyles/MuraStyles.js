@@ -1,4 +1,5 @@
 import React from 'react';
+import GlobalContext from '../GlobalContext';
 
 function MuraStyles(props) {
   const { moduleStyleData } = props;
