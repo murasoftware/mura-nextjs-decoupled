@@ -1,15 +1,18 @@
-import MuraDecorator from '../MuraDecorator';
-import { getComponent } from '../../helpers/MuraHelper';
+import React from 'react';
 import Mura from 'mura.js/src/core/core';
 
+// eslint-disable-next-line
+import { getComponent } from '@helpers/MuraHelper';
+import MuraDecorator from '../MuraDecorator';
+
 function Container(props) {
-  const { items  } = props;
+  const { items } = props;
   // console.log('Container -> items', items);
   // console.log('Container -> props', props);
-  if(!items) return ('');
+  if (!items) return '';
 
   return (items.map(item => {
-          let obj=Object.assign({},item);
+          const obj=Object.assign({},item);
           if(Mura.cloning){
             obj.instanceid=Mura.createUUID();
           }
