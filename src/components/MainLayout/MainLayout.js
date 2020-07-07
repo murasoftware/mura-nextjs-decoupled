@@ -32,7 +32,9 @@ function contentDidChange(_content){
     }
 
     //Ensure edit classes are removed
-    Mura('html,body').attr('class','');
+    if(typeof MuraInlineEditor == 'undefined'){
+        Mura('html,body').attr('class','');
+    }
 
     setTimeout(
         ()=>{
@@ -46,7 +48,7 @@ function contentDidChange(_content){
             Mura.holdReady(false)
         
             if(!htmlQueueContainer.length){
-               // Mura.loader().loadjs(Mura.rootpath + "/core/modules/v1/core_assets/js/variation.js?siteid=" + Mura.siteid)
+               //Mura.loader().loadjs(Mura.rootpath + "/core/modules/v1/core_assets/js/variation.js?siteid=" + Mura.siteid)
             }
 
         },
