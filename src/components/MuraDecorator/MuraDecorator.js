@@ -47,11 +47,17 @@ function MuraDecorator(props) {
     domObject.id = props.moduleStyleData[props.instanceid].targets.object.id;
     domObject['data-inited'] = true;
     domObject.className += ` mura-object-${props.object}`;
-
     domContent.className =
       props.moduleStyleData[props.instanceid].targets.content.class;
     domContent.id = props.moduleStyleData[props.instanceid].targets.content.id;
+
+    ['objectspacing','contentspacing','metaspacing'].forEach((key)=>{
+      if(typeof props[key] != 'undefined' && props[key] && props[key] != 'custom'){
+        domObject['data-' + key] = props[key];
+      }
+    });
   }
+
   return (
     <div {...domObject}>
       {label ? <MuraMeta label={label} labeltag={labeltag} /> : null}
