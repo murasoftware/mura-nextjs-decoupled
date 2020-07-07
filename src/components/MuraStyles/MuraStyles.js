@@ -1,11 +1,20 @@
 import React from 'react';
+import GlobalContext from '../GlobalContext';
 
 function MuraStyles(props) {
   const { moduleStyleData } = props;
 
+  let isEditMode = true;
+
+  try {
+    [isEditMode] = useContext(GlobalContext);
+  } catch (e) {
+    isEditMode = true;
+  }
+
   // console.log("DIN: ",dynamicCSS);
 
-  if (typeof moduleStyleData !== 'undefined') {
+  if (!isEditMode && typeof moduleStyleData !== 'undefined') {
     return (
       <div>
         {Object.keys(moduleStyleData).map(instanceid => {
