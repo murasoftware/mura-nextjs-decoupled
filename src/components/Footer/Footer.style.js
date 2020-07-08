@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { iexText, font20, iexStandard, font30 } from '@styles/typography';
 import { H3, Column, ContentContainer } from '@styles/atoms';
 
+
 export const Footer = styled(ContentContainer)`
   max-width: ${props =>  props.theme.sizes.maxWidth}px;
   padding: 150px 0;
@@ -13,8 +14,11 @@ export const Footer = styled(ContentContainer)`
   }
 `;
 
+
+
 export const FooterColumn = styled(Column)`
   padding: 0 20px;
+
 
   > * {
     display: block;
