@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowSVG } from 'Arrow.style';
+import { ArrowSVG } from './Icons.style';
 /* eslint-disable */
 export const LeftCarouselArrow = isActive => (
   <ArrowSVG
@@ -189,32 +189,17 @@ export const ExternalLink = () => (
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-      <g
-        id="IEX_Masterbrand_Home_V1"
-        transform="translate(-1081.000000, -11747.000000)"
-      >
-        <rect fill="#010202" x="0" y="0" width="2400" height="12181" />
-        <g
-          id="Group-22"
-          transform="translate(0.000000, 11625.000000)"
-          fill="#FFFFFF"
-        >
-          <g id="Group-2" transform="translate(0.000000, 106.000000)">
-            <g id="Group-9" transform="translate(896.000000, 1.000000)">
-              <g
-                id="Icon/Arrow/White"
-                transform="translate(192.000000, 21.500000) rotate(-45.000000) translate(-192.000000, -21.500000) translate(183.000000, 13.000000)"
-              >
-                <polygon
-                  id="Fill-1"
-                  points="9.33048276 0 8.4697931 0.843779333 15.6701379 7.90349216 0 7.90349216 0 9.09650784 15.6701379 9.09650784 8.4697931 16.1564911 9.33048276 17 18 8.49979715"
-                />
-              </g>
-            </g>
-          </g>
-        </g>
-      </g>
+    <g
+      transform="rotate(-45.000000)"
+      style={{
+        fill: 'white',
+        transform: `translate(-5px, 8px) rotate(-45deg)`,
+      }}
+    >
+      <polygon
+        id="Fill-1"
+        points="9.33048276 0 8.4697931 0.843779333 15.6701379 7.90349216 0 7.90349216 0 9.09650784 15.6701379 9.09650784 8.4697931 16.1564911 9.33048276 17 18 8.49979715"
+      ></polygon>
     </g>
   </svg>
 );
