@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
+import GlobalFonts from './fonts';
+
 const GlobalStyle = createGlobalStyle`
+  ${GlobalFonts}
   /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -18,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
   figure, figcaption, footer, header, hgroup,
   menu, nav, output, ruby, section, summary,
   time, mark, audio, video {
+    color: white;
     margin: 0;
     padding: 0;
     border: 0;
@@ -30,6 +34,8 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     height: 100%;
     scroll-behavior: smooth;
+    background-color: ${props =>  props.theme.colors.background};
+
   }
 
   * {
@@ -97,16 +103,6 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-
-  body {
-    background: white;
-    line-height: 1.2;
-    font-size: 100%;
-    font-variant-ligatures: none;
-    font-weight: normal;
-    font-family: "GT Futura", sans-serif;
-  }
-
   img {
     display: block;
     width: 100%;
@@ -129,6 +125,10 @@ const GlobalStyle = createGlobalStyle`
     &:invalid {
       box-shadow: none;
     }
+  }
+
+  a {
+    text-decoration: none;
   }
 
   button {
