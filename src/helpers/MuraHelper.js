@@ -144,13 +144,13 @@ export const getRootPath = () => {
   return getMura().rootpath;
 };
 
-export const getMuraProps = async context => {
+export const getMuraProps = async (context,isEditMode) => {
   getMura(context);
 
   const muraObject = await renderContent(context);
   const navigation = await getPrimaryNavData();
   const content = muraObject.getAll();
-  const moduleStyleData = await getRegionProps(muraObject);
+  const moduleStyleData = await getRegionProps(muraObject,isEditMode);
 
   const props = {
     navigation,
@@ -226,7 +226,7 @@ async function getPrimaryNavData() {
     });
 }
 
-async function getRegionProps(content) {
+async function getRegionProps(content,isEditMode) {
   getMura();
   let moduleStyleData = {};
 
@@ -240,6 +240,7 @@ async function getRegionProps(content) {
         moduleStyleData[item.instanceid] = await getModuleProps(
           item,
           moduleStyleData,
+          isEditMode
         );
       });
     }
@@ -248,6 +249,7 @@ async function getRegionProps(content) {
       moduleStyleData[item.instanceid] = await getModuleProps(
         item,
         moduleStyleData,
+        isEditMode
       );
     });
   });
@@ -255,8 +257,9 @@ async function getRegionProps(content) {
   return moduleStyleData;
 }
 
-async function getModuleProps(item, moduleStyleData) {
+async function getModuleProps(item, moduleStyleData,isEditMode) {
   getMura();
+
   const objectkey = Mura.firstToUpperCase(item.object);
   if (typeof moduleLookup[objectkey] != 'undefined') {
     item.dynamicProps = await moduleLookup[objectkey].getDynamicProps(item);
@@ -276,17 +279,22 @@ async function getModuleProps(item, moduleStyleData) {
         moduleStyleData[item.instanceid] = await getModuleProps(
           item,
           moduleStyleData,
+          isEditMode
         );
       });
     }
   }
 
-  const styleData = Mura.recordModuleStyles(item);
+ 
+    const styleData = Mura.recordModuleStyles(item);
+    
+    return {
+      isEditMode:isEditMode,
+      cssRules: styleData.cssRules,
+      targets: styleData.targets,
+      id: 'mura-styles' + item.instanceid,
+      stylesupport: item.stylesupport || {},
+    };
 
-  return {
-    cssRules: styleData.cssRules,
-    targets: styleData.targets,
-    id: 'mura-styles' + item.instanceid,
-    stylesupport: item.stylesupport || {},
-  };
+ 
 }
