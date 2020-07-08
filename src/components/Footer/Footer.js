@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavStyle, NavLink } from '@styles/atoms';
+import { ExternalLink } from '@components/Icons/Icons';
+import { isMobile } from '@utils/screenSize';
 
 import {
   Footer,
@@ -8,9 +10,15 @@ import {
   TagLine,
   TagLineLink,
   LinkRow,
+  RightContainer,
 } from './Footer.style';
 
 const FooterComponent = props => {
+  const [isMobileState, setIsMobileState] = useState(false);
+  useEffect(() => {
+    setIsMobileState(isMobile());
+  }, []);
+
   const {
     footerTagLine = 'Technology that works for everyone',
     contactText = 'Contact IEX Group',
@@ -52,37 +60,42 @@ const FooterComponent = props => {
     },
   ];
 
+  const renderContactColumn = () => (
+    <FooterColumn lcols={4} scols={12}>
+      <TagLine>{footerTagLine}</TagLine>
+      <NavLink href={contactLink}>{contactText}</NavLink>
+      <FooterAddress>
+        {address1}
+        <br />
+        {address2}
+        <br />
+        {address3}
+        <br />
+        {phoneNumber}
+      </FooterAddress>
+      <LinkRow>
+        <NavLink href={cookieLink}>{cookieText}</NavLink>
+        <NavLink href={privacyLink}>{privacyText}</NavLink>
+      </LinkRow>
+    </FooterColumn>
+  );
+
   return (
     <Footer>
-      <FooterColumn lcols={4} scols={12}>
-        <TagLine>{footerTagLine}</TagLine>
-        <NavLink href={contactLink}>{contactText}</NavLink>
-        <FooterAddress>
-          {address1}
-          <br />
-          {address2}
-          <br />
-          {address3}
-          <br />
-          {phoneNumber}
-        </FooterAddress>
-        <LinkRow>
-          <NavLink href={cookieLink}>{cookieText}</NavLink>
-          <NavLink href={privacyLink}>{privacyText}</NavLink>
-        </LinkRow>
-      </FooterColumn>
-      {columns.map(({
-        link,
-        title,
-        subTitle,
-        desc,
-      }) => (
-        <FooterColumn lcols={2} scols={12}>
-          <TagLineLink href={link}>{title}</TagLineLink>
-          <NavLink href={contactLink}>{subTitle}</NavLink>
-          <NavStyle>{desc}</NavStyle>
-        </FooterColumn>
-      ))}
+      {!isMobileState && renderContactColumn()}
+      <RightContainer lcols={8} scols={12}>
+        {columns.map(({ link, title, subTitle, desc }) => (
+          <FooterColumn lcols={3} mcols={6} scols={12}>
+            <TagLineLink href={link}>
+              <span>{title}</span>
+              <ExternalLink />
+            </TagLineLink>
+            <NavLink href={contactLink}>{subTitle}</NavLink>
+            <NavStyle>{desc}</NavStyle>
+          </FooterColumn>
+        ))}
+      </RightContainer>
+      {isMobileState && renderContactColumn()}
     </Footer>
   );
 };

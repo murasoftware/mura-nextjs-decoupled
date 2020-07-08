@@ -1,6 +1,7 @@
 const theme = {
   colors: {
     background: '#010202',
+    border: '#979797',
   },
   sizes: {
     maxWidth: 1900,

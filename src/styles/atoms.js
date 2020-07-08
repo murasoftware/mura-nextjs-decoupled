@@ -59,7 +59,7 @@ export const Column = styled.div`
   }
 
   @media (max-width: ${props => props.theme.breakpoints.mobile.max}px) {
-    flex-basis: ${props => `calc( 100% / 12 * ${props.scols})` ||  `calc(100% / 12 * 3)`};
+    flex-basis: ${props => `calc( 100% / 12 * ${props.scols})` ||  `calc(100% / 12 * 12)`};
   }
 
   &:first-of-type {
