@@ -8,6 +8,7 @@ function MuraStyles(props) {
       <div>
         {Object.keys(moduleStyleData).map(instanceid => {
           const rules = moduleStyleData[instanceid];
+          if(!rules.isEditMode){
           return (
             <style
               id={rules.id}
@@ -15,6 +16,9 @@ function MuraStyles(props) {
               dangerouslySetInnerHTML={{ __html: rules.cssRules.join('\n') }}
              />
           );
+          } else {
+            return '';
+          }
         })}
       </div>
     );

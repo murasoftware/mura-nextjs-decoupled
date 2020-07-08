@@ -10,7 +10,7 @@ function MuraDecorator(props) {
   } catch (e) {
     isEditMode = true;
   }
-  //  console.log("MuraDecorator -> isEditMode", props);
+  //console.log("MuraDecorator -> isEditMode", isEditMode);
 
   const domObject = {
     className: 'mura-object mura-async-object',
