@@ -21,6 +21,7 @@ services:
         MURA_ADMINDOMAIN: "localhost"
         MURA_EXTERNALCONFIG: "/var/www/config/mura.config.json"
         MURA_DEFAULTTHEMEURL: "https://github.com/murasoftware/mura-minimal/archive/master.zip"
+        MURA_HTMLEDITORTYPE: markdown
     volumes:
         #-   ../mura/app/core:/var/www/core
         #-   ../mura/app/admin:/var/www/admin
