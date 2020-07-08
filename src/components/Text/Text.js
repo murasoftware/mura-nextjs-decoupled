@@ -1,5 +1,6 @@
 import React from 'react';
 import Mura from 'mura.js';
+import ReactMarkdown from "react-markdown";
 
 function Text(props) {
   const objectparams = Object.assign({}, props);
@@ -10,13 +11,11 @@ function Text(props) {
 
   if (typeof objectparams.dynamicProps.source !== 'undefined') {
     return (
-      <div
-        dangerouslySetInnerHTML={{ __html: objectparams.dynamicProps.source }}
-       />
+      <ReactMarkdown source={objectparams.dynamicProps.source} />
     );
   } 
     return (
-      <div dangerouslySetInnerHTML={{ __html: objectparams.source }} />
+      <ReactMarkdown source={objectparams.source} />
     );
   
 }
