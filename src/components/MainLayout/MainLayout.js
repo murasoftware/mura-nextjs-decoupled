@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 import Mura from 'mura.js';
+import Footer from '@components/Footer';
+import theme from '@styles/theme';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyle from '@styles/global'
 import MuraStyles from '../MuraStyles';
 
 const MainLayout = props => {
@@ -13,8 +17,12 @@ const MainLayout = props => {
 
   return (
     <div>
-      {children}
-      <MuraStyles {...props} />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        {children}
+        <MuraStyles {...props} />
+        <Footer />
+      </ThemeProvider>
     </div>
   );
 };

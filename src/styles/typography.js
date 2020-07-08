@@ -61,7 +61,7 @@ export const font30 = `
   }
 
   @media (max-width: ${mobile.max}px) {
-    font-size: 20px;
+    font-size: 30px;
     line-height: 1;
   }
 `;

@@ -1,22 +1,25 @@
 const theme = {
   colors: {
-    
+    background: '#010202',
   },
   sizes: {
-  
+    maxWidth: 1900,
   },
   breakpoints: {
     mobile: {
-     
+      min: 0,
+      max: 600,
+    },
+    tablet: {
+      min: 601,
+      max: 1024,
     },
     desktop: {
-      
+      min: 1025,
+      max: 2400,
     },
   },
-  responsive: {
-    
-  },
- 
+  responsive: {},
 };
 
 export default theme;
