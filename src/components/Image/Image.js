@@ -51,7 +51,9 @@ const Img = (props) => {
       <img src={props.src} alt={props.alt} loading="lazy" style={{height:"100%",width:"100%",objectFit:props.fit}} data-object-fit={props.fit} />
     );
   } else {
-    <img src={props.src} alt={props.alt} loading="lazy" />
+    return (
+      <img src={props.src} alt={props.alt} loading="lazy" />
+    )
   }
  
 }
