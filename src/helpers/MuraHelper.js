@@ -206,7 +206,13 @@ async function renderContent(context) {
           contentid: Mura.createUUID(),
           contenthistid: Mura.createUUID(),
           filename: '404',
-          displayregions:{primarycontent:[]}
+          displayregions:{
+            primarycontent:{
+              local:{
+                items:[]
+              }
+            }
+          }
         });
       } else {
         return rendered;
