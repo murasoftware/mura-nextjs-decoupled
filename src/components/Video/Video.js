@@ -17,13 +17,8 @@ const getVideoPlayer = props => {
 
 function Video(props) {
 
-console.log("VIDEO",props.displaytype);
-
   const { displaytype, videoid, videoplatform } = props;
   const {modalsize} = videoConfig;
-
-  console.log("MSIZE",modalsize);
-
   if(!videoplatform.length) {
     return <div>Video platform missing.</div>
   }
