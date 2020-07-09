@@ -4,19 +4,26 @@ import ReactMarkdown from "react-markdown";
 
 function Text(props) {
   const objectparams = Object.assign({}, props);
+  let initialSource='';
 
-  if (typeof objectparams.dynamicProps === 'undefined') {
-    objectparams.dynamicProps = (async () => getDynamicProps(objectparams))();
+  if (Mura.isUUID(objectparams.source)){
+    if( typeof objectparams.dynamicProps === 'undefined') {
+      getDynamicProps(objectparams).then((dynamicProps)=>{
+        setSource(dynamicProps.source);
+      });
+    } else {
+      initialSource=objectparams.dynamicProps.source;
+    }
+  } else {
+    initialSource=objectparams.source;
   }
 
-  if (typeof objectparams.dynamicProps.source !== 'undefined') {
-    return (
-      <ReactMarkdown source={objectparams.dynamicProps.source} />
-    );
-  } 
-    return (
-      <ReactMarkdown source={objectparams.source} />
-    );
+  const [source, setSource] = React.useState(initialSource);
+
+  return (
+    <ReactMarkdown source={source} />
+  );
+  
   
 }
 
@@ -27,9 +34,9 @@ export const getDynamicProps = async props => {
     props.sourcetype === 'component' &&
     Mura.isUUID(props.source)
   ) {
-    data.source = await Mura.getEntity('content')
-      .loadBy('contentid', props.source, { type: 'component', fields: 'body' })
-      .get('body');
+     const entity= await Mura.getEntity('content')
+      .loadBy('contentid', props.source, { type: 'component', fields: 'body' });
+    data.source=entity.get('body');
   }
 
   return data;
