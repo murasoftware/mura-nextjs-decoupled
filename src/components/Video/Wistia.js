@@ -18,7 +18,7 @@ function Wistia(props) {
 		<div
 			className={`wistia_embed wistia_async_${videoid}`}
 			seo='false'
-			videoFoam='true'
+			videofoam='true'
 			style={{height:'100%',width:'100%'}}>&nbsp;</div></div></div>
 	  </div>
 	);
