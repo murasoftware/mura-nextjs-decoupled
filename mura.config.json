@@ -16,6 +16,20 @@
 					{"type":"text","name":"myvar","label":"My Label"}
 				]
 			},
+			"LatestArticle":{
+				"name":"Latest Article",
+				"contenttypes":"*",
+				"configurator":[
+					{"type":"image","name":"articleSourceImage","label":"Article source image"},
+					{"type":"text","name":"articleAuthors","label":"Article Author(s)"},
+					{"type":"text","name":"articleAuthorAdditionalInfo","label":"Article Author additional info (Company & Title)"},					
+					{"type":"text","name":"businessSourceHeadline","label":"Business Source Headline"},
+					{"type":"text","name":"articleTitle","label":"Article Title"},
+					{"type":"text","name":"articleBodyCopyPreview","label":"Article Body Copy Preview"},
+					{"type":"text","name":"downloadWhitePaperCTA","label":"Download White Paper CTA"},
+					{"type":"text","name":"seeAllInsightsCTA","label":"See all Insights CTA"}
+				]
+			},
 			"NextJSCollectionLayout":{
 				"name":"NextJS Collection Layout",
 				"contenttypes":"",
