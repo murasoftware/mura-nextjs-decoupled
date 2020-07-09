@@ -1,17 +1,17 @@
 import React,{ useContext, useEffect } from "react";
 import GlobalContext from "../GlobalContext";
 
-const EditLayout = (props) => {
-    const [isEditMode, setIsEditMode]  = useContext(GlobalContext);
+const EditLayout = ({children}) => {
+    const [, setIsEditMode]  = useContext(GlobalContext);
 
     useEffect(()=>{
         setIsEditMode(true);
-    },[setIsEditMode])
+    }, [setIsEditMode])
 
     return (
         <div>
-            {props.children}
-            <div id="htmlqueues"></div>
+            {children}
+            <div id="htmlqueues" />
         </div>
     )
 }

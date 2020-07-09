@@ -8,6 +8,7 @@
     "start": "next start",
     "test": "eslint src && echo \"no test specified\"",
     "lint": "eslint src",
+    "lint-fix": "eslint src --fix",
     "export": "next build && next export",
     "help": "next export --help"
   },
@@ -19,13 +20,14 @@
     "next": "^9.4.5-canary.28",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-markdown": "^4.3.1",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",

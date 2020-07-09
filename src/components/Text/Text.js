@@ -1,39 +1,38 @@
 import React from 'react';
 import Mura from 'mura.js';
+import ReactMarkdown from "react-markdown";
 
 function Text(props) {
-  let objectparams=Object.assign({},props);
-  
-  if(typeof objectparams.dynamicProps == 'undefined'){
-    objectparams.dynamicProps=(async ()=>{ return await getDynamicProps(objectparams)})();
+  const objectparams = Object.assign({}, props);
+
+  if (typeof objectparams.dynamicProps === 'undefined') {
+    objectparams.dynamicProps = (async () => getDynamicProps(objectparams))();
   }
-  
-  if(typeof objectparams.dynamicProps.source != 'undefined'){
+
+  if (typeof objectparams.dynamicProps.source !== 'undefined') {
     return (
-      <div dangerouslySetInnerHTML={{__html:  objectparams.dynamicProps.source}}></div>
+      <ReactMarkdown source={objectparams.dynamicProps.source} />
     );
-  } else {
+  } 
     return (
-      <div dangerouslySetInnerHTML={{__html: objectparams.source}}></div>
+      <ReactMarkdown source={objectparams.source} />
     );
-  }
   
 }
 
-export const getDynamicProps=async (props) => {
-  let data={};
-  if(
-      typeof props.sourcetype != 'undefined'
-      && props.sourcetype=='component' 
-      && Mura.isUUID(props.source)
-    ){
-      data.source= await Mura.getEntity('content').loadBy('contentid',props.source,{type:'component',fields:'body'}).get('body');
+export const getDynamicProps = async props => {
+  const data = {};
+  if (
+    typeof props.sourcetype !== 'undefined' &&
+    props.sourcetype === 'component' &&
+    Mura.isUUID(props.source)
+  ) {
+    data.source = await Mura.getEntity('content')
+      .loadBy('contentid', props.source, { type: 'component', fields: 'body' })
+      .get('body');
   }
-  
+
   return data;
-  
-}
-
-
+};
 
 export default Text;
