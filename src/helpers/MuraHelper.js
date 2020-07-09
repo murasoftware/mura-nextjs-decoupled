@@ -5,6 +5,8 @@ import Text, { getTextProps } from '../components/Text';
 import Video from '../components/Video';
 import Image from '../components/Image';
 import Container from '../components/Container';
+import Embed from '../components/Embed';
+import Hr from '../components/Hr';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -31,6 +33,14 @@ let moduleRegistry = [
   {
     name: 'Container',
     component: Container,
+  },
+  {
+    name: 'Hr',
+    component: Hr,
+  },
+  {
+    name: 'Embed',
+    component: Embed,
   },
 ];
 
@@ -196,6 +206,7 @@ async function renderContent(context) {
           contentid: Mura.createUUID(),
           contenthistid: Mura.createUUID(),
           filename: '404',
+          displayregions:{primarycontent:[]}
         });
       } else {
         return rendered;
