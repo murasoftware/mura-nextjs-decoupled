@@ -66,6 +66,20 @@ export const font30 = `
   }
 `;
 
+export const font24 = `
+  font-size: 20px;
+  line-height: 1.2;
+  
+  @media (max-width: ${tablet.max}px) {
+    font-size: 24px;
+  }
+
+  @media (max-width: ${mobile.max}px) {
+    font-size: 20px;
+    line-height: 1;
+  }
+`;
+
 export const font20 = `
   font-size: 20px;
   line-height: 1.1;

@@ -2,6 +2,7 @@ const theme = {
   colors: {
     background: '#010202',
     border: '#979797',
+    accent: '#F7A11E',
   },
   sizes: {
     maxWidth: 1900,
