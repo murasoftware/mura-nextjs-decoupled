@@ -1,7 +1,11 @@
 import React from 'react';
 
 const LatestArticle = props => {
+<<<<<<< HEAD
 
+=======
+  console.log(props);
+>>>>>>> initial commit for #173652563
   const {
     articlesourceimage,
     articleauthors,
