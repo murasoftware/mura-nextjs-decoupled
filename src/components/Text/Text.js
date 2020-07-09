@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 
 function Text(props) {
   const objectparams = Object.assign({}, props);
+  let initialSource='';
 
   if(Mura.isUUID(objectparams.source) && !objectparams.dynamicProps){
     const [source, setSource]=useState('');
