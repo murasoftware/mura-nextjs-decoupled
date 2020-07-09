@@ -315,7 +315,6 @@ async function getModuleProps(item, moduleStyleData,isEditMode) {
     }
   }
 
-<<<<<<< HEAD
   const styleData = Mura.recordModuleStyles(item);
  
   return {
@@ -326,18 +325,4 @@ async function getModuleProps(item, moduleStyleData,isEditMode) {
     stylesupport: item.stylesupport || {},
     };
 
-=======
- 
-    const styleData = Mura.recordModuleStyles(item);
-    
-    return {
-      isEditMode:isEditMode,
-      cssRules: styleData.cssRules,
-      targets: styleData.targets,
-      id: 'mura-styles' + item.instanceid,
-      stylesupport: item.stylesupport || {},
-    };
-
- 
->>>>>>> Adding isEditMode to getMuraProps()
 }
