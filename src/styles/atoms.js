@@ -53,13 +53,18 @@ export const NavStyle = styled.p`
 export const Column = styled.div`
   padding: 0 20px;
   flex-basis: ${props => `calc( 100% / 12 * ${props.lcols})` || `calc(100% / 12 * 3)`};
+  width: ${props => `calc( 100% / 12 * ${props.lcols})` || `calc(100% / 12 * 3)`};
+  min-width: ${props => `calc( 100% / 12 * ${props.lcols})` || `calc(100% / 12 * 3)`};
 
   @media (max-width: ${props => props.theme.breakpoints.tablet.max}px) {
     flex-basis: ${props => `calc( 100% / 12 * ${props.mcols})` ||  `calc(100% / 12 * 3)`};
+    width: ${props => `calc( 100% / 12 * ${props.mcols})` ||  `calc(100% / 12 * 3)`};
+
   }
 
   @media (max-width: ${props => props.theme.breakpoints.mobile.max}px) {
     flex-basis: ${props => `calc( 100% / 12 * ${props.scols})` ||  `calc(100% / 12 * 12)`};
+    width: ${props => `calc( 100% / 12 * ${props.scols})` ||  `calc(100% / 12 * 12)`};
   }
 
   &:first-of-type {

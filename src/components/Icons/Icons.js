@@ -21,7 +21,6 @@ export const LeftCarouselArrow = isActive => (
             <g
               id="Group-14"
               transform="translate(250.000000, 1069.000000)"
-              opacity="0.5"
             >
               <g
                 id="Group-Copy-3"
