@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Mura from 'mura.js';
 import ReactMarkdown from "react-markdown";
 
@@ -18,7 +18,7 @@ function Text(props) {
     initialSource=objectparams.source;
   }
 
-  const [source, setSource] = React.useState(initialSource);
+  const [source, setSource]=useState(initialSource);
 
   return (
     <ReactMarkdown source={source} />
