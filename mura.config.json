@@ -6,20 +6,23 @@
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
 			"editableAttributesArray":[],
-			"imageAttributesArray":[],
+			"imageAttributesArray":[]
 		},
 		"modules":{
 			"Example":{
 				"name":"My Module",
 				"contenttypes":"*",
+				"omitcontenttypes":"",
 				"configurator":[
 					{"type":"text","name":"myvar","label":"My Label"}
 				]
 			},
 			"CollectionLayout":{
 				"name":"CollectionLayout",
-				"contenttypes":"*",
-				"configurator":""
+				"contenttypes":"",
+				"configurator":[
+					{"type":"hidden","name":"fields","value":"title,filename"}
+				]
 			}
 		},
 	"sites":{

@@ -2,6 +2,7 @@
 import Mura from 'mura.js';
 import Example from '../components/Example';
 import Text, { getTextProps } from '../components/Text';
+import Collection, { getCollectionProps } from '../components/Collection';
 import Video from '../components/Video';
 import Image from '../components/Image';
 import Container from '../components/Container';
@@ -21,6 +22,11 @@ let moduleRegistry = [
     name: 'Text',
     component: Text,
     getDynamicProps: getTextProps,
+  },
+  {
+    name: 'Collection',
+    component: Collection,
+    getDynamicProps: getCollectionProps,
   },
   {
     name: 'Video',

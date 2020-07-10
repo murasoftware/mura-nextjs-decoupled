@@ -87,7 +87,7 @@ function MuraDecorator(props) {
       }
     });
   }
-
+  
   return (
     <div {...domObject}>
       {label ? <MuraMeta label={label} labeltag={labeltag} dommeta={domMeta} dommetawrapper={domMetaWrapper}/> : null}

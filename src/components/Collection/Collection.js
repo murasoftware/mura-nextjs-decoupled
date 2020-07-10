@@ -1,8 +1,10 @@
 import React,{useState} from 'react';
 import Mura from 'mura.js';
 import CollectionLayout from '../CollectionLayout';
+import { useRouter } from 'next/router';
 
 function Collection(props) {
+  const router = useRouter();
   const objectparams = Object.assign({}, props);
   let initialRawCollection='';
 
@@ -24,8 +26,9 @@ function Collection(props) {
 
     const DynamicCollectionLayout = CollectionLayout;
 
+  
     return (
-      <DynamicCollectionLayout collection={collection} props={props} />
+      <DynamicCollectionLayout  collection={collection} props={props} />
     )
   }
   else {
@@ -43,16 +46,28 @@ export const getDynamicProps = async props => {
   // related content collection
   // TODO
   // feed collection
-  if (
-    typeof props.sourcetype !== 'undefined' &&
-    props.sourcetype === 'localindex' &&
-    Mura.isUUID(props.source)
+  if ((
+    typeof props.sourcetype === 'undefined'
+    || props.sourcetype === ''
+    ) 
+    ||  (
+      typeof props.sourcetype !== 'undefined' &&
+      props.sourcetype === 'localindex' &&
+      Mura.isUUID(props.source)
+    )
   ) {
-    const entity = await Mura.getFeed('content')
+    const feed = Mura.getFeed('content')
       .where()
       .andProp('feedid').isEQ(props.source);
+
+    if(props.displaylist){
+      feed.fields(props.displaylist);
+    }
+    if(props.fields){
+      feed.fields(props.fields);
+    }
       
-    const query = await entity.getQuery();
+    const query = await feed.getQuery();
 //    data.items = query.property.items;
     
     data.rawCollection = query.getAll();
