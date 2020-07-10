@@ -99,7 +99,6 @@ function MuraDecorator(props) {
 
 const MuraMeta = ({ label, labeltag, dommeta, dommetawrapper }) => {
   const LabelHeader = labeltag ? `${labeltag}` : 'h2';
-  console.log(dommeta)
   return (
     <div {...dommetawrapper}>
       <div {...dommeta}>
