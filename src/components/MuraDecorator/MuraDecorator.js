@@ -50,6 +50,10 @@ function MuraDecorator(props) {
         domObject.className += ` ${props[key]}`;
       } else if (key === 'cssid') {
         domObject.id += ` ${props[key]}`;
+      } else if (key === 'contentcssclass') {
+        domContent.className += ` ${props[key]}`;
+      } else if (key === 'contentcssid') {
+        domContent.id += ` ${props[key]}`;
       } else if (key === 'metacssclass') {
         domMeta.className += ` ${props[key]}`;
       } else if (key === 'metacssid') {
