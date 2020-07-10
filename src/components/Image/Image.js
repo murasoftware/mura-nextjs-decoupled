@@ -26,7 +26,7 @@ function Image(props) {
   );
   } else {
     return (
-      <figure>
+      <figure style={{margin:"0px"}}>
          <Img {...objectparams} />
         <FigCaption {...objectparams} />
       </figure>
