@@ -71,11 +71,11 @@ function MuraDecorator(props) {
       props.moduleStyleData[props.instanceid].targets.content.class;
     domContent.id = props.moduleStyleData[props.instanceid].targets.content.id;
     domMetaWrapper.className =
-    props.moduleStyleData[props.instanceid].targets.metawrapper.class;
+      props.moduleStyleData[props.instanceid].targets.metawrapper.class;
     domMeta.className =
-    props.moduleStyleData[props.instanceid].targets.meta.class;
+      props.moduleStyleData[props.instanceid].targets.meta.class;
     domMeta.id =
-    props.moduleStyleData[props.instanceid].targets.meta.id;
+      props.moduleStyleData[props.instanceid].targets.meta.id;
 
     ['objectspacing','contentspacing','metaspacing'].forEach((key)=>{
       if(typeof props[key] != 'undefined' && props[key] && props[key] != 'custom'){
