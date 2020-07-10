@@ -60,15 +60,17 @@ export const getDynamicProps = async props => {
       .where()
       .andProp('feedid').isEQ(props.source);
 
+    //displaylist is what is used by default collection component
     if(props.displaylist){
       feed.fields(props.displaylist);
     }
     if(props.fields){
       feed.fields(props.fields);
     }
+
+    //Add stuff like maxitems, nextn
       
     const query = await feed.getQuery();
-//    data.items = query.property.items;
     
     data.rawCollection = query.getAll();
 
