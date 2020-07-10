@@ -1,15 +1,17 @@
 import React,{useState} from 'react';
 import Mura from 'mura.js';
-import ReactMarkdown from "react-markdown";
-import Link from "next/link";
+import CollectionLayout from '../CollectionLayout';
 
 function Collection(props) {
   const objectparams = Object.assign({}, props);
   let initialRawCollection='';
 
+  // pretending dynamic TODO
+  objectparams.layout = "CollectionLayout";
+
   if( typeof objectparams.dynamicProps === 'undefined') {
     getDynamicProps(objectparams).then((dynamicProps)=>{
-      setSource(dynamicProps.rawCollection);
+      setRawCollection(dynamicProps.rawCollection);
     });
   } else {
     initialRawCollection=objectparams.dynamicProps.rawCollection;
@@ -19,8 +21,11 @@ function Collection(props) {
   
   if(rawCollection) {
     const collection = new Mura.EntityCollection(rawCollection,Mura._requestcontext);
+
+    const DynamicCollectionLayout = CollectionLayout;
+
     return (
-      <CollectionLayout collection={collection} props={props} />
+      <DynamicCollectionLayout collection={collection} props={props} />
     )
   }
   else {
@@ -30,27 +35,14 @@ function Collection(props) {
   }
 }
 
-export const CollectionLayout = ({props,collection}) => {
-  
-  return (
-    <div>
-      <ul>
-        {collection.get('items').map(function(item, i){
-          return <li key={item.get('contentid').toString()}><Link  href="/" as={'/' + item.get('filename')}>
-          <a>{item.get('menutitle')}</a>
-          </Link></li>;
-        })}
-      </ul>
-    </div>
-  )
-}
-
 export const getDynamicProps = async props => {
   const data = {};
 
-  //console.log("DYN CALLED",props);
-  console.clear();
-
+  // children collection
+  // TODO
+  // related content collection
+  // TODO
+  // feed collection
   if (
     typeof props.sourcetype !== 'undefined' &&
     props.sourcetype === 'localindex' &&

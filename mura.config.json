@@ -2,7 +2,7 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["NextJSCollectionLayout"],
+			"collectionLayoutArray":["CollectionLayout"],
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
 			"editableAttributesArray":[],
@@ -16,9 +16,9 @@
 					{"type":"text","name":"myvar","label":"My Label"}
 				]
 			},
-			"NextJSCollectionLayout":{
-				"name":"NextJS Collection Layout",
-				"contenttypes":"",
+			"CollectionLayout":{
+				"name":"CollectionLayout",
+				"contenttypes":"*",
 				"configurator":""
 			}
 		},
