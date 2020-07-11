@@ -4,35 +4,42 @@ import ReactMarkdown from "react-markdown";
 
 function Text(props) {
   const objectparams = Object.assign({}, props);
-  const [source, setSource]=useState('');
 
-  useEffect(() => {
-    if (Mura.isUUID(objectparams.source)){
-      if( typeof objectparams.dynamicProps === 'undefined') {
+  if(Mura.isUUID(objectparams.source) && !objectparams.dynamicProps){
+    const [source, setSource]=useState('');
+
+    useEffect(() => {
         getDynamicProps(objectparams).then((dynamicProps)=>{
           setSource(dynamicProps.source);
         });
-      } else {
-        setSource(objectparams.dynamicProps.source);
-      }
+    },[]);
+
+    if(source){
+      return (
+        <ReactMarkdown source={source} />
+      );
     } else {
-      setSource(objectparams.source);
+      return (
+        <div></div>
+        );
     }
-  },[]);
-
-  if(source && source !== 'unconfigured'){
-    return (
-      <ReactMarkdown source={source} />
-    );
   } else {
-    return (
-      <div></div>
-     );
+    let source='';
+    if(Mura.isUUID(objectparams.source) && objectparams.dynamicProps){
+      source=objectparams.dynamicProps.source;
+    } else {
+      source=objectparams.source;
+    }
+    if(source && source !== 'unconfigured'){
+      return (
+        <ReactMarkdown source={source} />
+      );
+    } else {
+      return (
+        <div></div>
+        );
+    }
   }
-
-  
-  
-  
 }
 
 export const getDynamicProps = async props => {
