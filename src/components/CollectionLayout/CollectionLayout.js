@@ -11,7 +11,7 @@ const CollectionLayout = ({props,collection,link}) => {
       <ul>
         {collection.get('items').map(function(item, i){
           return <li key={item.get('contentid')}>
-            <Link item={item}>
+            <Link href={`/${item.get('filename')}`}>
               {item.get('title')}
             </Link>
           </li>;

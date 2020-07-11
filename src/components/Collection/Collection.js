@@ -46,17 +46,17 @@ function Collection(props) {
   }
 }
 
-const RouterlessLink = ({item,hasRouter,children})=>{
+const RouterlessLink = ({href,children})=>{
   return (
-    <a href={`/${item.get('filename')}`}>
+    <a href={href}>
       {children}
     </a>
   );
 }
 
-const RouterLink = ({item,hasRouter,children})=>{
+const RouterLink = ({href,children})=>{
   return (
-    <Link href={`/${item.get('filename')}`}>
+    <Link href={href}>
       <a>{children}</a>
     </Link>
   );
@@ -87,8 +87,16 @@ export const getDynamicProps = async props => {
     }
 
     if(props.displaylist){
+      const hasFilename=props.displaylist.split(",").find(field=>field==='filename');
+      if(!hasFilename){
+        props.displaylist += ",filename";
+      }
       feed.fields(props.displaylist);
     } else if(props.fields){
+      const hasFilename=props.fields.split(",").find(field=>field==='filename');
+      if(!hasFilename){
+        props.fields += ",filename";
+      }
       feed.fields(props.fields);
     }
 
