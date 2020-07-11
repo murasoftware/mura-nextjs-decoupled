@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import Mura from 'mura.js';
+import Link from "next/link";
+
 import CollectionLayout from '../CollectionLayout';
 
 const LayoutRegistry = {
@@ -17,13 +19,8 @@ const getLayout=(layout) => {
 function Collection(props) {
   const objectparams = Object.assign({}, props);
   const DynamicCollectionLayout = getLayout(objectparams.layout);
-  /*
-    hasRouter exists because when reconfigured via layout manager 
-    in edit mode the next/link argument throws an error because it 
-    does not have access to the router
-  */
+
   if(!objectparams.dynamicProps){
-    const hasRouter=false;
     const [collection,setCollection]=useState(false);
     useEffect(() => {
       getDynamicProps(objectparams).then((dynamicProps)=>{
@@ -33,7 +30,7 @@ function Collection(props) {
     }, []);
     if(collection) {
       return (
-        <DynamicCollectionLayout collection={collection} props={props} hasRouter={hasRouter}/>
+        <DynamicCollectionLayout collection={collection} props={props} link={RouterlessLink}/>
       )
     }
     else {
@@ -42,12 +39,27 @@ function Collection(props) {
       )
     }
   } else {
-    const hasRouter=true;
     const collection=new Mura.EntityCollection(objectparams.dynamicProps.collection,Mura._requestcontext);
       return (
-        <DynamicCollectionLayout collection={collection} props={props} hasRouter={hasRouter}/>
+        <DynamicCollectionLayout collection={collection} props={props} link={RouterLink}/>
       )
   }
+}
+
+const RouterlessLink = ({item,hasRouter,children})=>{
+  return (
+    <a href={`/${item.get('filename')}`}>
+      {children}
+    </a>
+  );
+}
+
+const RouterLink = ({item,hasRouter,children})=>{
+  return (
+    <Link href={`/${item.get('filename')}`}>
+      <a>{children}</a>
+    </Link>
+  );
 }
 
 export const getDynamicProps = async props => {
