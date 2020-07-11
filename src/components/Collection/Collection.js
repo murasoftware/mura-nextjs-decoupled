@@ -26,16 +26,15 @@ function Collection(props) {
         setCollection(new Mura.EntityCollection(objectparams.dynamicProps.collection,Mura._requestcontext));
       } else {
         getDynamicProps(objectparams).then((dynamicProps)=>{
-          objectparams.dynamicProps=dynamicProps;
           hasRouter=false;
-          setCollection(new Mura.EntityCollection(objectparams.dynamicProps.collection,Mura._requestcontext));
+          setCollection(new Mura.EntityCollection(dynamicProps.collection,Mura._requestcontext));
         });   
       }
   }, []);
   
   if(collection) {
     return (
-      <DynamicCollectionLayout  collection={collection} props={props} hasRouter={hasRouter}/>
+      <DynamicCollectionLayout collection={collection} props={props} hasRouter={hasRouter}/>
     )
   }
   else {

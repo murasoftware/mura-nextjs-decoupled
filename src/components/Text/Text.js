@@ -1,28 +1,36 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Mura from 'mura.js';
 import ReactMarkdown from "react-markdown";
 
 function Text(props) {
   const objectparams = Object.assign({}, props);
-  let initialSource='';
+  const [source, setSource]=useState('');
 
-  if (Mura.isUUID(objectparams.source)){
-    if( typeof objectparams.dynamicProps === 'undefined') {
-      getDynamicProps(objectparams).then((dynamicProps)=>{
-        setSource(dynamicProps.source);
-      });
+  useEffect(() => {
+    if (Mura.isUUID(objectparams.source)){
+      if( typeof objectparams.dynamicProps === 'undefined') {
+        getDynamicProps(objectparams).then((dynamicProps)=>{
+          setSource(dynamicProps.source);
+        });
+      } else {
+        setSource(objectparams.dynamicProps.source);
+      }
     } else {
-      initialSource=objectparams.dynamicProps.source;
+      setSource(objectparams.source);
     }
+  },[]);
+
+  if(source){
+    return (
+      <ReactMarkdown source={source} />
+    );
   } else {
-    initialSource=objectparams.source;
+    return (
+      <div></div>
+     );
   }
 
-  const [source, setSource]=useState(initialSource);
-
-  return (
-    <ReactMarkdown source={source} />
-  );
+  
   
   
 }

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Link from "next/link";
 /*
   The link component throws an error when rerending after being 
