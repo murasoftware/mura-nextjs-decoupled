@@ -20,7 +20,7 @@ function Text(props) {
     }
   },[]);
 
-  if(source){
+  if(source && source !== 'unconfigured'){
     return (
       <ReactMarkdown source={source} />
     );
