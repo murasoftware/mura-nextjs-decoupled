@@ -2,8 +2,7 @@ import React from 'react';
 import Link from "next/link";
 /*
   The link component throws an error when rerending after being 
-  reconfigured in edit mode. So I think we'll another component that 
-  can conditionally use the vanilla anchor tags when rerending.
+  reconfigured in edit mode. Hence CollectionLink
 */
 const CollectionLayout = ({props,collection,hasRouter}) => {
   return (
