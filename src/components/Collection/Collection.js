@@ -1,34 +1,41 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Mura from 'mura.js';
 import CollectionLayout from '../CollectionLayout';
-import { useRouter } from 'next/router';
+
+const LayoutRegistry = {
+  CollectionLayout
+};
+
+const getLayout=(layout) => {
+  if(typeof LayoutRegistry[layout] != 'undefined'){
+    return LayoutRegistry[layout];
+  } else {
+    return CollectionLayout;
+  }
+}
 
 function Collection(props) {
-  const router = useRouter();
   const objectparams = Object.assign({}, props);
-  let initialRawCollection='';
+  const [collection,setCollection]=useState(false);
+  const DynamicCollectionLayout = getLayout(objectparams.layout);
+  let hasRouter=false;
 
-  // pretending dynamic TODO
-  objectparams.layout = "CollectionLayout";
-
-  if( typeof objectparams.dynamicProps === 'undefined') {
-    getDynamicProps(objectparams).then((dynamicProps)=>{
-      setRawCollection(dynamicProps.rawCollection);
-    });
-  } else {
-    initialRawCollection=objectparams.dynamicProps.rawCollection;
-  }
-
-  const [rawCollection, setRawCollection]=useState(initialRawCollection);
+  useEffect(() => {
+      if( objectparams.dynamicProps){
+        hasRouter=true;
+        setCollection(new Mura.EntityCollection(objectparams.dynamicProps.collection,Mura._requestcontext));
+      } else {
+        getDynamicProps(objectparams).then((dynamicProps)=>{
+          objectparams.dynamicProps=dynamicProps;
+          hasRouter=false;
+          setCollection(new Mura.EntityCollection(objectparams.dynamicProps.collection,Mura._requestcontext));
+        });   
+      }
+  }, []);
   
-  if(rawCollection) {
-    const collection = new Mura.EntityCollection(rawCollection,Mura._requestcontext);
-
-    const DynamicCollectionLayout = CollectionLayout;
-
-  
+  if(collection) {
     return (
-      <DynamicCollectionLayout  collection={collection} props={props} />
+      <DynamicCollectionLayout  collection={collection} props={props} hasRouter={hasRouter}/>
     )
   }
   else {
@@ -57,14 +64,14 @@ export const getDynamicProps = async props => {
     )
   ) {
     const feed = Mura.getFeed('content')
-      .where()
-      .andProp('feedid').isEQ(props.source);
 
-    //displaylist is what is used by default collection component
+    if(props.source){
+      feed.andProp('feedid').isEQ(props.source);
+    }
+
     if(props.displaylist){
       feed.fields(props.displaylist);
-    }
-    if(props.fields){
+    } else if(props.fields){
       feed.fields(props.fields);
     }
 
@@ -72,7 +79,7 @@ export const getDynamicProps = async props => {
       
     const query = await feed.getQuery();
     
-    data.rawCollection = query.getAll();
+    data.collection = query.getAll();
 
   }
 
