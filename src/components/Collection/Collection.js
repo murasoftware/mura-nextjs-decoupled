@@ -27,7 +27,6 @@ function Collection(props) {
     const [collection,setCollection]=useState(false);
     useEffect(() => {
       getDynamicProps(objectparams).then((dynamicProps)=>{
-       
         setCollection(new Mura.EntityCollection(dynamicProps.collection,Mura._requestcontext));
       });   
 
