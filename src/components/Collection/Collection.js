@@ -85,19 +85,20 @@ export const getDynamicProps = async props => {
     if(props.source){
       feed.andProp('feedid').isEQ(props.source);
     }
-
+    
+    let fields='';
     if(props.displaylist){
-      const hasFilename=props.displaylist.split(",").find(field=>field==='filename');
-      if(!hasFilename){
-        props.displaylist += ",filename";
-      }
-      feed.fields(props.displaylist);
+      fields=props.displaylist;
     } else if(props.fields){
-      const hasFilename=props.fields.split(",").find(field=>field==='filename');
+      fields=props.fields;
+    }
+
+    if(fields){
+      const hasFilename=fields.split(",").find(field=>field==='filename');
       if(!hasFilename){
-        props.fields += ",filename";
+        fields += ",filename";
       }
-      feed.fields(props.fields);
+      feed.fields(fields);
     }
 
     //Add stuff like maxitems, nextn
