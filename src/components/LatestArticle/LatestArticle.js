@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LatestArticle = props => {
-  console.log(props);
+
   const {
     articlesourceimage,
     articleauthors,
