@@ -11,7 +11,7 @@ function Youtube(props) {
         src={`//www.youtube.com/embed/${videoid}?rel=0&autoplay=1&vq=hd1080&controls=0`}
         frameBorder="0"
         allowFullScreen
-      ></iframe>
+       />
     </div>
   );
 }

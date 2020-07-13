@@ -2,7 +2,7 @@ import React from 'react';
 
 const LatestArticleCarousel = props => {
   const { collection } = props;
-
+  console.log(props)
   if (collection) {
     const {
       properties: { items },

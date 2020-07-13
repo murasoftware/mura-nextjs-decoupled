@@ -3,6 +3,8 @@ const theme = {
     background: '#010202',
     border: '#979797',
     accent: '#F7A11E',
+    green: '#5DBC70',
+    red: '#F16C6B',
   },
   sizes: {
     maxWidth: 1900,

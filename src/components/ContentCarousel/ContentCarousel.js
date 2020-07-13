@@ -55,12 +55,14 @@ const rightItemTemp = [
   />,
 ];
 
-const ContentCarouselComponent = ({
-  seeAllText = 'See all Insights',
-  seeAllLink = 'https://www.iextrading.com',
-  leftItems = leftItemTemp,
-  rightItems = rightItemTemp,
-}) => {
+const ContentCarouselComponent = (props) => {
+  console.log(props)
+  const {
+    seeAllText = 'See all Insights',
+    seeAllLink = 'https://www.iextrading.com',
+    leftItems = leftItemTemp,
+    rightItems = rightItemTemp,
+  } = props;
   if (leftItems.length !== rightItems.length) {
     throw new Error('Content Carousel | Lenths are not equal');
   }

@@ -1,4 +1,3 @@
-import React from 'react';
 import Youtube from './Youtube';
 import Vimeo from './Vimeo';
 //import Vidyard from './Vidyard';
