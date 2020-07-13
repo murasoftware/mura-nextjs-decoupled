@@ -2,7 +2,7 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["CollectionLayout"],
+			"collectionLayoutArray":["CollectionLayout","LatestArticleCarousel"],
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
 			"editableAttributesArray":[],
@@ -20,7 +20,7 @@
 			
 			"LatestArticle":{
 				"name":"Latest Article",
-				"contenttypes":"*",
+				"contenttypes":"Page/Article",
 				"configurator":[
 					{"type":"image","name":"articleSourceImage","label":"Article source image"},
 					{"type":"text","name":"articleAuthors","label":"Article Author(s)"},

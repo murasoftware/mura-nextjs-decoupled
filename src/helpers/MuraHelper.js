@@ -8,7 +8,8 @@ import Image from '../components/Image';
 import Container from '../components/Container';
 import Embed from '../components/Embed';
 import Hr from '../components/Hr';
-import LatestArticle from '../components/LatestArticle';
+import LatestArticle from '../components/LatestArticle'; 
+import LatestArticleCarousel from '../components/LatestArticleCarousel'; 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -51,6 +52,10 @@ let moduleRegistry = [
   },{
     name: 'LatestArticle',
     component: LatestArticle,
+  },
+  {
+    name: 'LatestArticleCarousel',
+    component: LatestArticleCarousel,
   },
 ];
 
