@@ -6,7 +6,7 @@ import Page from '../[...page]';
 import { getMuraProps, getRootPath } from '../../helpers/MuraHelper';
 
 export async function getServerSideProps(context) {
-  const props = await getMuraProps(context);
+  const props = await getMuraProps(context,true);
 
   return props;
 }

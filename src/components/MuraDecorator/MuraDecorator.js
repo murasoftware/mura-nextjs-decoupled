@@ -10,7 +10,7 @@ function MuraDecorator(props) {
   } catch (e) {
     isEditMode = true;
   }
-  //  console.log("MuraDecorator -> isEditMode", props);
+  //console.log("MuraDecorator -> isEditMode", isEditMode);
 
   const domObject = {
     className: 'mura-object mura-async-object',
@@ -19,6 +19,14 @@ function MuraDecorator(props) {
   const domContent = {
     className: 'mura-object-content',
   };
+
+  const domMeta={
+    className:"mura-object-meta"
+  }
+
+  const domMetaWrapper={
+    className:"mura-object-meta-wrapper"
+  }
 
   if (isEditMode) {
     Object.keys(props).forEach(key => {
@@ -38,8 +46,24 @@ function MuraDecorator(props) {
       }
       if (key === 'class') {
         domObject.className += ` ${props[key]}`;
+      } else if (key === 'cssclass') {
+        domObject.className += ` ${props[key]}`;
+      } else if (key === 'cssid') {
+        domObject.id += ` ${props[key]}`;
+      } else if (key === 'contentcssclass') {
+        domContent.className += ` ${props[key]}`;
+      } else if (key === 'contentcssid') {
+        domContent.id += ` ${props[key]}`;
+      } else if (key === 'metacssclass') {
+        domMeta.className += ` ${props[key]}`;
+      } else if (key === 'metacssid') {
+        domMeta.id += ` ${props[key]}`;
       }
     });
+    
+    if(domObject.className.split(' ').find($class => $class === 'container')){
+      domMetaWrapper.className += ' container';
+    }
   } else {
     domObject['data-instanceid'] = instanceid;
     domObject.className =
@@ -47,25 +71,37 @@ function MuraDecorator(props) {
     domObject.id = props.moduleStyleData[props.instanceid].targets.object.id;
     domObject['data-inited'] = true;
     domObject.className += ` mura-object-${props.object}`;
-
     domContent.className =
       props.moduleStyleData[props.instanceid].targets.content.class;
     domContent.id = props.moduleStyleData[props.instanceid].targets.content.id;
+    domMetaWrapper.className =
+      props.moduleStyleData[props.instanceid].targets.metawrapper.class;
+    domMeta.className =
+      props.moduleStyleData[props.instanceid].targets.meta.class;
+    domMeta.id =
+      props.moduleStyleData[props.instanceid].targets.meta.id;
+
+    ['objectspacing','contentspacing','metaspacing'].forEach((key)=>{
+      if(typeof props[key] != 'undefined' && props[key] && props[key] != 'custom'){
+        domObject['data-' + key] = props[key];
+      }
+    });
   }
+
   return (
     <div {...domObject}>
-      {label ? <MuraMeta label={label} labeltag={labeltag} /> : null}
+      {label ? <MuraMeta label={label} labeltag={labeltag} dommeta={domMeta} dommetawrapper={domMetaWrapper}/> : null}
       {label ? <div className="mura-flex-break" /> : null}
       <div {...domContent}>{children}</div>
     </div>
   );
 }
 
-const MuraMeta = ({ label, labeltag }) => {
+const MuraMeta = ({ label, labeltag, dommeta, dommetawrapper }) => {
   const LabelHeader = labeltag ? `${labeltag}` : 'h2';
   return (
-    <div className="mura-object-meta-wrapper">
-      <div className="mura-object-meta">
+    <div {...dommetawrapper}>
+      <div {...dommeta}>
         <LabelHeader>{label}</LabelHeader>
       </div>
     </div>

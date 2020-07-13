@@ -5,6 +5,10 @@ import Text, { getTextProps } from '../components/Text';
 import Video from '../components/Video';
 import Image from '../components/Image';
 import Container from '../components/Container';
+import Embed from '../components/Embed';
+import Hr from '../components/Hr';
+import LatestArticle from '../components/LatestArticle'; 
+import LatestArticleCarousel from '../components/LatestArticleCarousel'; 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -31,6 +35,21 @@ let moduleRegistry = [
   {
     name: 'Container',
     component: Container,
+  },
+  {
+    name: 'Hr',
+    component: Hr,
+  },
+  {
+    name: 'Embed',
+    component: Embed,
+  },{
+    name: 'LatestArticle',
+    component: LatestArticle,
+  },
+  {
+    name: 'LatestArticleCarousel',
+    component: LatestArticleCarousel,
   },
 ];
 
@@ -144,14 +163,14 @@ export const getRootPath = () => {
   return getMura().rootpath;
 };
 
-export const getMuraProps = async context => {
+export const getMuraProps = async (context,isEditMode) => {
   getMura(context);
 
   const muraObject = await renderContent(context);
   const navigation = await getPrimaryNavData();
   const content = muraObject.getAll();
-  const moduleStyleData = await getRegionProps(muraObject);
-
+  const moduleStyleData = await getRegionProps(muraObject,isEditMode);
+  
   const props = {
     navigation,
     content: content,
@@ -196,6 +215,13 @@ async function renderContent(context) {
           contentid: Mura.createUUID(),
           contenthistid: Mura.createUUID(),
           filename: '404',
+          displayregions:{
+            primarycontent:{
+              local:{
+                items:[]
+              }
+            }
+          }
         });
       } else {
         return rendered;
@@ -226,67 +252,80 @@ async function getPrimaryNavData() {
     });
 }
 
-async function getRegionProps(content) {
+async function getRegionProps(content,isEditMode) {
   getMura();
   let moduleStyleData = {};
+  const regions=Object.values(content.get('displayregions'));
 
-  Object.values(content.get('displayregions')).forEach(async region => {
+  for(const regionIdx in regions){
+   const region=regions[regionIdx]; 
     if (
       typeof region.inherited != 'undefined' &&
       Array.isArray(region.inherited.items)
     ) {
-      region.inherited.items.forEach(async item => {
+      for(const itemdIx in region.inherited.items){
+        const item=region.inherited.items[itemdIx];
         item.instanceid = item.instanceid || Mura.createUUID();
         moduleStyleData[item.instanceid] = await getModuleProps(
           item,
           moduleStyleData,
+          isEditMode
         );
-      });
+      }
     }
-    region.local.items.forEach(async item => {
+   
+    for(const itemIdx in region.local.items){
+      const item=region.local.items[itemIdx];
       item.instanceid = item.instanceid || Mura.createUUID();
       moduleStyleData[item.instanceid] = await getModuleProps(
         item,
         moduleStyleData,
+        isEditMode
       );
-    });
-  });
+    }
+
+  }
 
   return moduleStyleData;
 }
 
-async function getModuleProps(item, moduleStyleData) {
+async function getModuleProps(item, moduleStyleData,isEditMode) {
   getMura();
+
   const objectkey = Mura.firstToUpperCase(item.object);
   if (typeof moduleLookup[objectkey] != 'undefined') {
     item.dynamicProps = await moduleLookup[objectkey].getDynamicProps(item);
     if (item.object == 'container') {
       if (
-        typeof item.object.items != 'undefined' &&
-        !Array.isArray(item.object.items)
+        typeof item.items != 'undefined' &&
+        !Array.isArray(item.items)
       ) {
         try {
-          item.object.items = JSON.parse(item.object.items);
+          item.items = JSON.parse(item.items);
         } catch (e) {
-          item.object.items = [];
+          item.items = [];
         }
       }
-      item.items.forEach(async item => {
-        item.instanceid = item.instanceid || Mura.createUUID();
-        moduleStyleData[item.instanceid] = await getModuleProps(
-          item,
+      for(const containerIdx in item.items){
+        const containerItem=item.items[containerIdx];
+        containerItem.instanceid = containerItem.instanceid || Mura.createUUID();
+        moduleStyleData[containerItem.instanceid] = await getModuleProps(
+          containerItem,
           moduleStyleData,
+          isEditMode
         );
-      });
+      }
     }
   }
 
   const styleData = Mura.recordModuleStyles(item);
-
+ 
   return {
+    isEditMode:isEditMode,
     cssRules: styleData.cssRules,
     targets: styleData.targets,
     id: 'mura-styles' + item.instanceid,
     stylesupport: item.stylesupport || {},
-  };
+    };
+
 }

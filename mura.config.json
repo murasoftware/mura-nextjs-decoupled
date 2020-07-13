@@ -2,7 +2,7 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["NextJSCollectionLayout"],
+			"collectionLayoutArray":["LatestArticleCarousel"],
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
 			"editableAttributesArray":[],
@@ -16,9 +16,23 @@
 					{"type":"text","name":"myvar","label":"My Label"}
 				]
 			},
-			"NextJSCollectionLayout":{
-				"name":"NextJS Collection Layout",
-				"contenttypes":"",
+			"LatestArticle":{
+				"name":"Latest Article",
+				"contenttypes":"Page/Article",
+				"configurator":[
+					{"type":"image","name":"articleSourceImage","label":"Article source image"},
+					{"type":"text","name":"articleAuthors","label":"Article Author(s)"},
+					{"type":"text","name":"articleAuthorAdditionalInfo","label":"Article Author additional info (Company & Title)"},					
+					{"type":"text","name":"businessSourceHeadline","label":"Business Source Headline"},
+					{"type":"text","name":"articleTitle","label":"Article Title"},
+					{"type":"text","name":"articleBodyCopyPreview","label":"Article Body Copy Preview"},
+					{"type":"text","name":"downloadWhitePaperCTA","label":"Download White Paper CTA"},
+					{"type":"text","name":"seeAllInsightsCTA","label":"See all Insights CTA"}
+				]
+			},
+			"LatestArticleCarousel":{
+				"name":"Latest Article Carousel",
+				"contenttypes":"*",
 				"configurator":""
 			}
 		},

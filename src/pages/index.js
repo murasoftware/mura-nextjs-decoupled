@@ -7,7 +7,7 @@ import { getMuraProps, getRootPath } from '../helpers/MuraHelper';
 
 export async function getStaticProps(context) {
   // console.log("CON",context);
-  const props = await getMuraProps(context);
+  const props = await getMuraProps(context,false);
   return props;
 }
 

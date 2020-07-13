@@ -16,12 +16,13 @@
     "hooks": {}
   },
   "dependencies": {
-    "mura.js": "^1.0.245",
-    "next": "^9.4.5-canary.28",
+    "mura.js": "^1.0.246",
+    "next": "^9.4.5-canary.31",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-slick": "^0.26.1",
     "slick-carousel": "^1.8.1",
+    "react-markdown": "^4.3.1",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
