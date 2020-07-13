@@ -8,12 +8,10 @@ import Image from '../components/Image';
 import Container from '../components/Container';
 import Embed from '../components/Embed';
 import Hr from '../components/Hr';
-<<<<<<< HEAD
+
 import LatestArticle from '../components/LatestArticle'; 
 import LatestArticleCarousel from '../components/LatestArticleCarousel'; 
-=======
-import LatestArticle from '../components/LatestArticle';
->>>>>>> initial commit for #173652563
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -56,13 +54,10 @@ let moduleRegistry = [
   },{
     name: 'LatestArticle',
     component: LatestArticle,
-<<<<<<< HEAD
   },
   {
     name: 'LatestArticleCarousel',
     component: LatestArticleCarousel,
-=======
->>>>>>> initial commit for #173652563
   },
 ];
 
