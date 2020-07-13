@@ -9,6 +9,8 @@ import Embed from '../components/Embed';
 import Hr from '../components/Hr';
 import LatestArticle from '../components/LatestArticle'; 
 import LatestArticleCarousel from '../components/LatestArticleCarousel'; 
+import ContentCarousel from '@components/ContentCarousel';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -51,6 +53,10 @@ let moduleRegistry = [
     name: 'LatestArticleCarousel',
     component: LatestArticleCarousel,
   },
+  {
+    name: 'RecentArticles',
+    component: ContentCarousel,
+  }
 ];
 
 let moduleLookup = {};

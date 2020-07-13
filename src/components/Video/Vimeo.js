@@ -9,8 +9,7 @@ function Vimeo(props) {
 			height="540"
 			frameBorder="0"
 			allow="autoplay; fullscreen"
-			allowFullScreen>
-		</iframe>		
+			allowFullScreen />		
 	  </div>
 	);
 }

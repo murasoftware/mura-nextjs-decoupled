@@ -1,14 +1,14 @@
 export const videoConfig = {
 	videoplatform:"",
 	videoid:"",
-	displaytype:"modal",//inline,modal
+	displaytype:"modal",// inline,modal
 	modalsize:'default',
 	showheader:false,
 	modaltitle:'',
 	showfooter:false,
-	bodypadding:"0",//1rem
-	modalcta:"button",//button,thumbnail,text
-	buttonclass:"secondary",//primary,secondary,success,warning,danger,info,light,dark,link
+	bodypadding:"0",// 1rem
+	modalcta:"button",// button,thumbnail,text
+	buttonclass:"secondary",// primary,secondary,success,warning,danger,info,light,dark,link
 	thumbnailsrc:"",
 	showthumbnailplayicon:false,
 	showbuttonplayicon:false,

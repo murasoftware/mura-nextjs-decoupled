@@ -2,7 +2,7 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["LatestArticleCarousel"],
+			"collectionLayoutArray":["LatestArticleCarousel", "RecentArticles"],
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
 			"editableAttributesArray":[],
@@ -32,6 +32,11 @@
 			},
 			"LatestArticleCarousel":{
 				"name":"Latest Article Carousel",
+				"contenttypes":"*",
+				"configurator":""
+			},
+			"ContentCarousel": {
+				"name": "Recent Article Carousel",
 				"contenttypes":"*",
 				"configurator":""
 			}

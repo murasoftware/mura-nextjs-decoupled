@@ -10,7 +10,7 @@ function MuraDecorator(props) {
   } catch (e) {
     isEditMode = true;
   }
-  //console.log("MuraDecorator -> isEditMode", isEditMode);
+  // console.log("MuraDecorator -> isEditMode", isEditMode);
 
   const domObject = {
     className: 'mura-object mura-async-object',
@@ -82,8 +82,8 @@ function MuraDecorator(props) {
       props.moduleStyleData[props.instanceid].targets.meta.id;
 
     ['objectspacing','contentspacing','metaspacing'].forEach((key)=>{
-      if(typeof props[key] != 'undefined' && props[key] && props[key] != 'custom'){
-        domObject['data-' + key] = props[key];
+      if(typeof props[key] !== 'undefined' && props[key] && props[key] != 'custom'){
+        domObject[`data-${  key}`] = props[key];
       }
     });
   }

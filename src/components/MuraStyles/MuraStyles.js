@@ -16,9 +16,9 @@ function MuraStyles(props) {
               dangerouslySetInnerHTML={{ __html: rules.cssRules.join('\n') }}
              />
           );
-          } else {
+          } 
             return '';
-          }
+          
         })}
       </div>
     );

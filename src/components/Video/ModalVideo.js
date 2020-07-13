@@ -9,17 +9,15 @@ const ModalVideo = ({props,children}) => {
 			return (
 				<button
 					type="button"
-					onclick="openVidyardLightbox('#esapiEncode('html',objectparams.videoid)#'); return false;"
+					onClick="openVidyardLightbox('#esapiEncode('html',objectparams.videoid)#'); return false;"
 					className={`btn btn-${buttonclass}`}>
 					{showbuttonplayicon ?
-						<i className={`fas fa-play fa-${buttonplayiconsize} align-middle`}></i>
+						<i className={`fas fa-play fa-${buttonplayiconsize} align-middle`} />
 						:
 						null
 					}
 					{buttonctatext}
-					<Head>
-					
-					</Head>
+					<Head />
 				</button>
 			)
 			break;	

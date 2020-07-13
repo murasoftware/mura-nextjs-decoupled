@@ -24,14 +24,14 @@ function Image(props) {
         <FigCaption {...objectparams} />
       </figure>
   );
-  } else {
+  } 
     return (
       <figure style={{margin:"0px"}}>
          <Img {...objectparams} />
         <FigCaption {...objectparams} />
       </figure>
   );
-  }
+  
  
 }
 
@@ -40,9 +40,9 @@ const FigCaption = ({caption}) => {
     return (
       <figcaption><ReactMarkdown source={caption} /></figcaption>
     );
-  } else {
+  } 
     return '';
-  }
+  
 }
 
 const Img = (props) => {
@@ -50,11 +50,11 @@ const Img = (props) => {
     return (
       <img src={props.src} alt={props.alt} loading="lazy" style={{height:"100%",width:"100%",objectFit:props.fit}} data-object-fit={props.fit} />
     );
-  } else {
+  } 
     return (
       <img src={props.src} alt={props.alt} loading="lazy" />
     )
-  }
+  
  
 }
 

@@ -6,8 +6,8 @@ function Wistia(props) {
 	return (
 	  <div className="wistiaWrapper" id={`player-${instanceid}`}>
 		<Head>
-			<script src='https://fast.wistia.net/assets/external/E-v1.js'></script>
-			<script src={`https://fast.wistia.com/embed/medias/${videoid}.jsonp`}></script>
+			<script src='https://fast.wistia.net/assets/external/E-v1.js' />
+			<script src={`https://fast.wistia.com/embed/medias/${videoid}.jsonp`} />
 		</Head>
 		<div
 			className="wistia_responsive_padding"
