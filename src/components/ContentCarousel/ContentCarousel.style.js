@@ -51,3 +51,9 @@ export const Count = styled.span`
   display: block;
   margin: 0 20px;
 `;
+
+
+export const SliderContainer = styled.div`
+  margin-top: 30px;
+  margin-bottom: 170px;
+`;

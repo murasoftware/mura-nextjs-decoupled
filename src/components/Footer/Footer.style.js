@@ -47,7 +47,6 @@ export const RightContainer = styled(Column)`
 export const TagLineLink = styled.a`
   ${iexStandard}
   ${font30}
-  white-space: nowrap;
   span {
     margin-right: 10px;
   }

@@ -17,6 +17,7 @@ import {
   ArrowButton,
   Count,
   ContentCarousel,
+  SliderContainer,
 } from './ContentCarousel.style';
 
 const leftItemTemp = [
@@ -124,9 +125,12 @@ const ContentCarouselComponent = (props) => {
       </LeftColumn>
       <RightColumn lcols={8}>
         <SourceLabel />
-        <Slider {...settings} ref={carouselRef}>
-          {rightItems}
-        </Slider>
+        <SliderContainer>
+          <Slider {...settings} ref={carouselRef}>
+            {rightItems}
+          </Slider>
+        </SliderContainer>
+        
         <ArrowLink link={seeAllLink} text={seeAllText} />
       </RightColumn>
     </ContentCarousel>
