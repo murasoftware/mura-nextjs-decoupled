@@ -6,7 +6,7 @@ import { getComponent } from '@helpers/MuraHelper';
 import MuraDecorator from '../MuraDecorator';
 
 function Container(props) {
-  const { items } = props;
+  const { items,content } = props;
   // console.log('Container -> items', items);
   // console.log('Container -> props', props);
   if (!items) return '';
@@ -18,7 +18,9 @@ function Container(props) {
           }
           obj.key=obj.instanceid;
           obj.moduleStyleData=props.moduleStyleData;
-          return  (<MuraDecorator {...obj}> {getComponent(obj)} </MuraDecorator>)
+          obj.content = content;
+
+          return (<MuraDecorator {...obj}> {getComponent(obj)} </MuraDecorator>)
       })
    
   );

@@ -1,24 +1,36 @@
 import React,{useState,useEffect} from 'react';
 import Mura from 'mura.js';
 import Link from "next/link";
+import { useRouter } from 'next/router';
 
+import DefaultLayout from '../DefaultLayout';
 import CollectionLayout from '../CollectionLayout';
+import MasterLayout from '../MasterLayout';
 
 const LayoutRegistry = {
-  CollectionLayout
+  CollectionLayout,
+  DefaultLayout,
+  MasterLayout
 };
 
 const getLayout=(layout) => {
-  if(typeof LayoutRegistry[layout] != 'undefined'){
-    return LayoutRegistry[layout];
+
+  const uselayout = layout == 'default' ? "DefaultLayout" : layout;
+
+  if(typeof LayoutRegistry[uselayout] != 'undefined') {
+    return LayoutRegistry[uselayout];
   } else {
-    return CollectionLayout;
+    console.log("Layout not registered: ",layout);
+    return DefaultLayout;
   }
 }
 
 function Collection(props) {
+  
   const objectparams = Object.assign({}, props);
   const DynamicCollectionLayout = getLayout(objectparams.layout);
+  const router = useRouter();
+  const {content} = props;
 
   if(!objectparams.dynamicProps){
     const [collection,setCollection]=useState(false);
@@ -62,7 +74,7 @@ const RouterLink = ({href,children})=>{
   );
 }
 
-export const getDynamicProps = async props => {
+export const getDynamicProps = async (item) => {
   const data = {};
 
   // children collection
@@ -70,47 +82,80 @@ export const getDynamicProps = async props => {
   // related content collection
   // TODO
   // feed collection
-  if ((
-    typeof props.sourcetype === 'undefined'
-    || props.sourcetype === ''
+  let {content} = item;
+
+  if(content.getAll) {
+    content = content.getAll();
+  }
+
+// E01B7C64-1E17-41B3-8E20CD775D9B592F
+
+  if(item.sourcetype === 'children') {
+    const feed = Mura.getFeed('content');
+
+    feed.andProp('parentid').isEQ(content.contentid);
+    feed.fields(getDisplayListFields(item));
+
+    const query = await feed.getQuery();
+    data.collection = query.getAll();
+  }
+  else if(item.sourcetype === 'relatedcontent') {
+    const feed = Mura.getFeed('content');
+
+    feed.andProp('parentid').isEQ(content.contentid);
+
+    feed.fields(getDisplayListFields(item));
+
+    const query = await feed.getQuery();
+    data.collection = query.getAll();
+  }
+  else if ((
+    typeof item.sourcetype === 'undefined'
+    || item.sourcetype === ''
     ) 
     ||  (
-      typeof props.sourcetype !== 'undefined' &&
-      props.sourcetype === 'localindex' &&
-      Mura.isUUID(props.source)
+      typeof item.sourcetype !== 'undefined' &&
+      item.sourcetype === 'localindex' &&
+      Mura.isUUID(item.source)
     )
   ) {
-    const feed = Mura.getFeed('content')
+    const feed = Mura.getFeed('content');
 
-    if(props.source){
-      feed.andProp('feedid').isEQ(props.source);
+    if(item.source) {
+      feed.andProp('feedid').isEQ(item.source);
     }
     
-    let fields='';
-    if(props.displaylist){
-      fields=props.displaylist;
-    } else if(props.fields){
-      fields=props.fields;
-    }
+    feed.fields(getDisplayListFields(item));
 
-    if(fields){
-      const hasFilename=fields.split(",").find(field=>field==='filename');
-      if(!hasFilename){
-        fields += ",filename";
-      }
-      feed.fields(fields);
-    }
+    feed.maxItems(item.maxitems);
+    feed.itemsPerPage(0);
 
     //Add stuff like maxitems, nextn
       
     const query = await feed.getQuery();
-    
+
     data.collection = query.getAll();
+//    console.log("COLLECTION",data.collection);
 
   }
 
   return data;
 };
+
+const getDisplayListFields = (item) => {
+  let fieldlist = item.displaylist ? item.displaylist : item.fields ? item.fields : '';
+
+  if(!fieldlist)
+    return '';
+  
+  const hasFilename=fieldlist.split(",").find(fieldlist=>fieldlist==='filename');
+  
+  if(!hasFilename){
+    fieldlist += ",filename";
+  }
+
+  return fieldlist;
+}
 
 
 export default Collection;

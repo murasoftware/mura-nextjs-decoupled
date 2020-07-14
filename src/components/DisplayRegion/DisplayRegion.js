@@ -43,11 +43,8 @@ const DisplayRegionSection = ({ children, region, section, iseditmode }) => {
   return out;
 };
 
-const DisplayRegion = ({ region, moduleStyleData }) => {
+const DisplayRegion = ({ region, moduleStyleData,content }) => {
   const [isEditMode] = useContext(GlobalContext);
-  // console.log(moduleStyleData)
-
-  //   console.log("DisplayRegion -> content", content);
   let inherited = '';
 // Mura inheritance, where modules are inherited from parent content
   if (region.inherited.items.length) {
@@ -61,6 +58,7 @@ const DisplayRegion = ({ region, moduleStyleData }) => {
           const obj = Object.assign({}, item);
           obj.key = obj.instanceid;
           obj.moduleStyleData = moduleStyleData;
+          obj.content = content;
           return <MuraDecorator {...obj}>{getComponent(obj)}</MuraDecorator>;
         })}
       </DisplayRegionSection>
@@ -73,12 +71,14 @@ const DisplayRegion = ({ region, moduleStyleData }) => {
       <DisplayRegionSection
         region={region}
         iseditmode={isEditMode}
+        content={content}
         section="local"
       >
         {region.local.items.map(item => {
           const obj = Object.assign({}, item);
           obj.key = obj.instanceid;
           obj.moduleStyleData = moduleStyleData;
+          obj.content = content;
           return <MuraDecorator {...obj}>{getComponent(obj)}</MuraDecorator>;
         })}
       </DisplayRegionSection>

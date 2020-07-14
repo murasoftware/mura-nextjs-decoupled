@@ -31,7 +31,7 @@ function MuraDecorator(props) {
   if (isEditMode) {
     Object.keys(props).forEach(key => {
       if (
-        !['children', 'isEditMode', 'dynamicProps', 'moduleStyleData'].find(
+        !['content', 'children', 'isEditMode', 'dynamicProps', 'moduleStyleData'].find(
           restrictedkey => restrictedkey === key,
         )
       ) {

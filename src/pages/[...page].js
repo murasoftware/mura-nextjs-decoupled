@@ -51,6 +51,7 @@ export default function Page(props) {
         <DisplayRegion
           region={primarycontent}
           moduleStyleData={moduleStyleData}
+          content={content}
         />
       )}
     </MainLayout>

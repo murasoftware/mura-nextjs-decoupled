@@ -1,16 +1,11 @@
 import React from 'react';
 
-/*
-  The link component throws an error when rerending after being 
-  reconfigured in edit mode. Hence CollectionLink
-*/
-const CollectionLayout = ({props,collection,link}) => {
+const MasterLayout = ({props,collection,link}) => {
   const Link=link;
-
-//  console.log("CollectionLayout",collection);
 
   return (
     <div>
+      <h2>Master Layout!</h2>
       <ul>
         {collection.get('items').map(function(item, i){
           return <li key={item.get('contentid')}>
@@ -24,4 +19,4 @@ const CollectionLayout = ({props,collection,link}) => {
   )
 }
 
-export default CollectionLayout;
+export default MasterLayout;

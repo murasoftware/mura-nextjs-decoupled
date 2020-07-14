@@ -2,7 +2,7 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["CollectionLayout"],
+			"collectionLayoutArray":["CollectionLayout","MasterLayout"],
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
 			"editableAttributesArray":[],
@@ -23,8 +23,14 @@
 				"configurator":[
 					{"type":"hidden","name":"fields","value":"title,filename"}
 				]
-			}
-		},
+			},
+			"MasterLayout":{
+				"name":"Master Layout",
+				"contenttypes":"",
+				"configurator":[
+					{"type":"hidden","name":"fields","value":"title,subtype"}
+				]
+			}		},
 	"sites":{
 		"default":{
 			"rendererProperties":{
