@@ -25,7 +25,6 @@ export const FooterPhone = styled.a``;
 export const RightContainer = styled(Column)`
   display: flex;
   flex-direction: row;
-  padding: 0;
 
   @media (max-width: ${props => props.theme.breakpoints.tablet.max}px) {
     flex-wrap: wrap;

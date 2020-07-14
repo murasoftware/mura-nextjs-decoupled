@@ -77,11 +77,11 @@ const ContentCarouselComponent = (props) => {
 
   const settings = {
     dots: isMobileVal,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    variableWidth: true,
+    variableWidth: false,
     swipeToSlide: true,
     rows: 1,
     arrows: false,

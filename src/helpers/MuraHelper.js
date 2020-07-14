@@ -1,17 +1,17 @@
 /* eslint-disable */
 import Mura from 'mura.js';
-import Example from '../components/Example';
-import Text, { getTextProps } from '../components/Text';
-import Collection, { getCollectionProps } from '../components/Collection';
-import Video from '../components/Video';
-import Image from '../components/Image';
-import Container from '../components/Container';
-import Embed from '../components/Embed';
-import Hr from '../components/Hr';
-import LatestArticle from '../components/LatestArticle'; 
-import LatestArticleCarousel from '../components/LatestArticleCarousel'; 
+import Example from '@components/Example';
+import Text, { getTextProps } from '@components/Text';
+import Collection, { getCollectionProps } from '@components/Collection';
+import Video from '@components/Video';
+import Image from '@components/Image';
+import Container from '@components/Container';
+import Embed from '@components/Embed';
+import Hr from '@components/Hr';
+import LatestArticle from '@components/LatestArticle'; 
+import LatestArticleCarousel from '@components/LatestArticleCarousel'; 
 import ContentCarousel from '@components/ContentCarousel';
-
+import MarketStats from '@components/MarketStats';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -62,6 +62,10 @@ let moduleRegistry = [
   {
     name: 'RecentArticles',
     component: ContentCarousel,
+  },
+  {
+    name: 'MarketStats',
+    component: MarketStats,
   }
 ];
 
@@ -182,7 +186,6 @@ export const getMuraProps = async (context,isEditMode) => {
   const navigation = await getPrimaryNavData();
   const content = muraObject.getAll();
   const moduleStyleData = await getRegionProps(muraObject,isEditMode);
-  
   const props = {
     navigation,
     content: content,
@@ -303,7 +306,6 @@ async function getRegionProps(content,isEditMode) {
 
 async function getModuleProps(item, moduleStyleData,isEditMode) {
   getMura();
-
   const objectkey = Mura.firstToUpperCase(item.object);
   if (typeof moduleLookup[objectkey] != 'undefined') {
     item.dynamicProps = await moduleLookup[objectkey].getDynamicProps(item);

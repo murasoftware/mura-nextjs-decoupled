@@ -48,7 +48,17 @@
 				"name": "Recent Article Carousel",
 				"contenttypes":"*",
 				"configurator":""
-			}
+			},
+			"MarketStats":{
+				"name":"Market Statistics",
+				"contenttypes":"*",
+				"configurator":[
+					{"type":"text","name":"sectionTitle","label":"Section Title"},
+					{"type":"textarea","name":"sectionDescription","label":"Section Description"},
+					{"type":"text","name":"businessSource","label":"Business Source"},
+					{"type":"text","name":"moduleName","label":"Module Name"},
+				]
+			},
 		},
 	"sites":{
 		"default":{

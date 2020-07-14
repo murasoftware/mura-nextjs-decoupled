@@ -1,19 +1,27 @@
-import React,{ useContext, useEffect } from "react";
-import GlobalContext from "../GlobalContext";
+import React, { useContext, useEffect } from 'react';
+import { ThemeProvider } from 'styled-components';
+import theme from '@styles/theme';
+import GlobalStyle from '@styles/global';
 
-const EditLayout = ({children}) => {
-    const [, setIsEditMode]  = useContext(GlobalContext);
+import GlobalContext from '../GlobalContext';
 
-    useEffect(()=>{
-        setIsEditMode(true);
-    }, [setIsEditMode])
 
-    return (
-        <div>
-            {children}
-            <div id="htmlqueues" />
-        </div>
-    )
-}
+const EditLayout = ({ children }) => {
+  const [, setIsEditMode] = useContext(GlobalContext);
+
+  useEffect(() => {
+    setIsEditMode(true);
+  }, [setIsEditMode]);
+
+  return (
+    <div>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        {children}
+        <div id="htmlqueues" />
+      </ThemeProvider>
+    </div>
+  );
+};
 
 export default EditLayout;

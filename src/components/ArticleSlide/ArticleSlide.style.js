@@ -4,7 +4,6 @@ import { iexStandard, font140, iexText, font24 } from '@styles/typography';
 export const ArticleSlide = styled.div`
   display: flex;
   flex-direction: row;
-  max-width: 70vw;
 `;
 
 export const ArticleTitle = styled.h3`

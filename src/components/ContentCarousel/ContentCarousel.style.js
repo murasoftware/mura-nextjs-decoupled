@@ -15,7 +15,7 @@ export const LeftColumn = styled(Column)`
   justify-content: space-between;
 `;
 
-export const RightColumn = styled.div``;
+export const RightColumn = styled(Column)``;
 
 export const FadingItems = styled.div`
   position: relative;
@@ -54,6 +54,8 @@ export const Count = styled.span`
 
 
 export const SliderContainer = styled.div`
+  display: block;
+  width: 100%;
   margin-top: 30px;
   margin-bottom: 170px;
 `;

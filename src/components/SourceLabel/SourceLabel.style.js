@@ -9,13 +9,13 @@ export const SourceLabel = styled.div`
 export const From = styled.span`
   position: relative;
   display: block;
-  color: ${props => props.theme.colors.accent};
+  /* color: ${props => props.theme.colors.accent}; */
   margin-right: 25px;
   ${iexBold}
   ${font20}
 
   &:before {
-    background: ${props => props.theme.colors.accent};
+    /* background: ${props => props.theme.colors.accent}; */
     content: ' ';
     display: block;
     width: 7px;
