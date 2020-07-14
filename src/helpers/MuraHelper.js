@@ -8,7 +8,6 @@ import Image from '../components/Image';
 import Container from '../components/Container';
 import Embed from '../components/Embed';
 import Hr from '../components/Hr';
-
 import LatestArticle from '../components/LatestArticle'; 
 import LatestArticleCarousel from '../components/LatestArticleCarousel'; 
 import ContentCarousel from '@components/ContentCarousel';
