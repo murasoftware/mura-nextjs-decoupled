@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { iexBold, font16, iexText } from '@styles/typography';
+import { Column } from '@styles/atoms';
 
 export const ContentSource = styled.div`
   width: 100%;
@@ -8,11 +9,9 @@ export const ContentSource = styled.div`
 `;
 
 export const ContentImage = styled.img`
-  width: 33.33%;
 `;
 
-export const ContentText = styled.div`
-  width: 66.66%;
+export const ContentText = styled(Column)`
 `;
 
 export const ContentTitle = styled.p`

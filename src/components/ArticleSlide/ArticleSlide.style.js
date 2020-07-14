@@ -10,11 +10,9 @@ export const ArticleSlide = styled.div`
 export const ArticleTitle = styled.h3`
   ${iexStandard}
   ${font140}
-  width: 66.66%;
 `;
 
 export const ArticleDescription = styled.p`
   ${iexText}
   ${font24}
-  width: 33.33%;
 `;

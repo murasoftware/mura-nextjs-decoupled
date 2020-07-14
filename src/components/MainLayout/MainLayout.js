@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Mura from 'mura.js';
 import Footer from '@components/Footer';
+import ContentCarousel from '@components/ContentCarousel';
 import theme from '@styles/theme';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '@styles/global'
@@ -21,6 +22,7 @@ const MainLayout = props => {
         <GlobalStyle />
         {children}
         <MuraStyles {...props} />
+        <ContentCarousel />
         <Footer />
       </ThemeProvider>
     </div>
