@@ -42,12 +42,16 @@
 			"LatestArticleCarousel":{
 				"name":"Latest Article Carousel",
 				"contenttypes":"*",
-				"configurator":""
+				"configurator":[
+					{"type":"text","name":"businessSource","label":"Business Source"},
+				]
 			},
 			"ContentCarousel": {
 				"name": "Recent Article Carousel",
 				"contenttypes":"*",
-				"configurator":""
+				"configurator":[
+					{"type":"text","name":"businessSource","label":"Business Source"},
+				]
 			},
 			"MarketStats":{
 				"name":"Market Statistics",
@@ -56,7 +60,7 @@
 					{"type":"text","name":"sectionTitle","label":"Section Title"},
 					{"type":"textarea","name":"sectionDescription","label":"Section Description"},
 					{"type":"text","name":"businessSource","label":"Business Source"},
-					{"type":"text","name":"moduleName","label":"Module Name"},
+					{"type":"text","name":"moduleName","label":"Module Name"}
 				]
 			},
 		},

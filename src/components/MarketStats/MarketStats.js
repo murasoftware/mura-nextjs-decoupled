@@ -2,22 +2,23 @@ import React, { useEffect, useState } from 'react';
 import SourceLabel from '@components/SourceLabel';
 import { calculateMarketStats } from '@utils/marketStatsHelper';
 import { ColumnContainer, Column } from '@styles/atoms';
+import { isMobile } from '@utils/screenSize';
 
 import 'whatwg-fetch';
 
 import {
   MarketStats,
-  Copy,
-  StatsContainer,
   StatTitle,
   StatDescription,
   Stats,
   Stat,
   StatValue,
   StatLabel,
+  SourceColumn,
 } from './MarketStats.style';
 
 const MarketStatsComp = props => {
+  const [isMobileVal, setIsMobileVal] = useState(false);
   const [formattedStats, setStats] = useState([]);
   const {
     businesssource,
@@ -27,13 +28,14 @@ const MarketStatsComp = props => {
   } = props;
 
   useEffect(() => {
+    setIsMobileVal(isMobile());
     fetch('/external/realtime.json')
       .then(response => response.json())
       .then(({ stats }) => {
-        const formattedStats = calculateMarketStats({ realTime: stats });
-        setStats(formattedStats);
+        const inStats = calculateMarketStats({ realTime: stats });
+        setStats(inStats);
       })
-      .catch(ex => {
+      .catch(() => {
         throw new Error('Failed to parse JSON for Market Stats');
       });
   }, []);
@@ -41,18 +43,25 @@ const MarketStatsComp = props => {
   return (
     <MarketStats>
       <ColumnContainer>
-        <Column lcols={4} scols={1}>
+        {isMobileVal && (
+          <SourceColumn lcols={8} mcols={6} scols={12}>
+            <SourceLabel fromLabel={businesssource} contentType={modulename} />
+          </SourceColumn>
+        )}
+        <Column lcols={4} mcols={6} scols={12}>
           <StatTitle>{sectiontitle}</StatTitle>
         </Column>
-        <Column lcols={8} scols={1}>
-          <SourceLabel fromLabel={businesssource} contentType={modulename} />
-        </Column>
+        {!isMobileVal && (
+          <SourceColumn lcols={8} mcols={6} scols={12}>
+            <SourceLabel fromLabel={businesssource} contentType={modulename} />
+          </SourceColumn>
+        )}
       </ColumnContainer>
       <ColumnContainer>
-        <Column lcols={4} scols={1}>
+        <SourceColumn lcols={4} mcols={6} scols={12}>
           <StatDescription>{sectiondescription}</StatDescription>
-        </Column>
-        <Column lcols={8} scols={1}>
+        </SourceColumn>
+        <Column lcols={8} mcols={6} scols={12}>
           <Stats>
             {formattedStats.map(({ realTime, name }) => (
               <Stat>

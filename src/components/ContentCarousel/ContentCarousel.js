@@ -57,7 +57,6 @@ const rightItemTemp = [
 ];
 
 const ContentCarouselComponent = (props) => {
-  console.log(props)
   const {
     seeAllText = 'See all Insights',
     seeAllLink = 'https://www.iextrading.com',

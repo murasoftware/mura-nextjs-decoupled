@@ -9,14 +9,11 @@ export const calculateMarketStats = ({ historicalData, realTime } = {}) => {
     const { historical, data } = schemaObject;
 
     outObject = { ...schemaObject };
-    console.log(outObject)
     
     if (historicalData && historicalData[historical]) {
       outObject.historical = historicalData[historical].RecordValue;
     }
-    console.log(realTime)
     if (realTime && realTime[data]) {
-      console.log(realTime[data].Count)
       outObject.realTime = realTime[data].Count;
     }
 

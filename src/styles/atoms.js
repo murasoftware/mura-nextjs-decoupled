@@ -13,11 +13,20 @@ import {
 } from './typography';
 
 export const ContentContainer = styled.div`
-  max-width: ${props => theme.sizes ? theme.sizes.maxWidth : '100%'}px;
-  @media (max-width: ${props => theme.sizes ? theme.sizes.maxWidth : '100%'}px) {
-    padding: 0 10%;
-  }
+  max-width: ${theme.sizes ? theme.sizes.maxWidth : '100%'}px;
   margin: 0 auto;
+
+  @media (max-width: ${theme.sizes ? theme.sizes.maxWidth : '100%'}px) {
+    padding: 0 80px;
+  }
+
+  @media (max-width: ${theme.breakpoints.tablet.max}px) {
+    padding: 0 40px;
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile.max}px) {
+    padding: 0 30px 0 45px;
+  }
 `;
 
 export const H1 = styled.h1`
@@ -59,7 +68,7 @@ export const BodyCopy = styled.p`
 export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: row;
-  @media (max-width: ${props => theme.breakpoints.mobile.max}px) {
+  @media (max-width: ${theme.breakpoints.mobile.max}px) {
    flex-direction: column;
   }
 `;
@@ -72,11 +81,9 @@ export const Column = styled.div`
   width: ${props =>
     `calc( 100% / ${props.maxCols || 12} * ${props.lcols})` ||
     `calc(100% / ${props.maxCols || 12} * 3)`};
-  min-width: ${props =>
-    `calc( 100% / ${props.maxCols || 12} * ${props.lcols})` ||
-    `calc(100% / ${props.maxCols || 12} * 3)`};
 
-  @media (max-width: ${props => theme.breakpoints.tablet.max}px) {
+
+  @media (max-width: ${theme.breakpoints.tablet.max}px) {
     flex-basis: ${props =>
       `calc( 100% / ${props.maxCols || 12} * ${props.mcols})` ||
       `calc(100% / ${props.maxCols || 12} * 3)`};
@@ -85,7 +92,8 @@ export const Column = styled.div`
       `calc(100% / ${props.maxCols || 12} * 3)`};
   }
 
-  @media (max-width: ${props => theme.breakpoints.mobile.max}px) {
+  @media (max-width: ${theme.breakpoints.mobile.max}px) {
+    padding: 0;
     flex-basis: ${props =>
       `calc( 100% / ${props.maxCols || 12} * ${props.scols})` ||
       `calc(100% / ${props.maxCols || 12} * ${props.maxCols || 12})`};
