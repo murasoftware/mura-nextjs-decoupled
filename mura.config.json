@@ -3,6 +3,8 @@
 		"rendererProperties":{
 			"templateArray":["default"],
 			"collectionLayoutArray":["CollectionLayout"],
+			"collectionDefaultLayout":"MasterLayout",
+			"SSR":false,
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
 			"editableAttributesArray":[],
