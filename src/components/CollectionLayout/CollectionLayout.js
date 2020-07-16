@@ -18,12 +18,12 @@ const CollectionLayout = ({props,collection,link}) => {
 
 return (
   <div>
-    <h2>COLLECTION!</h2>
+    <h2>CollectionLayout!</h2>
     <ul style={{'listStyle': 'none'}}>
       <CurrentItems collection={collection} pos={pos} link={link} {...props} />
     </ul>
     <div>
-      <CollectNav collection={collection} pos={pos} link={link} {...props} />   
+      <CollectionNav collection={collection} pos={pos} link={link} {...props} />   
     </div>
   </div>
   )
@@ -38,6 +38,8 @@ const CurrentItems = (props) => {
   const itemsTo = pos+nextn > items.length ? items.length : pos+nextn;
   const fieldlist = fields.split(",");
 
+  // FOR TESTING ONLY!
+  fieldlist.push('summary');
   console.log('layout',props.layout);
   console.log('fieldlist',fieldlist);
 
@@ -57,6 +59,11 @@ const CurrentItems = (props) => {
                 </Link>
               </h1>
             )
+          case "image":
+            // static image serving????
+            return (
+              <p>img</p>
+            )
           case "summary":
             return <ReactMarkdown source={item.get('summary')} key={field} />
           default:
@@ -74,7 +81,7 @@ const CurrentItems = (props) => {
   return itemsList;
 }
 
-const CollectNav = (props) => {
+const CollectionNav = (props) => {
   const {collection,link,pos,nextn} = props;
   const Link = link;
   const router = useRouter();

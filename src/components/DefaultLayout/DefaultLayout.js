@@ -18,7 +18,7 @@ const DefaultLayout = ({props,collection,link}) => {
 
   return (
     <div>
-      <h2>DEFAULT!</h2>
+      <h2>DefaultLayout!</h2>
       <ul style={{'listStyle': 'none'}}>
         <CurrentItems collection={collection} pos={pos} link={link} {...props} />
       </ul>
@@ -36,7 +36,7 @@ const CurrentItems = (props) => {
   const Link = link;
   const items = collection.get('items');
   const itemsTo = pos+nextn > items.length ? items.length : pos+nextn;
-  const fieldlist = fields.split(",");
+  const fieldlist = fields ? fields.split(",") : [];
 
   console.log('layout',props.layout);
   console.log('fieldlist',fieldlist);
