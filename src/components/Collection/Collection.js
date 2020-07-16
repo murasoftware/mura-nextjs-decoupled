@@ -5,12 +5,10 @@ import { useRouter } from 'next/router';
 
 import DefaultLayout from '../DefaultLayout';
 import CollectionLayout from '../CollectionLayout';
-import MasterLayout from '../MasterLayout';
 
 const LayoutRegistry = {
   CollectionLayout,
-  DefaultLayout,
-  MasterLayout
+  DefaultLayout
 };
 
 const getLayout=(layout) => {
@@ -26,7 +24,6 @@ const getLayout=(layout) => {
 }
 
 function Collection(props) {
-  
   const objectparams = Object.assign({}, props);
   const DynamicCollectionLayout = getLayout(objectparams.layout);
   const router = useRouter();
