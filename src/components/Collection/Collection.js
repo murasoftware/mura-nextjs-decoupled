@@ -2,30 +2,23 @@ import React,{useState,useEffect} from 'react';
 import Mura from 'mura.js';
 import Link from "next/link";
 import { useRouter } from 'next/router';
-
-import DefaultLayout from '../DefaultLayout';
-import CollectionLayout from '../CollectionLayout';
-
-const LayoutRegistry = {
-  CollectionLayout,
-  DefaultLayout
-};
+import moduleLookup from '../../helpers/ComponentRegistry';
 
 const getLayout=(layout) => {
 
   const uselayout = layout == 'default' ? "DefaultLayout" : layout;
 
-  if(typeof LayoutRegistry[uselayout] != 'undefined') {
-    return LayoutRegistry[uselayout];
+  if(typeof moduleLookup[uselayout] != 'undefined') {
+    return moduleLookup[uselayout];
   } else {
     console.log("Layout not registered: ",layout);
-    return DefaultLayout;
+    return moduleLookup['DefaultLayout'];
   }
 }
 
 function Collection(props) {
   const objectparams = Object.assign({}, props);
-  const DynamicCollectionLayout = getLayout(objectparams.layout);
+  const DynamicCollectionLayout = getLayout(objectparams.layout).component;
   const router = useRouter();
   const {content} = props;
 
@@ -140,7 +133,17 @@ export const getDynamicProps = async (item) => {
 };
 
 const getDisplayListFields = (item) => {
-  let fieldlist = item.displaylist ? item.displaylist : item.fields ? item.fields : '';
+
+  const data = getLayout(item.layout).getStaticProps();
+
+  let fieldlist = '';
+
+  if(data.fields) {
+    fieldlist = data.fields;
+  }
+  else {
+    fieldlist = item.displaylist ? item.displaylist : data.fields ? data.fields : '';
+  }
 
   if(!fieldlist)
     return '';

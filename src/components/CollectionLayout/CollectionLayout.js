@@ -36,10 +36,10 @@ const CurrentItems = (props) => {
   const Link = link;
   const items = collection.get('items');
   const itemsTo = pos+nextn > items.length ? items.length : pos+nextn;
-  const fieldlist = fields.split(",");
+  const fieldlist = "";
 
   // FOR TESTING ONLY!
-  fieldlist.push('summary');
+//  fieldlist.push('summary');
   console.log('layout',props.layout);
   console.log('fieldlist',fieldlist);
 
@@ -47,30 +47,12 @@ const CurrentItems = (props) => {
     item = items[i];
     itemsList.push(
     <li key={item.get('contentid')}>
-      {
-      fieldlist.map(field => {
-
-        switch(field) {
-          case "title":
-            return (
-              <h1 key={field}>
-                <Link href={`/${item.get('filename')}`}>
-                  {item.get('title')}
-                </Link>
-              </h1>
-            )
-          case "image":
-            // static image serving????
-            return (
-              <p>img</p>
-            )
-          case "summary":
-            return <ReactMarkdown source={item.get('summary')} key={field} />
-          default:
-            return <p key={field}>{item.get(field)}</p>
-        }        
-      })
-      }
+        <h1>
+          <Link href={`/${item.get('filename')}`}>
+            {item.get('title')}
+          </Link>
+        </h1>
+        <ReactMarkdown source={item.get('summary')}/>
       <Link href={`/${item.get('filename')}`}>
         Read More
       </Link>
@@ -116,5 +98,13 @@ const CollectionNav = (props) => {
 
   return nav;
 }
+
+export const getStaticProps = () => {
+  const data = {};
+  
+  data['fields'] = "title,summary,filename";
+
+  return data;
+};
 
 export default CollectionLayout;

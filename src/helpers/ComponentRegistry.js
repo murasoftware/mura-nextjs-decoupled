@@ -7,6 +7,10 @@ import Image from '../components/Image';
 import Container from '../components/Container';
 import Embed from '../components/Embed';
 import Hr from '../components/Hr';
+
+import DefaultLayout from '../components/DefaultLayout';
+import CollectionLayout,{getCollectionLayoutProps} from '../components/CollectionLayout';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -47,6 +51,12 @@ let moduleRegistry = [
     name: 'Embed',
     component: Embed,
   },
+  {
+    name: 'CollectionLayout',
+    component: CollectionLayout,
+    getStaticProps: getCollectionLayoutProps,
+    excludeFromClient: true
+  }  
 ];
 
 let moduleLookup = {};
@@ -57,9 +67,15 @@ moduleRegistry.forEach(module => {
     function() {
       return {};
     };
+  module.getStaticProps =
+    module.getStaticProps ||
+    function() {
+      return {};
+    };
   moduleLookup[module.name] = {
     component: module.component,
     getDynamicProps: module.getDynamicProps,
+    getStaticProps: module.getStaticProps
   };
 
   if (!module.excludeFromClient) {
