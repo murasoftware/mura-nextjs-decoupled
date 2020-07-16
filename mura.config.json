@@ -2,8 +2,8 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["CollectionLayout"],
-			"collectionDefaultLayout":"MasterLayout",
+			"collectionLayoutArray":["DefaultLayout","CollectionLayout"],
+			"collectionDefaultLayout":"DefaultLayout",
 			"SSR":false,
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
@@ -23,7 +23,14 @@
 				"name":"CollectionLayout",
 				"contenttypes":"",
 				"configurator":[
-					{"type":"hidden","name":"fields","value":"title,summary,credits"}
+					{"type":"fieldlist","name":"fields","default":"title,summary,credits"}
+				]
+			},
+			"DefaultLayout":{
+				"name":"DefaultLayout",
+				"contenttypes":"",
+				"configurator":[
+					{"type":"fieldlist","name":"fields","default":"title,summary,credits"}
 				]
 			}
 	},

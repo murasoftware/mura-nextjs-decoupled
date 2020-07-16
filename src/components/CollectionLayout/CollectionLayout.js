@@ -30,18 +30,12 @@ return (
 }
 
 const CurrentItems = (props) => {
-  const {collection,nextn,link,pos,fields} = props;
+  const {collection,nextn,link,pos} = props;
   let itemsList = [];
   let item = '';
   const Link = link;
   const items = collection.get('items');
   const itemsTo = pos+nextn > items.length ? items.length : pos+nextn;
-  const fieldlist = "";
-
-  // FOR TESTING ONLY!
-//  fieldlist.push('summary');
-  console.log('layout',props.layout);
-  console.log('fieldlist',fieldlist);
 
   for(let i = pos;i < itemsTo;i++) {
     item = items[i];
@@ -53,9 +47,6 @@ const CurrentItems = (props) => {
           </Link>
         </h1>
         <ReactMarkdown source={item.get('summary')}/>
-      <Link href={`/${item.get('filename')}`}>
-        Read More
-      </Link>
     </li>
     );
   }
@@ -99,10 +90,19 @@ const CollectionNav = (props) => {
   return nav;
 }
 
-export const getStaticProps = () => {
+
+/*
+  This is not need, it not supplied a default list of fields will be provided.
+  It is used to retrieve the requried fields when populated getStatic/getServerSide props
+*/
+export const getQueryProps = () => {
   const data = {};
   
-  data['fields'] = "title,summary,filename";
+  /*
+    You wouldn't really need to set this because
+    both of these are available in the default field list
+  */
+  data['fields'] = "title,summary";
 
   return data;
 };

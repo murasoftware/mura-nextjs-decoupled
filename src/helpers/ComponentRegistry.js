@@ -1,7 +1,7 @@
 import Mura from 'mura.js';
 import Example from '../components/Example';
-import Text, { getTextProps } from '../components/Text';
-import Collection, { getCollectionProps } from '../components/Collection';
+import Text, {getDynamicProps as  getTextProps } from '../components/Text';
+import Collection, {getDynamicProps as getCollectionProps } from '../components/Collection';
 import Video from '../components/Video';
 import Image from '../components/Image';
 import Container from '../components/Container';
@@ -9,7 +9,7 @@ import Embed from '../components/Embed';
 import Hr from '../components/Hr';
 
 import DefaultLayout from '../components/DefaultLayout';
-import CollectionLayout,{getCollectionLayoutProps} from '../components/CollectionLayout';
+import CollectionLayout,{getQueryProps as getCollectionLayoutProps} from '../components/CollectionLayout';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -54,9 +54,14 @@ let moduleRegistry = [
   {
     name: 'CollectionLayout',
     component: CollectionLayout,
-    getStaticProps: getCollectionLayoutProps,
+    getQueryProps: getCollectionLayoutProps,
     excludeFromClient: true
-  }  
+  },
+  {
+    name: 'DefaultLayout',
+    component: DefaultLayout,
+    excludeFromClient: true
+  }   
 ];
 
 let moduleLookup = {};
@@ -67,15 +72,15 @@ moduleRegistry.forEach(module => {
     function() {
       return {};
     };
-  module.getStaticProps =
-    module.getStaticProps ||
+  module.getQueryProps =
+    module.getQueryProps ||
     function() {
       return {};
     };
   moduleLookup[module.name] = {
     component: module.component,
     getDynamicProps: module.getDynamicProps,
-    getStaticProps: module.getStaticProps
+    getQueryProps: module.getQueryProps
   };
 
   if (!module.excludeFromClient) {

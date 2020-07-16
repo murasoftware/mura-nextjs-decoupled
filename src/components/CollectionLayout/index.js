@@ -1,4 +1,4 @@
-import CollectionLayout,{getStaticProps} from './CollectionLayout'
+import CollectionLayout,{getQueryProps} from './CollectionLayout'
 
-export const getCollectionLayoutProps = getStaticProps;
+export {getQueryProps};
 export default CollectionLayout;

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Mura from 'mura.js';
-import moduleLookup from './ComponentRegistry';
+import ComponentRegistry from './ComponentRegistry';
 
 let muraIsInit = false;
 let contextIsInit = false;
@@ -10,8 +10,8 @@ export const getComponent = item => {
 
   const objectkey = Mura.firstToUpperCase(item.object);
 
-  if (typeof moduleLookup[objectkey] != 'undefined') {
-    const ComponentVariable = moduleLookup[objectkey].component;
+  if (typeof ComponentRegistry[objectkey] != 'undefined') {
+    const ComponentVariable = ComponentRegistry[objectkey].component;
     return <ComponentVariable key={item.instanceid} {...item} />;
   }
 
@@ -195,9 +195,9 @@ async function getModuleProps(item,moduleStyleData,isEditMode,content) {
   getMura();
 
   const objectkey = Mura.firstToUpperCase(item.object);
-  if (typeof moduleLookup[objectkey] != 'undefined') {
+  if (typeof ComponentRegistry[objectkey] != 'undefined') {
 
-    item.dynamicProps = await moduleLookup[objectkey].getDynamicProps({...item,content});
+    item.dynamicProps = await ComponentRegistry[objectkey].getDynamicProps({...item,content});
     if (item.object == 'container') {
       if (
         typeof item.items != 'undefined' &&

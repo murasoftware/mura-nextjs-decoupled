@@ -47,7 +47,7 @@ const CurrentItems = (props) => {
     <li key={item.get('contentid')}>
       {
       fieldlist.map(field => {
-
+        field=field.toLowerCase();
         switch(field) {
           case "title":
             return (
@@ -59,14 +59,15 @@ const CurrentItems = (props) => {
             )
           case "summary":
             return <ReactMarkdown source={item.get('summary')} key={field} />
+          case "readmore":
+            return (<Link href={`/${item.get('filename')}`}>
+              Read More
+            </Link>)
           default:
             return <p key={field}>{item.get(field)}</p>
         }        
       })
       }
-      <Link href={`/${item.get('filename')}`}>
-        Read More
-      </Link>
     </li>
     );
   }

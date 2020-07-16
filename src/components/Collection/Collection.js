@@ -2,17 +2,17 @@ import React,{useState,useEffect} from 'react';
 import Mura from 'mura.js';
 import Link from "next/link";
 import { useRouter } from 'next/router';
-import moduleLookup from '../../helpers/ComponentRegistry';
+import ComponentRegistry from '../../helpers/ComponentRegistry';
 
 const getLayout=(layout) => {
 
   const uselayout = layout == 'default' ? "DefaultLayout" : layout;
 
-  if(typeof moduleLookup[uselayout] != 'undefined') {
-    return moduleLookup[uselayout];
+  if(typeof ComponentRegistry[uselayout] != 'undefined') {
+    return ComponentRegistry[uselayout];
   } else {
     console.log("Layout not registered: ",layout);
-    return moduleLookup['DefaultLayout'];
+    return ComponentRegistry['DefaultLayout'];
   }
 }
 
@@ -115,6 +115,7 @@ export const getDynamicProps = async (item) => {
       feed.andProp('feedid').isEQ(item.source);
     }
     
+    console.log(getDisplayListFields(item))
     feed.fields(getDisplayListFields(item));
 
     feed.maxItems(item.maxitems);
@@ -134,15 +135,14 @@ export const getDynamicProps = async (item) => {
 
 const getDisplayListFields = (item) => {
 
-  const data = getLayout(item.layout).getStaticProps();
+  const data = getLayout(item.layout).getQueryProps();
 
   let fieldlist = '';
 
   if(data.fields) {
     fieldlist = data.fields;
-  }
-  else {
-    fieldlist = item.displaylist ? item.displaylist : data.fields ? data.fields : '';
+  } else {
+    fieldlist = data.fields ? data.fields  : '';
   }
 
   if(!fieldlist)
