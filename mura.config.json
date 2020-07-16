@@ -21,16 +21,13 @@
 			},
 			"CollectionLayout":{
 				"name":"CollectionLayout",
-				"contenttypes":"",
-				"configurator":[
-					{"type":"fieldlist","name":"fields","default":"title,summary,credits"}
-				]
+				"contenttypes":""
 			},
 			"DefaultLayout":{
 				"name":"DefaultLayout",
 				"contenttypes":"",
 				"configurator":[
-					{"type":"fieldlist","name":"fields","default":"title,summary,credits"}
+					{"type":"fieldlist","name":"fields","label":"Display List"}
 				]
 			}
 	},
