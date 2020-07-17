@@ -63,6 +63,7 @@ const RouterLink = ({href,children})=>{
 
 export const getDynamicProps = async (item) => {
   const data = {};
+  let cdata = {};
   let {content} = item;
 
 // E01B7C64-1E17-41B3-8E20CD775D9B592F
