@@ -19,8 +19,6 @@ const getLayout=(layout) => {
 function Collection(props) {
   const objectparams = Object.assign({}, props);
   const DynamicCollectionLayout = getLayout(objectparams.layout).component;
-  const router = useRouter();
-  const {content} = props;
 
   if(!objectparams.dynamicProps){
     const [collection,setCollection]=useState(false);
@@ -67,11 +65,6 @@ const RouterLink = ({href,children})=>{
 export const getDynamicProps = async (item) => {
   const data = {};
 
-  // children collection
-  // TODO
-  // related content collection
-  // TODO
-  // feed collection
   let {content} = item;
 
   if(content.getAll) {

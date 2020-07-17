@@ -1,36 +1,22 @@
-import { useEffect } from "react";
-import { useRouter } from 'next/router';
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 
 const CollectionLayout = ({props,collection,link}) => {
-  const router = useRouter();
-  let pos = 0;
+  const [pos, setPos] = useState(0);
 
-  if(router){
-    pos = router.query.n ? parseInt(router.query.n) >= 0 ? parseInt(router.query.n) : 0 : 0;
-    useEffect(() => {
-      console.log("POSITION: ",pos);
-    }, [router.query.n])
-  }
-  else {
-    pos = 0;
-  }
-
-return (
-  <div>
-    <h2>CollectionLayout!</h2>
-    <ul style={{'listStyle': 'none'}}>
-      <CurrentItems collection={collection} pos={pos} link={link} {...props} />
-    </ul>
+  return (
     <div>
-      <CollectionNav collection={collection} pos={pos} link={link} {...props} />   
-    </div>
+      <h2>CollectionLayout!</h2>
+      <ul style={{'listStyle': 'none'}}>
+        <CurrentItems collection={collection} pos={pos} setPos={setPos} link={link} {...props} />
+      </ul>
+      <CollectionNav collection={collection} pos={pos} setPos={setPos} link={link} {...props} />   
   </div>
   )
 }
 
 const CurrentItems = (props) => {
-  const {collection,nextn,link,pos} = props;
+  const {collection,nextn,link,pos,setPos} = props;
   let itemsList = [];
   let item = '';
   const Link = link;
@@ -55,45 +41,47 @@ const CurrentItems = (props) => {
 }
 
 const CollectionNav = (props) => {
-  const {collection,link,pos,nextn} = props;
-  const Link = link;
-  const router = useRouter();
+  const {collection,pos,nextn,setPos} = props;
   const items = collection.get('items');
   const next = pos+nextn;
   const prev = pos > 0 ? pos-nextn > 0 ? pos-nextn : 0 : 0;
+  const itemsOf = pos+nextn > items.length ? items.length: pos+nextn;
   let nav = [];
 
-  if(!router) {
-    return nav;
-  }
-
   if(pos > 0) {
-    const prevAS =  `/${router.query.page}?n=${prev}`;
-
     nav.push (
-      <Link href={prevAS} key="prev">
-          Prev
-      </Link>
-    )    
-  }
-
-  if(next<items.length) {
-    const nextAS =  `/${router.query.page}?n=${next}`;
-
-      nav.push (
-      <Link href={nextAS} key="next">
-      Next
-      </Link>
+      <NavButton key="prev" pos={pos} val={prev} onItemClick={setPos} label="Prev"/>
     )
   }
 
-  return nav;
+  if(next<items.length) {
+    nav.push (
+      <NavButton key="next" pos={pos} val={next} onItemClick={setPos} label="Next"/>
+    )
+  }
+
+  return (
+    <div>
+      <p>Items {pos+1}-{itemsOf} of {items.length}</p>
+      {nav}
+    </div>
+  );
 }
 
+const NavButton = props => {
+  let {val,onItemClick} = props;
+
+  const _onClick = () => {
+    onItemClick(val);
+  }
+
+  return (
+    <button onClick={_onClick}>{props.label}</button>
+  )
+}
 
 /*
-  This is not need, it not supplied a default list of fields will be provided.
-  It is used to retrieve the requried fields when populated getStatic/getServerSide props
+  This is not required; it is used to retrieve the required fields when populated getStatic/getServerSide props
 */
 export const getQueryProps = () => {
   const data = {};
