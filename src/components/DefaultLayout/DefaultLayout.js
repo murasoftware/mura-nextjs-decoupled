@@ -38,8 +38,8 @@ const CurrentItems = (props) => {
   const itemsTo = pos+nextn > items.length ? items.length : pos+nextn;
   const fieldlist = fields ? fields.toLowerCase().split(",") : [];
 
-  console.log('layout',props.layout);
-  console.log('fieldlist',fieldlist);
+  //console.log('layout',props.layout);
+  //console.log('fieldlist',fieldlist);
 
   for(let i = pos;i < itemsTo;i++) {
     item = items[i];
@@ -58,10 +58,12 @@ const CurrentItems = (props) => {
             )
           case "date":
               return (item.get('releasedate') || item.get('lastupdate'));
+          case "image":
+            return  <CollectImage key={field} item={item}/>
           case "summary":
             return <ReactMarkdown source={item.get('summary')} key={field} />
           case "readmore":
-            return (<Link href={`/${item.get('filename')}`}>
+            return (<Link key={field} href={`/${item.get('filename')}`}>
               Read More
             </Link>)
           default:
@@ -76,6 +78,15 @@ const CurrentItems = (props) => {
   return itemsList;
 }
 
+const CollectImage = (item) => {
+  if(item.get('images').medium){
+    return (
+    <p><img src={`${item.get('images').medium}`}/></p>
+    );
+  } else {
+     return '';
+  }
+}
 const CollectNav = (props) => {
   const {collection,link,pos,nextn} = props;
   const Link = link;

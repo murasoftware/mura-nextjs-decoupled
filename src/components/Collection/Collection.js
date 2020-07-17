@@ -154,15 +154,30 @@ const getSelectFields = (item) => {
   let hasReleaseDate=false;
   let hasLastUpdate=false;
   let hasCreated=false;
-  
+  let hasImage=false;
+  let hasFileid=false;
+  let hasContentid=false;
+  let hasContenthistid=false;
+  let hasParentid=false;
+
   fieldarray=fieldarray.filter(field=>{
     field=field.toLowerCase();
     if(field==='filename'){
       hasFilename=true;
-    }
-    if(field==='date'){
+    } else if(field==='date'){
       hasDate=true;
       return false;
+    } else if(field==='image'){
+      hasImage=true;
+      return false;
+    } else if(field==='fileid'){
+      hasFileid=true;
+    } else if(field==='contentid'){
+      hasContentid=true;
+    } else if(field==='contenthistid'){
+      hasContenthistid=true;
+    } else if(field==='parentid'){
+      hasParentid=true;
     } 
     return true;
   });
@@ -180,11 +195,24 @@ const getSelectFields = (item) => {
     }
   }
 
-  //we always want file for routing
+  if(hasImage){
+    if(!hasFileid){
+      fieldarray.push('fileid');
+    }
+    fieldarray.push('images');
+  }
   if(!hasFilename){
     fieldarray.push('filename');
   }
-
+  if(!hasContentid){
+    fieldarray.push('contentid');
+  }
+  if(!hasContenthistid){
+    fieldarray.push('contenthistid');
+  }
+  if(!hasParentid){
+    fieldarray.push('parentid');
+  }
   return fieldarray.join(',').toLowerCase();
 }
 
