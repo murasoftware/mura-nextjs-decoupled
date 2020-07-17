@@ -80,21 +80,58 @@ export const getDynamicProps = async (item) => {
   
     feed.andProp('parentid').isEQ(cdata.contentid);
     feed.fields(getSelectFields(item));
+    feed.expand(getExpandFields(item));
 
     const query = await feed.getQuery();
     data.collection = query.getAll();
   }
   else if(item.sourcetype === 'relatedcontent') {
     const src = item.source;
-  
-    if(content.getRelatedContent) {
-      const related = await content.getRelatedContent(src);
-      data.collection = related.getAll(); 
-    }
-    else {
-      content = await Mura.getEntity('content')
-        .loadBy('contentid', content.contentid);
-      const related = await content.getRelatedContent(src);
+   
+    if(src==='custom'){
+      if(typeof item.items !='undefined'){
+        if(!Array.isArray(item.items)){
+          try{
+            JSON.parse(item.items);
+          } catch(e){
+            console.log(e)
+            item.items=[];
+          }
+        }
+      } else {
+        item.items=[];
+      }
+      if(item.items.length){
+        const related = await Mura.getFeed('content')
+        .where()
+        .fields(getSelectFields(item))
+        .expand(getExpandFields(item))
+        .itemsPerPage(0)
+        .maxItems(item.maxitems)
+        .prop('id')
+        .isEQ(item.items.join(","))
+        .getQuery();
+        
+        data.collection=related.getAll();
+      } else {
+        data.collection={
+          items: [],
+          totaltems: 0,
+        }
+      }
+    } else {
+      if(!content.getRelatedContent){
+        content=Mura.getEntity("content").set(content);
+      }
+      const related = await content.getRelatedContent(
+        src,
+        {
+          fields:getSelectFields(item),
+          expand:getExpandFields(item),
+          itemsPerPage:0,
+          maxitems:item.maxitems
+        }
+      );
       data.collection = related.getAll(); 
     }
     return data;
