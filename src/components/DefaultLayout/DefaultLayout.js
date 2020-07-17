@@ -36,7 +36,7 @@ const CurrentItems = (props) => {
   const Link = link;
   const items = collection.get('items');
   const itemsTo = pos+nextn > items.length ? items.length : pos+nextn;
-  const fieldlist = fields ? fields.split(",") : [];
+  const fieldlist = fields ? fields.toLowerCase().split(",") : [];
 
   console.log('layout',props.layout);
   console.log('fieldlist',fieldlist);
@@ -47,7 +47,6 @@ const CurrentItems = (props) => {
     <li key={item.get('contentid')}>
       {
       fieldlist.map(field => {
-        field=field.toLowerCase();
         switch(field) {
           case "title":
             return (
@@ -57,6 +56,8 @@ const CurrentItems = (props) => {
                 </Link>
               </h1>
             )
+          case "date":
+              return (item.get('releasedate') || item.get('lastupdate'));
           case "summary":
             return <ReactMarkdown source={item.get('summary')} key={field} />
           case "readmore":

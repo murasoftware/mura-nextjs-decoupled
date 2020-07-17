@@ -84,7 +84,7 @@ export const getDynamicProps = async (item) => {
     const feed = Mura.getFeed('content');
 
     feed.andProp('parentid').isEQ(content.contentid);
-    feed.fields(getDisplayListFields(item));
+    feed.fields(getSelectFields(item));
 
     const query = await feed.getQuery();
     data.collection = query.getAll();
@@ -94,7 +94,7 @@ export const getDynamicProps = async (item) => {
 
     feed.andProp('parentid').isEQ(content.contentid);
 
-    feed.fields(getDisplayListFields(item));
+    feed.fields(getSelectFields(item));
 
     const query = await feed.getQuery();
     data.collection = query.getAll();
@@ -115,8 +115,8 @@ export const getDynamicProps = async (item) => {
       feed.andProp('feedid').isEQ(item.source);
     }
     
-    console.log(getDisplayListFields(item))
-    feed.fields(getDisplayListFields(item));
+    console.log(getSelectFields(item))
+    feed.fields(getSelectFields(item));
 
     feed.maxItems(item.maxitems);
     feed.itemsPerPage(0);
@@ -133,7 +133,7 @@ export const getDynamicProps = async (item) => {
   return data;
 };
 
-const getDisplayListFields = (item) => {
+const getSelectFields = (item) => {
 
   const data = getLayout(item.layout).getQueryProps();
 
@@ -148,13 +148,44 @@ const getDisplayListFields = (item) => {
   if(!fieldlist)
     return '';
   
-  const hasFilename=fieldlist.split(",").find(fieldlist=>fieldlist==='filename');
+  let fieldarray=fieldlist.split(",");
+  let hasDate=false;
+  let hasFilename=false;
+  let hasReleaseDate=false;
+  let hasLastUpdate=false;
+  let hasCreated=false;
   
-  if(!hasFilename){
-    fieldlist += ",filename";
+  fieldarray=fieldarray.filter(field=>{
+    field=field.toLowerCase();
+    if(field==='filename'){
+      hasFilename=true;
+    }
+    if(field==='date'){
+      hasDate=true;
+      return false;
+    } 
+    return true;
+  });
+
+  //There is no generic date field.  If selected these are the options
+  if(hasDate){
+    if(!hasReleaseDate){
+      fieldarray.push('releasedate');
+    } 
+    if(!hasLastUpdate){
+      fieldarray.push('lastupdate');
+    }
+    if(!hasCreated){
+      fieldarray.push('created');
+    }
   }
 
-  return fieldlist;
+  //we always want file for routing
+  if(!hasFilename){
+    fieldarray.push('filename');
+  }
+
+  return fieldarray.join(',').toLowerCase();
 }
 
 
