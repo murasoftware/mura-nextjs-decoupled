@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Mura from 'mura.js';
 import Link from "next/link";
-import { useRouter } from 'next/router';
 import ComponentRegistry from '../../helpers/ComponentRegistry';
 
 const getLayout=(layout) => {
@@ -64,33 +63,40 @@ const RouterLink = ({href,children})=>{
 
 export const getDynamicProps = async (item) => {
   const data = {};
-
   let {content} = item;
-
-  if(content.getAll) {
-    content = content.getAll();
-  }
 
 // E01B7C64-1E17-41B3-8E20CD775D9B592F
 
   if(item.sourcetype === 'children') {
     const feed = Mura.getFeed('content');
 
-    feed.andProp('parentid').isEQ(content.contentid);
+    if(content.getAll) {
+      cdata = content.getAll();
+    }
+    else {
+      cdata = content;
+    }
+  
+    feed.andProp('parentid').isEQ(cdata.contentid);
     feed.fields(getSelectFields(item));
 
     const query = await feed.getQuery();
     data.collection = query.getAll();
   }
   else if(item.sourcetype === 'relatedcontent') {
-    const feed = Mura.getFeed('content');
-
-    feed.andProp('parentid').isEQ(content.contentid);
-
-    feed.fields(getSelectFields(item));
-
-    const query = await feed.getQuery();
-    data.collection = query.getAll();
+    const src = item.source;
+  
+    if(content.getRelatedContent) {
+      const related = await content.getRelatedContent(src);
+      data.collection = related.getAll(); 
+    }
+    else {
+      content = await Mura.getEntity('content')
+        .loadBy('contentid', content.contentid);
+      const related = await content.getRelatedContent(src);
+      data.collection = related.getAll(); 
+    }
+    return data;
   }
   else if ((
     typeof item.sourcetype === 'undefined'
@@ -108,7 +114,6 @@ export const getDynamicProps = async (item) => {
       feed.andProp('feedid').isEQ(item.source);
     }
     
-    //console.log(getSelectFields(item))
     feed.fields(getSelectFields(item));
     feed.expand(getExpandFields(item));
     
@@ -120,8 +125,6 @@ export const getDynamicProps = async (item) => {
     const query = await feed.getQuery();
 
     data.collection = query.getAll();
-//    console.log("COLLECTION",data.collection);
-
   }
 
   return data;

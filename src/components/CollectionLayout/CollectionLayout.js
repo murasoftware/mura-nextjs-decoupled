@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import CollectionNav from '../CollectionNav/CollectionNav';
 
 const CollectionLayout = ({props,collection,link}) => {
   const [pos, setPos] = useState(0);
@@ -8,7 +9,7 @@ const CollectionLayout = ({props,collection,link}) => {
     <div>
       <h2>CollectionLayout!</h2>
       <ul style={{'listStyle': 'none'}}>
-        <CurrentItems collection={collection} pos={pos} setPos={setPos} link={link} {...props} />
+        <CurrentItems collection={collection} pos={pos} link={link} {...props} />
       </ul>
       <CollectionNav collection={collection} pos={pos} setPos={setPos} link={link} {...props} />   
   </div>
@@ -16,7 +17,7 @@ const CollectionLayout = ({props,collection,link}) => {
 }
 
 const CurrentItems = (props) => {
-  const {collection,nextn,link,pos,setPos} = props;
+  const {collection,nextn,link,pos} = props;
   let itemsList = [];
   let item = '';
   const Link = link;
@@ -38,46 +39,6 @@ const CurrentItems = (props) => {
   }
 
   return itemsList;
-}
-
-const CollectionNav = (props) => {
-  const {collection,pos,nextn,setPos} = props;
-  const items = collection.get('items');
-  const next = pos+nextn;
-  const prev = pos > 0 ? pos-nextn > 0 ? pos-nextn : 0 : 0;
-  const itemsOf = pos+nextn > items.length ? items.length: pos+nextn;
-  let nav = [];
-
-  if(pos > 0) {
-    nav.push (
-      <NavButton key="prev" pos={pos} val={prev} onItemClick={setPos} label="Prev"/>
-    )
-  }
-
-  if(next<items.length) {
-    nav.push (
-      <NavButton key="next" pos={pos} val={next} onItemClick={setPos} label="Next"/>
-    )
-  }
-
-  return (
-    <div>
-      <p>Items {pos+1}-{itemsOf} of {items.length}</p>
-      {nav}
-    </div>
-  );
-}
-
-const NavButton = props => {
-  let {val,onItemClick} = props;
-
-  const _onClick = () => {
-    onItemClick(val);
-  }
-
-  return (
-    <button onClick={_onClick}>{props.label}</button>
-  )
 }
 
 /*
