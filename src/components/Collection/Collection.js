@@ -117,7 +117,8 @@ export const getDynamicProps = async (item) => {
     
     //console.log(getSelectFields(item))
     feed.fields(getSelectFields(item));
-
+    feed.expand(getExpandFields(item));
+    
     feed.maxItems(item.maxitems);
     feed.itemsPerPage(0);
 
@@ -132,6 +133,18 @@ export const getDynamicProps = async (item) => {
 
   return data;
 };
+
+const getExpandFields = (item) => {
+
+  const data = getLayout(item.layout).getQueryProps();
+
+  if(data.expand){
+    return data.expand;
+  } else {
+    return '';
+  }
+
+}
 
 const getSelectFields = (item) => {
 
