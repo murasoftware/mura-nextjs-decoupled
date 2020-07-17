@@ -59,7 +59,7 @@ const CurrentItems = (props) => {
           case "date":
               return (item.get('releasedate') || item.get('lastupdate'));
           case "image":
-            return  <CollectImage key={field} item={item}/>
+            return  <CollectImage key={field} imageurl={item.get('images')}/>
           case "summary":
             return <ReactMarkdown source={item.get('summary')} key={field} />
           case "readmore":
@@ -78,10 +78,11 @@ const CurrentItems = (props) => {
   return itemsList;
 }
 
-const CollectImage = (item) => {
-  if(item.get('images').medium){
+const CollectImage = (images) => {
+  //console.log(images)
+  if(images && images.medium){
     return (
-    <p><img src={`${item.get('images').medium}`}/></p>
+    <p><img src={`${images.medium}`}/></p>
     );
   } else {
      return '';
