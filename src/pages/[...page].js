@@ -22,6 +22,13 @@ export async function getStaticProps(context) {
 }
 
 export default function Page(props) {
+  /*
+   When in a route not defined in static routes it's intitially missing props
+  */
+  if(!props.content){
+    return '';
+  }
+
   const {
     navigation,
     content = {},

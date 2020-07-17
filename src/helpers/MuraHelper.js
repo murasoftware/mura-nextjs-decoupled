@@ -97,6 +97,10 @@ async function renderContent(context) {
     filename = context.params.page;
   }
 
+  if(Array.isArray(filename)){
+    filename=filename.join("/");
+  }
+  
   return await Mura.renderFilename(filename, query).then(
     async rendered => {
       return rendered;
