@@ -115,7 +115,7 @@ export const getDynamicProps = async (item) => {
       feed.andProp('feedid').isEQ(item.source);
     }
     
-    console.log(getSelectFields(item))
+    //console.log(getSelectFields(item))
     feed.fields(getSelectFields(item));
 
     feed.maxItems(item.maxitems);
@@ -145,9 +145,10 @@ const getSelectFields = (item) => {
     fieldlist = data.fields ? data.fields  : '';
   }
 
-  if(!fieldlist)
+  if(!fieldlist){
     return '';
-  
+  }
+
   let fieldarray=fieldlist.split(",");
   let hasDate=false;
   let hasFilename=false;
@@ -194,7 +195,6 @@ const getSelectFields = (item) => {
       fieldarray.push('created');
     }
   }
-
   if(hasImage){
     if(!hasFileid){
       fieldarray.push('fileid');

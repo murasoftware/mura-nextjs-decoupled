@@ -75,7 +75,7 @@ moduleRegistry.forEach(module => {
   module.getQueryProps =
     module.getQueryProps ||
     function() {
-      return {};
+      return {fields:''};
     };
   moduleLookup[module.name] = {
     component: module.component,
