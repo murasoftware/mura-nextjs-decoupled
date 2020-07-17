@@ -63,6 +63,20 @@
 					{"type":"text","name":"moduleName","label":"Module Name"}
 				]
 			},
+			"FeaturedVideo":{
+				"name":"Featured Video",
+				"contenttypes":"*",
+				"configurator":[
+					{"type":"image","name":"logoImage","label":"Logo Image"},
+					{"type":"image","name":"posterImage","label":"Poster Image Overwrite"},
+					{"type":"text","name":"youtubeId","label":"Youtube ID"},
+					{"type":"text","name":"titleOverwrite","label":"Title Overwrite"},
+					{"type":"text","name":"businessSource","label":"Business Source"},
+					{"type":"text","name":"moduleName","label":"Module Name"},
+					{"type":"text","name":"cta","label":"CTA Link"},
+					{"type":"text","name":"ctaLabel","label":"CTA Text"}
+				]
+			},
 		},
 	"sites":{
 		"default":{

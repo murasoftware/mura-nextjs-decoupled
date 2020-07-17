@@ -11,9 +11,9 @@ export const ArrowLinkComp = styled.a`
 export const LinkText = styled.span`
   ${iexText}
   ${font20}
+  text-decoration: underline;
   display: block;
   margin-right: 20px;
-  border-bottom: 1px solid white;
   padding-bottom: 3px;
 `;
 
