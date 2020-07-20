@@ -101,6 +101,7 @@ export const getDynamicProps = async (item) => {
       } else {
         item.items=[];
       }
+
       if(item.items.length){
         const related = await Mura.getFeed('content')
         .where()
@@ -108,8 +109,7 @@ export const getDynamicProps = async (item) => {
         .expand(getExpandFields(item))
         .itemsPerPage(0)
         .maxItems(item.maxitems)
-        .prop('id')
-        .isEQ(item.items.join(","))
+        .findMany(item.items)
         .getQuery();
         
         data.collection=related.getAll();
