@@ -18,6 +18,9 @@ export const FeaturedVideo = styled(ContentContainer)`
 export const FeaturedVideoHeader = styled(ColumnContainer)``;
 
 export const LogoContainer = styled(Column)`
+  display: flex;
+  align-items: flex-end;
+
   @media (max-width: ${theme.breakpoints.mobile.max}px) {
     margin-bottom: 50px;
   }
@@ -64,6 +67,10 @@ export const TimeStamp = styled.span`
 `;
 export const Logo = styled.img`
   max-width: 230px;
+
+  @media (max-width: ${theme.breakpoints.tablet.max}px) {
+    max-width: 180px;
+  }
 
   @media (max-width: ${theme.breakpoints.mobile.max}px) {
     max-width: 50%;

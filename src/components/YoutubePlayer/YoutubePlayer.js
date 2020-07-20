@@ -7,6 +7,7 @@ import {
   PosterImage,
   FeaturedPlayButton,
 } from './YoutubePlayer.style';
+import { AnalyticsClick } from '@helpers/Analytics';
 
 const YoutubePlayer = ({ youtubeVideo, posterimage }) => {
   const videoContainer = useRef(null);
@@ -30,6 +31,11 @@ const YoutubePlayer = ({ youtubeVideo, posterimage }) => {
   const aspect = height / width;
   const newHeight = containerWidth * aspect;
 
+  const videoClick = () => {
+    AnalyticsClick('videoClick', id);
+    setShowPlayer(true);
+  }
+
   const iframe = () => (
     <iframe
       title={title}
@@ -47,7 +53,7 @@ const YoutubePlayer = ({ youtubeVideo, posterimage }) => {
   return (
     <YoutubePlayerStyle ref={videoContainer}>
       <PosterImage src={posterimage || youtubePoster} />
-      <FeaturedPlayButton onClick={() => setShowPlayer(true)}>
+      <FeaturedPlayButton onClick={videoClick}>
         <PlayButton />
       </FeaturedPlayButton>
 

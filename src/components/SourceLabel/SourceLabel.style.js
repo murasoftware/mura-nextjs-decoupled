@@ -7,7 +7,7 @@ export const SourceLabel = styled.div`
   flex-direction: row;
 
 
-  @media (max-width: ${theme.breakpoints.mobile.max}px) {
+  @media (max-width: ${theme.breakpoints.tablet.max}px) {
     flex-direction: column;
   }
 `;
@@ -32,7 +32,7 @@ export const From = styled.span`
     top: 50%;
     transform: translateY(-50%);
   }
-  @media (max-width: ${theme.breakpoints.mobile.max}px) {
+  @media (max-width: ${theme.breakpoints.tablet.max}px) {
     margin-bottom: 10px;
   }
   
