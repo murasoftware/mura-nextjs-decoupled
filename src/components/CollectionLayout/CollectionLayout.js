@@ -4,8 +4,10 @@ import React from 'react';
   The link component throws an error when rerending after being 
   reconfigured in edit mode. Hence CollectionLink
 */
-const CollectionLayout = ({props,collection,link}) => {
+const CollectionLayout = props => {
+  const { collection, link } = props;
   const Link=link;
+
   return (
     <div>
       <ul>

@@ -1,52 +1,51 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Mura from 'mura.js';
 import Link from "next/link";
+import { moduleLookup } from '@helpers/MuraHelper';
 
-import CollectionLayout from '../CollectionLayout';
+const getLayout = (layout) => {
 
-const LayoutRegistry = {
-  CollectionLayout
-};
+  const uselayout = layout === 'default' ? "DefaultLayout" : layout;
 
-const getLayout=(layout) => {
-  if(typeof LayoutRegistry[layout] != 'undefined'){
-    return LayoutRegistry[layout];
+  if (typeof moduleLookup[uselayout] !== 'undefined') {
+    return moduleLookup[uselayout];
   } else {
-    return CollectionLayout;
+    console.log("Layout not registered: ", layout);
+    return moduleLookup['DefaultLayout'];
   }
 }
 
 function Collection(props) {
   const objectparams = Object.assign({}, props);
-  const DynamicCollectionLayout = getLayout(objectparams.layout);
+  const DynamicCollectionLayout = getLayout(objectparams.layout).component;
 
-  if(!objectparams.dynamicProps){
-    const [collection,setCollection]=useState(false);
+  if (!objectparams.dynamicProps) {
+    const [collection, setCollection] = useState(false);
     useEffect(() => {
-      getDynamicProps(objectparams).then((dynamicProps)=>{
-        setCollection(new Mura.EntityCollection(dynamicProps.collection,Mura._requestcontext));
-      });   
+      getDynamicProps(objectparams).then((dynamicProps) => {
+        setCollection(new Mura.EntityCollection(dynamicProps.collection, Mura._requestcontext));
+      });
 
     }, []);
-    if(collection) {
+    if (collection) {
       return (
-        <DynamicCollectionLayout collection={collection} props={props} link={RouterlessLink}/>
+        <DynamicCollectionLayout collection={collection} props={props} link={RouterlessLink} />
       )
     }
     else {
       return (
-       <div></div>
+        <div></div>
       )
     }
   } else {
-    const collection=new Mura.EntityCollection(objectparams.dynamicProps.collection,Mura._requestcontext);
-      return (
-        <DynamicCollectionLayout collection={collection} props={props} link={RouterLink}/>
-      )
+    const collection = new Mura.EntityCollection(objectparams.dynamicProps.collection, Mura._requestcontext);
+    return (
+      <DynamicCollectionLayout collection={collection} props={props} link={RouterLink} />
+    )
   }
 }
 
-const RouterlessLink = ({href,children})=>{
+const RouterlessLink = ({ href, children }) => {
   return (
     <a href={href}>
       {children}
@@ -54,7 +53,7 @@ const RouterlessLink = ({href,children})=>{
   );
 }
 
-const RouterLink = ({href,children})=>{
+const RouterLink = ({ href, children }) => {
   return (
     <Link href={href}>
       <a>{children}</a>
@@ -62,55 +61,170 @@ const RouterLink = ({href,children})=>{
   );
 }
 
-export const getDynamicProps = async props => {
+export const getDynamicProps = async (item) => {
   const data = {};
+  let cdata = {};
+  let { content } = item;
 
-  // children collection
-  // TODO
-  // related content collection
-  // TODO
-  // feed collection
-  if ((
-    typeof props.sourcetype === 'undefined'
-    || props.sourcetype === ''
-    ) 
-    ||  (
-      typeof props.sourcetype !== 'undefined' &&
-      props.sourcetype === 'localindex' &&
-      Mura.isUUID(props.source)
+  // E01B7C64-1E17-41B3-8E20CD775D9B592F
+
+  if (item.sourcetype === 'children') {
+    const feed = Mura.getFeed('content');
+
+    if (content.getAll) {
+      cdata = content.getAll();
+    }
+    else {
+      cdata = content;
+    }
+
+    feed.andProp('parentid').isEQ(cdata.contentid);
+    feed.fields(getSelectFields(item));
+
+    const query = await feed.getQuery();
+    data.collection = query.getAll();
+  }
+  else if (item.sourcetype === 'relatedcontent') {
+    const src = item.source;
+
+    if (content.getRelatedContent) {
+      const related = await content.getRelatedContent(src);
+      data.collection = related.getAll();
+    }
+    else {
+      content = await Mura.getEntity('content')
+        .loadBy('contentid', content.contentid);
+      const related = await content.getRelatedContent(src);
+      data.collection = related.getAll();
+    }
+    return data;
+  }
+  else if ((
+    typeof item.sourcetype === 'undefined'
+    || item.sourcetype === ''
+  )
+    || (
+      typeof item.sourcetype !== 'undefined' &&
+      item.sourcetype === 'localindex' &&
+      Mura.isUUID(item.source)
     )
   ) {
-    const feed = Mura.getFeed('content')
+    const feed = Mura.getFeed('content');
 
-    if(props.source){
-      feed.andProp('feedid').isEQ(props.source);
-    }
-    
-    let fields='';
-    if(props.displaylist){
-      fields=props.displaylist;
-    } else if(props.fields){
-      fields=props.fields;
+    if (item.source) {
+      feed.andProp('feedid').isEQ(item.source);
     }
 
-    if(fields){
-      const hasFilename=fields.split(",").find(field=>field==='filename');
-      if(!hasFilename){
-        fields += ",filename";
-      }
-      feed.fields(fields);
-    }
+    feed.fields(getSelectFields(item));
+    feed.expand(getExpandFields(item));
 
-    //Add stuff like maxitems, nextn
-      
+    feed.maxItems(item.maxitems);
+    feed.itemsPerPage(0);
+
+    // Add stuff like maxitems, nextn
+
     const query = await feed.getQuery();
-    
-    data.collection = query.getAll();
 
+    data.collection = query.getAll();
   }
 
   return data;
 };
+
+const getExpandFields = (item) => {
+
+  const data = getLayout(item.layout).getQueryProps();
+
+  if (data.expand) {
+    return data.expand;
+  } else {
+    return '';
+  }
+
+}
+
+const getSelectFields = (item) => {
+
+  const data = getLayout(item.layout).getQueryProps();
+
+  let fieldlist = '';
+
+  if (data.fields) {
+    fieldlist = data.fields;
+  } else {
+    fieldlist = data.fields ? data.fields : '';
+  }
+
+  if (!fieldlist) {
+    return '';
+  }
+
+  let fieldarray = fieldlist.split(",");
+  let hasDate = false;
+  let hasFilename = false;
+  let hasReleaseDate = false;
+  let hasLastUpdate = false;
+  let hasCreated = false;
+  let hasImage = false;
+  let hasFileid = false;
+  let hasContentid = false;
+  let hasContenthistid = false;
+  let hasParentid = false;
+
+  fieldarray = fieldarray.filter(field => {
+    field = field.toLowerCase();
+    if (field === 'filename') {
+      hasFilename = true;
+    } else if (field === 'date') {
+      hasDate = true;
+      return false;
+    } else if (field === 'image') {
+      hasImage = true;
+      return false;
+    } else if (field === 'fileid') {
+      hasFileid = true;
+    } else if (field === 'contentid') {
+      hasContentid = true;
+    } else if (field === 'contenthistid') {
+      hasContenthistid = true;
+    } else if (field === 'parentid') {
+      hasParentid = true;
+    }
+    return true;
+  });
+
+  // There is no generic date field.  If selected these are the options
+  if (hasDate) {
+    if (!hasReleaseDate) {
+      fieldarray.push('releasedate');
+    }
+    if (!hasLastUpdate) {
+      fieldarray.push('lastupdate');
+    }
+    if (!hasCreated) {
+      fieldarray.push('created');
+    }
+  }
+  if (hasImage) {
+    if (!hasFileid) {
+      fieldarray.push('fileid');
+    }
+    fieldarray.push('images');
+  }
+  if (!hasFilename) {
+    fieldarray.push('filename');
+  }
+  if (!hasContentid) {
+    fieldarray.push('contentid');
+  }
+  if (!hasContenthistid) {
+    fieldarray.push('contenthistid');
+  }
+  if (!hasParentid) {
+    fieldarray.push('parentid');
+  }
+  return fieldarray.join(',').toLowerCase();
+}
 
 
 export default Collection;

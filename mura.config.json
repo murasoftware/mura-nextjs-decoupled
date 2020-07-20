@@ -2,7 +2,9 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["CollectionLayout","LatestArticleCarousel", "RecentArticles"],
+			"collectionLayoutArray":["CollectionLayout","LatestArticleCarousel", "RecentArticles", "PodcastCollectionLayout"],
+			"collectionDefaultLayout": "DefaultLayout",
+			"SSR": false,
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
 			"editableAttributesArray":[],
@@ -43,14 +45,14 @@
 				"name":"Latest Article Carousel",
 				"contenttypes":"*",
 				"configurator":[
-					{"type":"text","name":"businessSource","label":"Business Source"},
+					{"type":"text","name":"businessSource","label":"Business Source"}
 				]
 			},
 			"ContentCarousel": {
 				"name": "Recent Article Carousel",
 				"contenttypes":"*",
 				"configurator":[
-					{"type":"text","name":"businessSource","label":"Business Source"},
+					{"type":"text","name":"businessSource","label":"Business Source"}
 				]
 			},
 			"MarketStats":{
@@ -77,6 +79,31 @@
 					{"type":"text","name":"ctaLabel","label":"CTA Text"}
 				]
 			},
+			"Podcasts": {
+				"name": "Podcasts",
+				"contenttypes": "*",
+				"configurator": [
+					{"type":"text","name":"sectionTitle","label":"Section Title"},
+					{"type":"text","name":"sectionTitleImage","label":"Section Title Image"},
+					{"type":"text","name":"bgImageLeft","label":"Background Image Left"},
+					{"type":"text","name":"bgImageRight","label":"Background Image Right"},
+					{"type":"text","name":"viewAllCta","label":"View All Podcasts CTA"},
+					{"type":"text","name":"viewAllCtaUrl","label":"View All Podcasts CTA Destination"}
+				]
+			},
+			"PodcastCollectionLayout": {
+				"name": "Podcast Collection Layout",
+				"contenttypes": "*",
+				"configurator": [
+					{"type":"text","name":"sectionTitle","label":"Section Title"},
+					{"type":"text","name":"sectionTitleImage","label":"Section Title Image"},
+					{"type":"text","name":"bgImageLeft","label":"Background Image Left"},
+					{"type":"text","name":"bgImageRight","label":"Background Image Right"},
+					{"type":"text","name":"viewAllCta","label":"View All Podcasts CTA"},
+					{"type":"text","name":"viewAllCtaUrl","label":"View All Podcasts CTA Destination"},
+					{"type":"hidden","name":"fields","value":"episodeNumber"}
+				]
+			}
 		},
 	"sites":{
 		"default":{

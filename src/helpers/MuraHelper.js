@@ -8,11 +8,13 @@ import Image from '@components/Image';
 import Container from '@components/Container';
 import Embed from '@components/Embed';
 import Hr from '@components/Hr';
+import FeaturedVideo from '@components/FeaturedVideo';
 import LatestArticle from '@components/LatestArticle';
 import LatestArticleCarousel from '@components/LatestArticleCarousel';
 import ContentCarousel from '@components/ContentCarousel';
 import MarketStats from '@components/MarketStats';
-import FeaturedVideo from '@components/FeaturedVideo';
+import Podcasts from '@components/Podcasts';
+import PodcastCollectionLayout, { getQueryProps as getPodcastCollectionProps } from '@components/PodcastCollectionLayout';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -70,6 +72,15 @@ let moduleRegistry = [
     component: MarketStats,
   },
   { name: 'FeaturedVideo', component: FeaturedVideo },
+  {
+    name: 'PodcastCollectionLayout',
+    component: PodcastCollectionLayout,
+    getQueryProps: getPodcastCollectionProps,
+  },
+  {
+    name: 'Podcasts',
+    component: Podcasts,
+  }
 ];
 
 let moduleLookup = {};
@@ -77,20 +88,29 @@ let moduleLookup = {};
 moduleRegistry.forEach(module => {
   module.getDynamicProps =
     module.getDynamicProps ||
-    function() {
+    function () {
       return {};
+    };
+  module.getQueryProps =
+    module.getQueryProps ||
+    function () {
+      return { fields: '' };
     };
   moduleLookup[module.name] = {
     component: module.component,
     getDynamicProps: module.getDynamicProps,
+    getQueryProps: module.getQueryProps
   };
 
   if (!module.excludeFromClient) {
     Mura.Module[module.name] = Mura.UI.extend({
       component: module.component,
       renderClient() {
+
+        const content = Mura.content.getAll();
+
         ReactDOM.render(
-          React.createElement(this.component, this.context),
+          React.createElement(this.component, { ...this.context, content }),
           this.context.targetEl,
           () => {
             this.trigger('afterRender');
@@ -101,6 +121,8 @@ moduleRegistry.forEach(module => {
   }
 });
 
+export { moduleLookup };
+
 Mura.Module.Container.reopen({
   reset(self, empty) {
     self.find('.mura-object:not([data-object="container"])').html('');
@@ -110,7 +132,7 @@ Mura.Module.Container.reopen({
 
     if (content.length) {
       var nestedObjects = [];
-      content.children('.mura-object').each(function() {
+      content.children('.mura-object').each(function () {
         Mura.resetAsyncObject(this, empty);
         //console.log(Mura(this).data())
         nestedObjects.push(Mura(this).data());
