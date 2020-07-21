@@ -13,6 +13,10 @@ import LatestArticleCarousel from '@components/LatestArticleCarousel';
 import ContentCarousel from '@components/ContentCarousel';
 import MarketStats from '@components/MarketStats';
 import FeaturedVideo from '@components/FeaturedVideo';
+import TitleTextModule from '@components/TitleTextModule';
+import LinkList from '@components/LinkList';
+import TwoImage from '@components/TwoImage';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -70,6 +74,9 @@ let moduleRegistry = [
     component: MarketStats,
   },
   { name: 'FeaturedVideo', component: FeaturedVideo },
+  { name: 'TitleTextModule', component: TitleTextModule },
+  { name: 'LinkList', component: LinkList},
+  { name: 'TwoImage', component: TwoImage},
 ];
 
 let moduleLookup = {};

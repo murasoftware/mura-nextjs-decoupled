@@ -27,7 +27,7 @@ export const font140 = `
   line-height: 1.1;
 
   @media (max-width: ${tablet.max}px) {
-    font-size: 100px;
+    font-size: 80px;
   }
 
   @media (max-width: ${mobile.max}px) {
