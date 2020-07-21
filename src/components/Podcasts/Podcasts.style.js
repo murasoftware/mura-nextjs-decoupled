@@ -15,15 +15,9 @@ export const PodcastsContainer = styled(ContentContainer)`
   }
 `;
 
-export const Background = styled(ColumnContainer)`
-  @media (max-width: ${theme.breakpoints.mobile.max}px) {
-    flex-direction: row;
-    margin: 25px 0 27px;
-    position: static;
-  }
-`;
-
+// Source/Section info
 export const SectionInfo = styled(ColumnContainer)`
+  border-top: 1px solid ${theme.colors.border};
   position: absolute;
   top: 0;
   width: 100%;
@@ -38,28 +32,10 @@ export const SectionInfo = styled(ColumnContainer)`
   }
 `;
 
-export const AbsoluteRow = styled(ColumnContainer)`
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 2;
-
-  &:first-child {
-    z-index: 3;
-  }
-
-  @media (max-width: ${theme.breakpoints.mobile.max}px) {
-    flex-direction: row;
-    position: static;
-  }
-`;
-
-export const LeftColumn = styled(Column)`
+export const SectionLogo = styled(Column)`
   display: flex;
   flex-direction: column;
-`;
 
-export const SectionLogo = styled(LeftColumn)`
   @media (max-width: ${theme.breakpoints.mobile.max}px) {
     order: 2;
   }
@@ -74,6 +50,15 @@ export const SourceContainer = styled(Column)`
   @media (max-width: ${theme.breakpoints.mobile.max}px) {
     margin: 33px 0 35px;
     padding-left: 49px;
+  }
+`;
+
+// Image Backgrounds
+export const Background = styled(ColumnContainer)`
+  @media (max-width: ${theme.breakpoints.mobile.max}px) {
+    flex-direction: row;
+    margin: 25px 0 27px;
+    position: static;
   }
 `;
 
@@ -92,6 +77,31 @@ export const BackgroundImage = styled.img`
   @media (max-width: ${theme.breakpoints.mobile.max}px) {
     max-height: 352px;
   }
+`;
+
+
+export const AbsoluteRow = styled(ColumnContainer)`
+  ${'' /* border-bottom: 1px solid ${theme.colors.border}; */}
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+
+  &:first-child {
+    z-index: 3;
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile.max}px) {
+    flex-direction: row;
+    position: static;
+  }
+`;
+
+// Main content
+export const LeftColumn = styled(Column)`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const SectionTitle = styled.span``;
