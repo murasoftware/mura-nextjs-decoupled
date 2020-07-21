@@ -18,6 +18,26 @@ const getLayout=(layout) => {
 function Collection(props) {
   const objectparams = Object.assign({}, props);
   const DynamicCollectionLayout = getLayout(objectparams.layout).component;
+  const renderCollection = (collection) => {
+    if(collection) {
+      if(objectparams.scrollpages){
+        return (
+          <div>
+            <DynamicCollectionLayout collection={collection} props={props} link={RouterlessLink}/>
+            <div className="mura-collecion-end" data-instanceid={objectparams.instanceid}></div>
+          </div>
+        )
+      } else {
+        return (
+          <DynamicCollectionLayout collection={collection} props={props} link={RouterlessLink}/>
+        )
+      }
+    } else {
+      return (
+         <div></div>
+        )
+    }
+  }
 
   if(!objectparams.dynamicProps){
     const [collection,setCollection]=useState(false);
@@ -27,21 +47,10 @@ function Collection(props) {
       });   
 
     }, []);
-    if(collection) {
-      return (
-        <DynamicCollectionLayout collection={collection} props={props} link={RouterlessLink}/>
-      )
-    }
-    else {
-      return (
-       <div></div>
-      )
-    }
+    return renderCollection(collection);
   } else {
     const collection=new Mura.EntityCollection(objectparams.dynamicProps.collection,Mura._requestcontext);
-      return (
-        <DynamicCollectionLayout collection={collection} props={props} link={RouterLink}/>
-      )
+    return renderCollection(collection);
   }
 }
 
@@ -136,16 +145,7 @@ export const getDynamicProps = async (item) => {
     }
     return data;
   }
-  else if ((
-    typeof item.sourcetype === 'undefined'
-    || item.sourcetype === ''
-    ) 
-    ||  (
-      typeof item.sourcetype !== 'undefined' &&
-      item.sourcetype === 'localindex' &&
-      Mura.isUUID(item.source)
-    )
-  ) {
+  else {
     const feed = Mura.getFeed('content');
 
     if(item.source) {

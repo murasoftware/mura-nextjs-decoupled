@@ -1,20 +1,10 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from 'next/router';
+import CollectionNav from '../CollectionNav/CollectionNav';
 import ReactMarkdown from "react-markdown";
 
 const DefaultLayout = ({props,collection,link}) => {
-  const router = useRouter();
-  let pos = 0;
-
-  if(router){
-    pos = router.query.n ? parseInt(router.query.n) >= 0 ? parseInt(router.query.n) : 0 : 0;
-    useEffect(() => {
-      console.log("POSITION: ",pos);
-    }, [router.query.n])
-  }
-  else {
-    pos = 0;
-  }
+  const [pos, setPos] = useState(0);
 
   return (
     <div>
@@ -23,7 +13,7 @@ const DefaultLayout = ({props,collection,link}) => {
         <CurrentItems collection={collection} pos={pos} link={link} {...props} />
       </ul>
       <div>
-        <CollectNav collection={collection} pos={pos} link={link} {...props} />   
+      <CollectionNav collection={collection} pos={pos} setPos={setPos} link={link} {...props} />  
       </div>
     </div>
   )
@@ -87,41 +77,6 @@ const CollectImage = (images) => {
   } else {
      return '';
   }
-}
-const CollectNav = (props) => {
-  const {collection,link,pos,nextn} = props;
-  const Link = link;
-  const router = useRouter();
-  const items = collection.get('items');
-  const next = pos+nextn;
-  const prev = pos > 0 ? pos-nextn > 0 ? pos-nextn : 0 : 0;
-  let nav = [];
-
-  if(!router) {
-    return nav;
-  }
-
-  if(pos > 0) {
-    const prevAS =  `/${router.query.page}?n=${prev}`;
-
-    nav.push (
-      <Link href={prevAS} key="prev">
-          Prev
-      </Link>
-    )    
-  }
-
-  if(next<items.length) {
-    const nextAS =  `/${router.query.page}?n=${next}`;
-
-      nav.push (
-      <Link href={nextAS} key="next">
-      Next
-      </Link>
-    )
-  }
-
-  return nav;
 }
 
 export default DefaultLayout;
