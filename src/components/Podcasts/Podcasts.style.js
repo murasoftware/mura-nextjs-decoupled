@@ -68,11 +68,17 @@ export const BgColumnRight = styled(Column)`
   text-align: right;
 `;
 
+
+// TODO: Update global breakpoints to accomidate new small-desktop breakpoint
 export const BackgroundImage = styled.img`
   display: inline-block;
   height: 100%;
   max-height: 1362px;
   width: auto;
+
+  @media (max-width: 1440px) {
+    max-height: 922px;
+  }
   
   @media (max-width: ${theme.breakpoints.mobile.max}px) {
     max-height: 352px;
@@ -127,14 +133,6 @@ export const PodcastInfo = styled(Column)`
   @media (max-width: ${theme.breakpoints.mobile.max}px) {
     margin: 0 46px 0 48px;
   }
-
-  &:last-of-type {
-    padding-right: 300px;
-
-    @media (max-width: ${theme.breakpoints.mobile.max}px) {
-      padding-right: 0;
-    }
-  }
 `;
 
 export const EpisodeNumber = styled.p`
@@ -144,6 +142,7 @@ export const EpisodeNumber = styled.p`
 export const EpisodeTitle = styled.h2`
   ${font140}
   margin-bottom: 24px;
+  word-spacing: 300px;
 `;
 
 export const EpisodeDescription = styled.p`
