@@ -3,10 +3,10 @@ import React from 'react';
 import { SourceLabel, From, ContentType } from './SourceLabel.style';
 
 
-const SourceLabelComp = ({fromLabel = 'From IEX Exchage', contentType = 'Latest Articles'}) => (
+const SourceLabelComp = ({fromLabel = 'From IEX Exchage', contentType}) => (
   <SourceLabel>
     <From>{fromLabel}</From>
-    <ContentType>{contentType}</ContentType>
+    {contentType && <ContentType>{contentType}</ContentType>}
   </SourceLabel>
 )
 

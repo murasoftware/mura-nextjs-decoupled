@@ -8,13 +8,17 @@ import Image from '@components/Image';
 import Container from '@components/Container';
 import Embed from '@components/Embed';
 import Hr from '@components/Hr';
-import FeaturedVideo from '@components/FeaturedVideo';
 import LatestArticle from '@components/LatestArticle';
 import LatestArticleCarousel from '@components/LatestArticleCarousel';
 import ContentCarousel from '@components/ContentCarousel';
 import MarketStats from '@components/MarketStats';
 import Podcasts from '@components/Podcasts';
 import PodcastCollectionLayout, { getQueryProps as getPodcastCollectionProps } from '@components/PodcastCollectionLayout';
+import FeaturedVideo from '@components/FeaturedVideo';
+import TitleTextModule from '@components/TitleTextModule';
+import LinkList from '@components/LinkList';
+import TwoImage from '@components/TwoImage';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -80,7 +84,10 @@ let moduleRegistry = [
   {
     name: 'Podcasts',
     component: Podcasts,
-  }
+  },
+  { name: 'TitleTextModule', component: TitleTextModule },
+  { name: 'LinkList', component: LinkList},
+  { name: 'TwoImage', component: TwoImage},
 ];
 
 let moduleLookup = {};

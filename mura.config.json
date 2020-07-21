@@ -103,6 +103,36 @@
 					{"type":"text","name":"viewAllCtaUrl","label":"View All Podcasts CTA Destination"},
 					{"type":"hidden","name":"fields","value":"episodeNumber"}
 				]
+			},
+			"TitleTextModule":{
+				"name":"Title Text Module",
+				"contenttypes":"*",
+				"configurator":[
+					{"type":"text","name":"pageTitle","label":"Page Title"},
+					{"type":"text","name":"headline","label":"Headline"},
+					{"type":"textarea","name":"leftColumn","label":"Left Column"},
+					{"type":"textarea","name":"rightColumn","label":"Right Column"}
+				]
+			},
+			"LinkList":{
+				"name":"Link List",
+				"contenttypes":"*",
+				"configurator":[
+					{"type":"textarea","name":"description","label":"Description"}
+				]
+			},
+			"TwoImage":{
+				"name":"Two Image Module",
+				"contenttypes":"*",
+				"configurator":[
+					{"type":"text","name":"copy","label":"Copy"},
+					{"type":"image","name":"image1","label":"First Image"},
+					{"type":"image","name":"image2","label":"Second Image"},
+					{"type":"select", "name": "layout", "label": "Layout", "options": ["Title Left", "Description Left", "Title Above"]},
+					{"type":"select", "name": "topSpacing", "label": "Top Spacing", "options": ["Large", "Small"]},
+					{"type":"select", "name": "bottomSpacing", "label": "Bottom Spacing", "options": ["Large", "Small"]}
+
+				]
 			}
 		},
 	"sites":{
