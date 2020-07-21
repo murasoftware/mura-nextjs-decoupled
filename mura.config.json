@@ -16,7 +16,33 @@
 				"contenttypes":"*",
 				"omitcontenttypes":"",
 				"configurator":[
-					{"type":"text","name":"myvar","label":"My Label"}
+					{
+						"type":"text",
+						"name":"myvar",
+						"label":"My Label"
+					},
+					{
+						"type":"select",
+						"name":"myselect",
+						"label":"My Select",
+						"options":[
+							"option1",
+							"option2",
+							"option3",
+							"option4"
+						]
+					},
+					{
+						"type":"dispenser",
+						"name":"mydispenser",
+						"label":"My Dispenser",
+						"options":[
+							"option1",
+							"option2",
+							"option3",
+							"option4"
+						]
+					}
 				]
 			},
 			"CollectionLayout":{
