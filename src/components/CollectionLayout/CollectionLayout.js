@@ -3,26 +3,29 @@ import ReactMarkdown from "react-markdown";
 import CollectionNav from '../CollectionNav/CollectionNav';
 
 const CollectionLayout = ({props,collection,link}) => {
+  const {nextn} = props;
+  const items = collection.get('items');
   const [pos, setPos] = useState(0);
+  const [itemsTo,setItemsTo]= useState((pos+nextn > items.length ? items.length : pos+nextn));
+
 
   return (
     <div>
       <h2>CollectionLayout!</h2>
       <ul style={{'listStyle': 'none'}}>
-        <CurrentItems collection={collection} pos={pos} link={link} {...props} />
+        <CurrentItems collection={collection}  itemsTo={itemsTo} pos={pos} link={link} {...props} />
       </ul>
-      <CollectionNav collection={collection} pos={pos} setPos={setPos} link={link} {...props} />   
+      <CollectionNav collection={collection}  itemsTo={itemsTo}  setItemsTo={setItemsTo} pos={pos} setPos={setPos} link={link} {...props} />   
   </div>
   )
 }
 
 const CurrentItems = (props) => {
-  const {collection,nextn,link,pos} = props;
+  const {collection,link,pos,itemsTo} = props;
   let itemsList = [];
   let item = '';
   const Link = link;
   const items = collection.get('items');
-  const itemsTo = pos+nextn > items.length ? items.length : pos+nextn;
 
   for(let i = pos;i < itemsTo;i++) {
     item = items[i];

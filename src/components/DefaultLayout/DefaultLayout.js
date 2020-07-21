@@ -1,31 +1,32 @@
-import { useState } from "react";
-import { useRouter } from 'next/router';
+import {useState} from "react";
 import CollectionNav from '../CollectionNav/CollectionNav';
 import ReactMarkdown from "react-markdown";
 
 const DefaultLayout = ({props,collection,link}) => {
+  const {nextn} = props;
+  const items = collection.get('items');
   const [pos, setPos] = useState(0);
+  const [itemsTo,setItemsTo]= useState((pos+nextn > items.length ? items.length : pos+nextn));
 
   return (
     <div>
       <h2>DefaultLayout!</h2>
       <ul style={{'listStyle': 'none'}}>
-        <CurrentItems collection={collection} pos={pos} link={link} {...props} />
+        <CurrentItems collection={collection} itemsTo={itemsTo}  setItemsTo={setItemsTo} pos={pos} setPos={setPos} link={link} {...props} />
       </ul>
       <div>
-      <CollectionNav collection={collection} pos={pos} setPos={setPos} link={link} {...props} />  
+      <CollectionNav collection={collection} itemsTo={itemsTo} setItemsTo={setItemsTo} pos={pos} setPos={setPos} link={link} {...props} />  
       </div>
     </div>
   )
 }
 
 const CurrentItems = (props) => {
-  const {collection,nextn,link,pos,fields} = props;
+  const {collection,link,pos,fields,itemsTo} = props;
   let itemsList = [];
   let item = '';
   const Link = link;
   const items = collection.get('items');
-  const itemsTo = pos+nextn > items.length ? items.length : pos+nextn;
   const fieldlist = fields ? fields.toLowerCase().split(",") : [];
 
   //console.log('layout',props.layout);
