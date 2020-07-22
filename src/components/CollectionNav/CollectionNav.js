@@ -44,13 +44,17 @@ const CollectionNav = (props) => {
 		<NavButton key="next" pos={pos} val={next} onItemClick={setPos} label="Next"/>
 	  )
 	}
-  
-	return (
-	  <div>
-		<p>Items {pos+1}-{itemsOf} of {items.length}</p>
-		{nav}
-	  </div>
-	);
+	
+	if(nav.length){
+		return (
+		<div>
+			<p>Items {pos+1}-{itemsOf} of {items.length}</p>
+			{nav}
+		</div>
+		);
+	} else {
+		return '';
+	}
   }
   
   const NavButton = props => {
