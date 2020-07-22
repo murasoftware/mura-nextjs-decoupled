@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import CollectionNav from '../CollectionNav/CollectionNav';
 import ReactMarkdown from "react-markdown";
 
@@ -7,6 +7,10 @@ const DefaultLayout = ({props,collection,link}) => {
   const items = collection.get('items');
   const [pos, setPos] = useState(0);
   const [itemsTo,setItemsTo]= useState((pos+nextn > items.length ? items.length : pos+nextn));
+
+  useEffect(()=>{
+    setItemsTo((pos+nextn > items.length ? items.length : pos+nextn));
+  },[pos]);
 
   return (
     <div>

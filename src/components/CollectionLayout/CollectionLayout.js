@@ -8,6 +8,10 @@ const CollectionLayout = ({props,collection,link}) => {
   const [pos, setPos] = useState(0);
   const [itemsTo,setItemsTo]= useState((pos+nextn > items.length ? items.length : pos+nextn));
 
+  useEffect(()=>{
+    setItemsTo((pos+nextn > items.length ? items.length : pos+nextn));
+  },[pos]);
+  
   return (
     <div>
       <h2>CollectionLayout!</h2>
