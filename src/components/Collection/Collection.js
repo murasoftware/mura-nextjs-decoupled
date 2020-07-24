@@ -128,6 +128,7 @@ export const getDynamicProps = async (item) => {
         {
           fields:getSelectFields(item),
           expand:getExpandFields(item),
+          imagesizes:getImageSizes(item),
           itemsPerPage:0,
           maxitems:item.maxitems
         }
@@ -154,6 +155,7 @@ export const getDynamicProps = async (item) => {
     
     feed.fields(getSelectFields(item));
     feed.expand(getExpandFields(item));
+    feed.imageSizes(getImageSizes(item));
     
     feed.maxItems(item.maxitems);
     feed.itemsPerPage(0);
@@ -174,6 +176,18 @@ const getExpandFields = (item) => {
 
   if(data.expand){
     return data.expand;
+  } else {
+    return '';
+  }
+
+}
+
+const getImageSizes = (item) => {
+
+  const data = getLayout(item.layout).getQueryProps();
+
+  if(data.imagesizes){
+    return data.imagesizes;
   } else {
     return '';
   }
