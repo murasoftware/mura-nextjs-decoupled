@@ -6,7 +6,7 @@ import GlobalContext from '../GlobalContext';
 const DisplayRegionSection = ({ children, region, section, iseditmode }) => {
   let out = null;
   if (typeof region.name !== 'undefined' && iseditmode) {
-    if (section === 'inherited' && !region.inherited.items.length) {
+    if (section === 'inherited' && region.inherited.items.length) {
       out = (
         <div className="mura-region-inherited">
           <div className="frontEndToolsModal mura">

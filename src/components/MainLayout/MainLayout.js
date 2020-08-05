@@ -3,7 +3,7 @@ import Mura from 'mura.js';
 import MuraStyles from '../MuraStyles';
 
 const MainLayout = props => {
-  const { content, moduleStyleData, children } = props;
+  const { content, moduleStyleData, children, footer } = props;
 
   Mura.moduleStyleData = moduleStyleData;
 

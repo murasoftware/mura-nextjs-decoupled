@@ -2,7 +2,6 @@ import React from 'react';
 import Head from 'next/head';
 import { getMuraProps, getRootPath, getMuraPaths } from '@helpers/MuraHelper';
 
-import MainRouter from '../components/MainRouter';
 import MainLayout from '../components/MainLayout';
 import DisplayRegion from '../components/DisplayRegion';
 
@@ -30,13 +29,12 @@ export default function Page(props) {
   }
 
   const {
-    navigation,
     content = {},
     content: { displayregions } = {},
     content: {
-      displayregions: { primarycontent } = {},
+      displayregions: { primarycontent,footer,navigation } = {},
     },
-    moduleStyleData,
+    moduleStyleData
   } = props;
 
   return (
@@ -53,10 +51,23 @@ export default function Page(props) {
           key="skin"
         />
       </Head>
-      <MainRouter items={navigation} />
+      {content && displayregions && navigation && (
+        <DisplayRegion
+          region={navigation}
+          moduleStyleData={moduleStyleData}
+          content={content}
+        />
+      )}
       {content && displayregions && primarycontent && (
         <DisplayRegion
           region={primarycontent}
+          moduleStyleData={moduleStyleData}
+          content={content}
+        />
+      )}
+       {content && displayregions && footer && (
+        <DisplayRegion
+          region={footer}
           moduleStyleData={moduleStyleData}
           content={content}
         />

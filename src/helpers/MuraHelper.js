@@ -67,14 +67,12 @@ export const getMuraProps = async (context,isEditMode) => {
   getMura(context);
 
   const muraObject = await renderContent(context);
-  const navigation = await getPrimaryNavData();
   const content = muraObject.getAll();
   const moduleStyleData = await getRegionProps(muraObject,isEditMode);
-  
+
   const props = {
-    navigation,
     content: content,
-    moduleStyleData: moduleStyleData,
+    moduleStyleData: moduleStyleData
   };
 
   return {
@@ -134,27 +132,7 @@ async function renderContent(context) {
   );
 }
 
-async function getPrimaryNavData() {
-  getMura();
 
-  return Mura.getFeed('content')
-    .where()
-    .prop('parentid')
-    .isEQ(Mura.homeid)
-    .sort('orderno')
-    .getQuery()
-    .then(collection => {
-      let tempArray = collection.getAll().items;
-      tempArray.unshift({
-        url: '/',
-        menutitle: 'Home',
-        title: 'Home',
-        filename: '',
-        contentid: Mura.homeid,
-      });
-      return tempArray;
-    });
-}
 
 async function getRegionProps(content,isEditMode) {
   getMura();

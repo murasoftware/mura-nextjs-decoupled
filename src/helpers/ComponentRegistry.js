@@ -7,6 +7,7 @@ import Image from '../components/Image';
 import Container from '../components/Container';
 import Embed from '../components/Embed';
 import Hr from '../components/Hr';
+import PrimaryNav,{getDynamicProps as getPrimaryNavProps} from '../components/PrimaryNav';
 
 import DefaultLayout from '../components/DefaultLayout';
 import CollectionLayout,{getQueryProps as getCollectionLayoutProps} from '../components/CollectionLayout';
@@ -61,7 +62,12 @@ let moduleRegistry = [
     name: 'DefaultLayout',
     component: DefaultLayout,
     excludeFromClient: true
-  }   
+  },
+  {
+    name: 'PrimaryNav',
+    component: PrimaryNav,
+    getDynamicProps: getPrimaryNavProps,
+  }, 
 ];
 
 let moduleLookup = {};

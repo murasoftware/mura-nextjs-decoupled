@@ -16,8 +16,8 @@
     "hooks": {}
   },
   "dependencies": {
-    "mura.js": "^1.0.251",
-    "next": "^9.4.5-canary.32",
+    "mura.js": "^1.0.252",
+    "next": "^9.5.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-markdown": "^4.3.1",
@@ -32,7 +32,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react": "^7.20.5",
     "husky": "^4.2.5",
     "prettier-eslint": "^9.0.1"
   }
