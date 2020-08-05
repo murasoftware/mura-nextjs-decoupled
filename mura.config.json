@@ -9,7 +9,7 @@
 			"primaryContentTypes":"Page,Link,File",
 			"editableAttributesArray":[],
 			"imageAttributesArray":[],
-			"defaultInheritedRegions":["footer","navigation"]
+			"defaultInheritedRegions":["header","footer"]
 		},
 		"modules":{
 			"Example":{
