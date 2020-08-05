@@ -215,3 +215,25 @@ async function getModuleProps(item,moduleStyleData,isEditMode,content) {
     };
 
 }
+
+async function getPrimaryNavData() {
+  getMura();
+
+  return Mura.getFeed('content')
+    .where()
+    .prop('parentid')
+    .isEQ(Mura.homeid)
+    .sort('orderno')
+    .getQuery()
+    .then(collection => {
+      let tempArray = collection.getAll().items;
+      tempArray.unshift({
+        url: '/',
+        menutitle: 'Home',
+        title: 'Home',
+        filename: '',
+        contentid: Mura.homeid,
+      });
+      return tempArray;
+    });
+}

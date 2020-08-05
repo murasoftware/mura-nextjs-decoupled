@@ -40,7 +40,7 @@ const Render = ({ items, link }) => {
             {items &&
             items.map(item => (
                 <Link key={item.contentid} href={`/${item.filename}`}>
-                <a>{item.menutitle}</a>
+                {item.menutitle}
                 </Link>
             ))}
         </ul>
