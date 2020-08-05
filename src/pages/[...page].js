@@ -32,7 +32,7 @@ export default function Page(props) {
     content = {},
     content: { displayregions } = {},
     content: {
-      displayregions: { primarycontent,footer,navigation } = {},
+      displayregions: { primarycontent,footer,header } = {},
     },
     moduleStyleData
   } = props;
@@ -51,9 +51,9 @@ export default function Page(props) {
           key="skin"
         />
       </Head>
-      {content && displayregions && navigation && (
+      {content && displayregions && header && (
         <DisplayRegion
-          region={navigation}
+          region={header}
           moduleStyleData={moduleStyleData}
           content={content}
         />
