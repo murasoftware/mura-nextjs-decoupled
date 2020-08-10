@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import ReactMarkdown from "react-markdown";
 import CollectionNav from '../CollectionNav/CollectionNav';
 
@@ -14,12 +14,11 @@ const CollectionLayout = ({props,collection,link}) => {
   
   return (
     <div>
-      <h2>CollectionLayout!</h2>
       <ul style={{'listStyle': 'none'}}>
         <CurrentItems collection={collection}  itemsTo={itemsTo} pos={pos} link={link} {...props} />
       </ul>
       <CollectionNav collection={collection}  itemsTo={itemsTo}  setItemsTo={setItemsTo} pos={pos} setPos={setPos} link={link} {...props} />   
-  </div>
+    </div>
   )
 }
 

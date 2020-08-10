@@ -14,7 +14,6 @@ const DefaultLayout = ({props,collection,link}) => {
 
   return (
     <div>
-      <h2>DefaultLayout!</h2>
       <ul style={{'listStyle': 'none'}}>
         <CurrentItems collection={collection} itemsTo={itemsTo}  setItemsTo={setItemsTo} pos={pos} setPos={setPos} link={link} {...props} />
       </ul>
