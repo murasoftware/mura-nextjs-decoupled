@@ -16,7 +16,7 @@
     "hooks": {}
   },
   "dependencies": {
-    "mura.js": "^1.0.256",
+    "mura.js": "^1.0.257",
     "next": "^9.5.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",

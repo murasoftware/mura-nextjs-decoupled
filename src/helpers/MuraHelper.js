@@ -19,7 +19,24 @@ export const getComponent = item => {
 };
 
 export const getMuraPaths = async () => {
-  const pathList = await getPrimaryNavData();
+  getMura();
+
+  const pathList = await Mura.getFeed('content')
+    .maxItems(0)
+    .itemsPerPage(0)
+    .sort('orderno')
+    .getQuery()
+    .then(collection => {
+      let tempArray = collection.getAll().items;
+      tempArray.unshift({
+        url: '/',
+        menutitle: 'Home',
+        title: 'Home',
+        filename: '',
+        contentid: Mura.homeid,
+      });
+      return tempArray;
+    });
 
   const paths = pathList
     .map(item => {
@@ -33,24 +50,27 @@ export const getMuraPaths = async () => {
 };
 
 export const getMura = context => {
+
+  let config = {
+    rootpath: 'http://localhost:8888',
+    siteid: 'default',
+    processMarkup: false,
+    editroute: '/edit',
+  };
+
   if (context && context.res && !contextIsInit) {
-    Mura.init({
-      rootpath: 'http://localhost:8888',
-      siteid: 'default',
-      processMarkup: false,
-      response: context.res,
-      request: context.req,
-      editroute: '/edit',
-    });
+    Mura.init(Object.assign(
+        config,
+        { 
+          response: context.res,
+          request: context.req
+        }
+      )
+    );
     contextIsInit = true;
     muraIsInit = true;
   } else if (!muraIsInit) {
-    Mura.init({
-      rootpath: 'http://localhost:8888',
-      siteid: 'default',
-      processMarkup: false,
-      editroute: '/edit',
-    });
+    Mura.init(config);
     muraIsInit = true;
   }
 

@@ -1,5 +1,5 @@
 FROM murasoftware/mura:latest
-MAINTAINER Matt Levine, matt.levine@blueriver.com
+MAINTAINER Matt Levine, matt.levine@getmura.com
 
 ARG admin_hspw=
 ARG web_hspw=
