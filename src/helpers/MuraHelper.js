@@ -2,6 +2,8 @@
 import Mura from 'mura.js';
 import ComponentRegistry from './ComponentRegistry';
 
+require('mura.js/src/core/stylemap-static');
+
 let muraIsInit = false;
 let contextIsInit = false;
 
