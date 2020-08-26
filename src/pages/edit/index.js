@@ -33,7 +33,7 @@ function Edit(props) {
 
   return (
     <EditLayout {...props}>
-      <MainLayout {...props} route={`/${router.query.page}`}>
+      <MainLayout {...props}>
         <Head>
           <link
             href={`${getRootPath()}/core/modules/v1/core_assets/css/mura.10.min.css`}
