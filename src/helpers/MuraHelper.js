@@ -60,7 +60,7 @@ export const getMura = context => {
     editroute: '/edit',
   };
 
-  if (context && context.res && !contextIsInit) {
+  if (context && context.res) {
     Mura.init(Object.assign(
         config,
         { 
