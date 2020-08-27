@@ -86,11 +86,17 @@ export const getRootPath = () => {
 };
 
 export const getMuraProps = async (context,isEditMode) => {
-  getMura(context);
+  const Mura=getMura(context);
 
   const muraObject = await renderContent(context);
   const content = muraObject.getAll();
   const moduleStyleData = await getRegionProps(muraObject,isEditMode);
+
+  delete Mura._request;
+  delete Mura.response;
+  delete Mura.request;
+  contextIsInit = false;
+  muraIsInit = false;
 
   const props = {
     content: content,
