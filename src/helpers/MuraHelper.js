@@ -30,6 +30,7 @@ export const getMuraPaths = async () => {
     .getQuery()
     .then(collection => {
       let tempArray = collection.getAll().items;
+      /*
       tempArray.unshift({
         url: '/',
         menutitle: 'Home',
@@ -37,6 +38,7 @@ export const getMuraPaths = async () => {
         filename: '',
         contentid: Mura.homeid,
       });
+      */
       return tempArray;
     });
 
