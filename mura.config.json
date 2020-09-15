@@ -120,7 +120,11 @@
 				"name":"Cards",
 				"contenttypes":"",
 				"configurator":[
-					{"type":"hidden","name":"fields","value":"title,filename,summary,image,subtype"}
+					{"type":"hidden","name":"fields","value":"title,filename,summary,image,subtype"},
+					{"type":"select","name":"rowcolsxl","label":"Columns > 1199px","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"4"},
+					{"type":"select","name":"rowcolslg","label":"Columns > 991px","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"3"},
+					{"type":"select","name":"rowcolsmd","label":"Columns > 767px","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"3"},
+					{"type":"select","name":"rowcolssm","label":"Number > 575px","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"2"}
 				]
 			},
 			"PrimaryNav":{

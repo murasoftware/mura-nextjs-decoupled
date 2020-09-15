@@ -12,7 +12,7 @@ const CollectionLayoutCards = ({props,collection,link}) => {
   const [pos, setPos] = useState(0);
   return (
     <>
-      <div className="row row-cols-1 row-cols-md-3 collectionLayoutCards">
+      <div className={`row collectionLayoutCards row-cols-1 row-cols-sm-${props.rowcolssm} row-cols-md-${props.rowcolsmd} row-cols-lg-${props.rowcolslg} row-cols-xl-${props.rowcolsxl}`}>
           <CurrentItems collection={collection} pos={pos} link={link} {...props} /> 
       </div>
       <div className="row">
