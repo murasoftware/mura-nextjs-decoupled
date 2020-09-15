@@ -28,6 +28,8 @@ const CollectionNav = (props) => {
 		)
 	}
 
+	const btnClass = 'btn btn-secondary';
+
 	const next = pos+nextn;
 	const prev = pos > 0 ? pos-nextn > 0 ? pos-nextn : 0 : 0;
 	const itemsOf = pos+nextn > items.length ? items.length: pos+nextn;
@@ -35,13 +37,13 @@ const CollectionNav = (props) => {
 
 	if(pos > 0) {
 	  nav.push (
-		<NavButton key="prev" pos={pos} val={prev} onItemClick={setPos} label="Prev"/>
+		<NavButton key="prev" pos={pos} val={prev} onItemClick={setPos} label="Prev" className={btnClass} />
 	  )
 	}
   
 	if(next<items.length) {
 	  nav.push (
-		<NavButton key="next" pos={pos} val={next} onItemClick={setPos} label="Next"/>
+		<NavButton key="next" pos={pos} val={next} onItemClick={setPos} label="Next" className={btnClass} />
 	  )
 	}
 	
@@ -49,7 +51,9 @@ const CollectionNav = (props) => {
 		return (
 		<div>
 			<p>Items {pos+1}-{itemsOf} of {items.length}</p>
-			{nav}
+			<div class="btn-group" role="group" aria-label="Next/Previous Nav">
+				{nav}
+			</div>
 		</div>
 		);
 	} else {
@@ -65,7 +69,7 @@ const CollectionNav = (props) => {
 	}
   
 	return (
-	  <button onClick={_onClick}>{props.label}</button>
+	  <button onClick={_onClick} className={props.className}>{props.label}</button>
 	)
   }
   
