@@ -8,9 +8,11 @@ import Container from '../components/Container';
 import Embed from '../components/Embed';
 import Hr from '../components/Hr';
 import PrimaryNav,{getDynamicProps as getPrimaryNavProps} from '../components/PrimaryNav';
+import CTAButton from '../components/CTAButton';
 
 import DefaultLayout from '../components/DefaultLayout';
 import CollectionLayout,{getQueryProps as getCollectionLayoutProps} from '../components/CollectionLayout';
+import CollectionLayoutCards from '../components/CollectionLayoutCards';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -67,6 +69,15 @@ let moduleRegistry = [
     name: 'PrimaryNav',
     component: PrimaryNav,
     getDynamicProps: getPrimaryNavProps,
+  },
+  {
+    name: 'CTAButton',
+    component: CTAButton,
+  },
+  {
+    name: 'CollectionLayoutCards',
+    component: CollectionLayoutCards,
+    excludeFromClient: true
   }, 
 ];
 
