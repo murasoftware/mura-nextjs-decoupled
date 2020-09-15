@@ -1,6 +1,10 @@
 import Mura from 'mura.js';
 import {useEffect} from "react";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+
 const CollectionNav = (props) => {
 	const {collection,pos,nextn,setPos,scrollpages,instanceid,itemsTo,setItemsTo} = props;
 	const items = collection.get('items');
@@ -28,32 +32,30 @@ const CollectionNav = (props) => {
 		)
 	}
 
-	const btnClass = 'btn btn-secondary';
-
 	const next = pos+nextn;
 	const prev = pos > 0 ? pos-nextn > 0 ? pos-nextn : 0 : 0;
 	const itemsOf = pos+nextn > items.length ? items.length: pos+nextn;
 	let nav = [];
 
 	if(pos > 0) {
-	  nav.push (
-		<NavButton key="prev" pos={pos} val={prev} onItemClick={setPos} label="Prev" className={btnClass} />
-	  )
-	}
-  
-	if(next<items.length) {
-	  nav.push (
-		<NavButton key="next" pos={pos} val={next} onItemClick={setPos} label="Next" className={btnClass} />
-	  )
-	}
+		nav.push (
+		  <NavButton key="prev" pos={pos} val={prev} onItemClick={setPos} label="Prev"/>
+		)
+	  }
+	
+	  if(next<items.length) {
+		nav.push (
+		  <NavButton key="next" pos={pos} val={next} onItemClick={setPos} label="Next"/>
+		)
+	  }
 	
 	if(nav.length){
 		return (
 		<div>
-			<p>Items {pos+1}-{itemsOf} of {items.length}</p>
-			<div className="btn-group" role="group" aria-label="Next/Previous Nav">
+			<p>Displaying items {pos+1}-{itemsOf} of {items.length}</p>
+			<ul className="pagination">
 				{nav}
-			</div>
+			</ul>
 		</div>
 		);
 	} else {
@@ -67,10 +69,29 @@ const CollectionNav = (props) => {
 	const _onClick = () => {
 	  onItemClick(val);
 	}
-  
+
+	
 	return (
-	  <button onClick={_onClick} className={props.className}>{props.label}</button>
+	  <li className="page-item">
+	  	<a onClick={_onClick} className="page-link"><NavButtonLabel label={props.label} /></a>
+	  </li>
 	)
+  }
+
+  const NavButtonLabel = props => {
+	if (props.label == 'Next'){
+		return(
+			<>
+				{props.label} <FontAwesomeIcon icon={faChevronRight} />
+		  	</>
+		)
+	} else {
+		return(
+			<>
+				<FontAwesomeIcon icon={faChevronLeft} /> {props.label}
+		  	</>
+		)
+	}
   }
   
   export default CollectionNav;
