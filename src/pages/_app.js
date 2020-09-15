@@ -1,3 +1,4 @@
+import '../scss/custom.scss'
 
 import React, { useState } from "react";
 import GlobalContext from '../components/GlobalContext'
