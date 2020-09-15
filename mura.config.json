@@ -103,6 +103,13 @@
 					{"type":"fieldlist","name":"fields","label":"Display List"}
 				]
 			},
+			"CollectionLayoutCards":{
+				"name":"Cards",
+				"contenttypes":"",
+				"configurator":[
+					{"type":"hidden","name":"fields","value":"title,filename,summary,image,subtype"}
+				]
+			},
 			"PrimaryNav":{
 				"name":"PrimaryNav",
 				"contenttypes":"*"
