@@ -51,7 +51,7 @@ const CollectionNav = (props) => {
 		return (
 		<div>
 			<p>Items {pos+1}-{itemsOf} of {items.length}</p>
-			<div class="btn-group" role="group" aria-label="Next/Previous Nav">
+			<div className="btn-group" role="group" aria-label="Next/Previous Nav">
 				{nav}
 			</div>
 		</div>
