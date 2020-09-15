@@ -36,7 +36,7 @@ const CurrentItems = (props) => {
     item = items[i];
     itemsList.push(
     <div className="col mb-4" key={item.get('contentid')}>
-      <Card className="mb-3 h-100">
+      <Card className="mb-3 h-100 shadow">
         <Card.Img variant="top" src={item.get('images').landscape} />
         <Card.Body>
           <Card.Title><h3>{item.get('title')}</h3></Card.Title>

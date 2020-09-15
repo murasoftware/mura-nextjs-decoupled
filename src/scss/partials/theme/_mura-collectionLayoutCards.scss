@@ -1,5 +1,9 @@
 .collectionLayoutCards{
-    .card-footer{
-        background-color:#fff;
+    .card{
+        border:0;
+        .card-footer{
+            background-color:#fff;
+            border-top:0;
+        }   
     }
 }
