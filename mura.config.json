@@ -92,6 +92,19 @@
 					}
 				]
 			},
+			"CTAButton":{
+				"name":"CTA Button",
+				"contenttypes":"*",
+				"omitcontenttypes":"",
+				"configurator":[
+					{"type":"text","name":"buttontext","label":"Button Text"},
+					{"type":"select","name":"buttoncolor","label":"Button Color","labels":["Primary","Secondary","Success","Warning","Danger","Light","Dark","Link"],"options":["primary","secondary","success","warning","danger","light","dark","link"],"value":"primary"},
+					{"type":"select","name":"buttonsize","label":"Button Size","labels":["Small","Normal","Large"],"options":["sm","md","lg"],"value":"md"},
+					{"type":"text","name":"buttonlink","label":"Button Link"},
+					{"type":"select","name":"buttontarget","label":"Button Target","labels":["_blank","_self","_parent","_top"],"options":["Blank","Self","Parent","Top"],"value":"_self"},
+					{"type":"select","name":"buttonblock","label":"Button Block?","labels":["Yes","No"],"options":["true","false"],"value":"false"}
+				]
+			},
 			"CollectionLayout":{
 				"name":"CollectionLayout",
 				"contenttypes":""
