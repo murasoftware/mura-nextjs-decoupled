@@ -296,3 +296,10 @@
     }
   }
   
+  .navbar-nav{
+    .nav-item{
+      a{
+        @extend .nav-link;
+      }
+    }
+  }

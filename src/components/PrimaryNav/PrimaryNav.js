@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Mura from 'mura.js';
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 function PrimaryNav(props) {
   const objectparams = Object.assign({}, props);
@@ -34,18 +36,24 @@ const Render = ({ items, link }) => {
     const Link=link;
 
     return (
-    <div>
-        <nav>
-        <ul>
+      <Navbar bg="white" variant="light" expand="lg" className="navbar-static-top py-4 shadow-sm">
+      <div className="container-xl">
+        <Navbar.Brand href="/">Mura-NextJS-Decoupled</Navbar.Brand>
+        <Navbar.Toggle aria-controls="primary-nav" />
+        <Navbar.Collapse id="primary-nav">
+          <Nav className="ml-auto">
             {items &&
             items.map(item => (
-                <Link key={item.contentid} href={`/${item.filename}`}>
-                {item.menutitle}
+              <li className="nav-item" key={item.contentid}>
+                <Link href={`/${item.filename}`}>
+                  {item.menutitle}
                 </Link>
+              </li>
             ))}
-        </ul>
-        </nav>
-    </div>
+            </Nav>
+          </Navbar.Collapse>
+        </div>
+      </Navbar>
     )
 };
 
