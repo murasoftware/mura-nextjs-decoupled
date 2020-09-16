@@ -13,6 +13,7 @@ import CTAButton from '../components/CTAButton';
 import DefaultLayout from '../components/DefaultLayout';
 import CollectionLayout,{getQueryProps as getCollectionLayoutProps} from '../components/CollectionLayout';
 import CollectionLayoutCards from '../components/CollectionLayoutCards';
+import CollectionLayoutList from '../components/CollectionLayoutList';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -77,6 +78,11 @@ let moduleRegistry = [
   {
     name: 'CollectionLayoutCards',
     component: CollectionLayoutCards,
+    excludeFromClient: true
+  },
+  {
+    name: 'CollectionLayoutList',
+    component: CollectionLayoutList,
     excludeFromClient: true
   }, 
 ];
