@@ -1,0 +1,27 @@
+.mura-item-meta{
+    &__subtype{
+        @extend .badge, .badge-pill, .badge-primary, .mb-2;
+        &[data-value]:before{
+            position: relative;
+            font-family:"fontawesome";
+            margin-left: .15rem;
+            vertical-align: top;
+        }
+        &[data-value="Webinar"]{
+            background-color: $goldenrod;
+            &:before{
+                content:'\f108';
+                bottom: -1px;
+            }
+        }
+        &[data-value="White Paper"]{
+            background-color: $orange;
+            &:before{
+                content:'\f1c1';
+            }
+        }
+    }
+    &__date{
+        @extend .text-uppercase, .text-muted, .small, .mb-2;
+    }
+}
