@@ -45,18 +45,18 @@ function Collection(props) {
   }
 }
 
-const RouterlessLink = ({href,children})=>{
+const RouterlessLink = ({href,children,className})=>{
   return (
-    <a href={href}>
+    <a href={href} className={className}>
       {children}
     </a>
   );
 }
 
-const RouterLink = ({href,children})=>{
+const RouterLink = ({href,children,className})=>{
   return (
     <Link href={href}>
-      <a>{children}</a>
+      <a className={className}>{children}</a>
     </Link>
   );
 }
