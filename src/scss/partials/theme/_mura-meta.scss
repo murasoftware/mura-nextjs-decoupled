@@ -6,6 +6,8 @@
             font-family:"fontawesome";
             margin-left: .15rem;
             vertical-align: top;
+            content:'\f1c1';
+            margin-right:.35rem;
         }
         &[data-value="Webinar"]{
             background-color: $goldenrod;
