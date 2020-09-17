@@ -138,7 +138,7 @@ const NavLinkDropdown = props => {
   if (Items.length) {
     return (
       <>
-      <NavDropdown key={props.contentid} title={props.menutitle} id={`dropdown-${props.contentid}`}>
+      <NavDropdown key={props.contentid} title={props.menutitle} id={`dropdown-${props.contentid}`} renderMenuOnMount={true}>
       {Items && Items.map((item) => {
         return(
           <Link key={item.contentid} href={`/${item.filename}`} className="dropdown-item">{item.menutitle}</Link>

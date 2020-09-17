@@ -303,3 +303,16 @@
       }
     }
   }
+
+  @include media-breakpoint-up(lg){
+    .nav-item:hover{
+      .dropdown-menu{
+        display:block!important;
+        a{
+          &:first-child{
+            display:none;
+          }
+        }
+      }
+    }
+  }
