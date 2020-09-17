@@ -1,12 +1,12 @@
-
 import React from 'react';
+import styles from './Example.module.scss';
 
 function Example({myvar}) {
   // console.log("Component -> Text: ", props);
 
   return (
     <div>
-        <h3>{myvar || 'Enter example variable in configurator'}</h3>
+        <h3 className={styles.label}>{myvar || 'Enter example variable in configurator'}</h3>
     </div>
   );
 }
