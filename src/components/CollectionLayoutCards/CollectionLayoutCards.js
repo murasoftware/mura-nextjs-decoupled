@@ -3,6 +3,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ReactMarkdown from "react-markdown";
 import CollectionNav from '../CollectionNav/CollectionNav';
+import ItemDate from '../ItemDate';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
@@ -81,26 +82,6 @@ const CurrentItems = (props) => {
   return itemsList;
 }
 
-const ItemDate = (props) => {
-  let date = '';
-  let formatteddate = '';
-
-  if(props.releasedate){
-    date = props.releasedate;
-  } else {
-    date = props.lastupdate
-  }
-  console.log(date);
-  //
-  //need to format the date, not sure why the below doesn't work
-  //
-  //formatteddate = Intl.DateTimeFormat("en-US", {year: "numeric",month: "long",day: "2-digit"}).format(date);
-  formatteddate = date;
-
-  return (
-      formatteddate
-  )
-}
 /*
   This is not required; it is used to retrieve the required fields when populated getStatic/getServerSide props
 */
