@@ -1,13 +1,21 @@
 .mura-item-meta{
     &__subtype{
         @extend .badge, .badge-pill, .badge-primary, .mb-2;
+        font-size:.8rem;
         &[data-value]:before{
             position: relative;
             font-family:"fontawesome";
             margin-left: .15rem;
             vertical-align: top;
-            content:'\f1c1';
+            content:'\f15b';
             margin-right:.35rem;
+            font-weight:400;
+        }
+        &[data-value="Article"]{
+            background-color: $goldenrod;
+            &:before{
+                content:'\f15c';
+            }
         }
         &[data-value="Webinar"]{
             background-color: $goldenrod;
