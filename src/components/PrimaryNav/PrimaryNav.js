@@ -55,7 +55,7 @@ const Render = ({ items, link }) => {
                 //if not home, return a dropdown if the item has children
                 if (item.menutitle != 'Home') {
                     return (
-                      <NavLinkDropdown contentid={item.contentid} filename={item.filename} menutitle={item.menutitle} />
+                      <NavLinkDropdown key={item.contentid} contentid={item.contentid} filename={item.filename} menutitle={item.menutitle} />
                     )
                 }
                 //otherwise return just the "home" link item
@@ -141,7 +141,7 @@ const NavLinkDropdown = props => {
       <NavDropdown key={props.contentid} title={props.menutitle} id={`dropdown-${props.contentid}`}>
       {Items && Items.map((item) => {
         return(
-          <NavDropdown.Item key={item.contentid} href={`/${item.filename}`}>{item.menutitle}</NavDropdown.Item>
+          <Link key={item.contentid} href={`/${item.filename}`} className="dropdown-item">{item.menutitle}</Link>
         )
       })}
       </NavDropdown>
