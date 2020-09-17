@@ -1,9 +1,11 @@
 import { useState } from "react";
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import ReactMarkdown from "react-markdown";
 import CollectionNav from '../CollectionNav/CollectionNav';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 /*
   The link component throws an error when rerending after being 
   reconfigured in edit mode. Hence CollectionLink
@@ -59,18 +61,15 @@ const CurrentItems = (props) => {
                 case "summary":
                   return <ReactMarkdown source={item.get('summary')} key={field} />
                 default:
-                  return <div className={`mura-item-meta__${field}`} key={field} data-value={field}>{item.get(field)}</div>
+                  return <div className={`mura-item-meta__${field}`} key={field} data-value={item.get(field)}>{item.get(field)}</div>
               }        
             })
             }
           </div>
         </Card.Body>
         <Card.Footer>
-          {/* <Button key="readmore" as={Link} href={`/${item.get('filename')}`} variant="primary" className="stretched-link">
-					  Learn More
-					</Button> */}
-          <Link href={`/${item.get('filename')}`} passHref className="stretched-link">
-            Learn More
+          <Link href={`/${item.get('filename')}`} passHref className="stretched-link btn btn-primary">
+            Read More  <FontAwesomeIcon icon={faChevronRight} />
           </Link>
         </Card.Footer>
 
