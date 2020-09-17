@@ -2,7 +2,7 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["DefaultLayout","CollectionLayout"],
+			"collectionLayoutArray":["DefaultLayout","CollectionLayout","CollectionLayoutCards","CollectionLayoutList"],
 			"collectionDefaultLayout":"DefaultLayout",
 			"SSR":false,
 			"hashurls":false,
@@ -125,6 +125,13 @@
 					{"type":"select","name":"rowcolslg","label":"Columns > 991px","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"3"},
 					{"type":"select","name":"rowcolsmd","label":"Columns > 767px","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"3"},
 					{"type":"select","name":"rowcolssm","label":"Number > 575px","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"2"}
+				]
+			},
+			"CollectionLayoutList":{
+				"name":"List",
+				"contenttypes":"",
+				"configurator":[
+					{"type":"fieldlist","name":"fields","label":"Display List"}
 				]
 			},
 			"PrimaryNav":{
