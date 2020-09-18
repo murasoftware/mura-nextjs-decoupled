@@ -305,9 +305,13 @@
   }
 
   @include media-breakpoint-up(lg){
-    .nav-item:hover{
+    .nav-item{
+      &:hover{
+        .dropdown-menu{
+          display:block!important;
+        }
+      }
       .dropdown-menu{
-        display:block!important;
         a{
           &:first-child{
             display:none;
@@ -315,6 +319,7 @@
         }
       }
     }
+    
   }
   @include media-breakpoint-down(md){
     .navbar-collapse{
@@ -345,7 +350,7 @@
           position:relative;
           &::after{
             position:absolute;
-            right: $dropdown-padding-y;
+            right: 1rem;
             top: 50%;
             transform: translateY(-50%);
           }
