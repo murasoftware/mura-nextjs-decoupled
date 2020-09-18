@@ -14,6 +14,7 @@ import DefaultLayout from '../components/DefaultLayout';
 import CollectionLayout,{getQueryProps as getCollectionLayoutProps} from '../components/CollectionLayout';
 import CollectionLayoutCards from '../components/CollectionLayoutCards';
 import CollectionLayoutList from '../components/CollectionLayoutList';
+import CollectionLayoutAccordion from '../components/CollectionLayoutAccordion';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -83,6 +84,11 @@ let moduleRegistry = [
   {
     name: 'CollectionLayoutList',
     component: CollectionLayoutList,
+    excludeFromClient: true
+  },
+  {
+    name: 'CollectionLayoutAccordion',
+    component: CollectionLayoutAccordion,
     excludeFromClient: true
   }, 
 ];

@@ -1,0 +1,2 @@
+import CollectionLayoutAccordion from './CollectionLayoutAccordion'
+export default CollectionLayoutAccordion;
