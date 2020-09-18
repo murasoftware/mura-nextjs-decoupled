@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 function CTAButton({buttontext,buttoncolor,buttonsize,buttonlink,buttontarget,buttonblock}) {
 
@@ -12,7 +13,9 @@ function CTAButton({buttontext,buttoncolor,buttonsize,buttonlink,buttontarget,bu
 
   return (
     <>
-        <a href={buttonlink||'https://www.murasoftware.com'} target={buttontarget||'_self'} className={btnclass}>{buttontext || 'Press Me'}</a>
+        <Link href={buttonlink||'https://www.murasoftware.com'} passHref>
+          <a target={buttontarget||'_self'} className={btnclass}>{buttontext || 'Press Me'}</a>
+        </Link>
     </>
   );
 }
