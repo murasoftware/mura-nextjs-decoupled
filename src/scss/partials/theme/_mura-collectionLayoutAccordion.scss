@@ -1,6 +1,7 @@
 .accordion{
     .card-header{
         position:relative;
+        cursor: pointer;
         &::before{
             font-family: 'fontawesome';
             font-weight: 900;
@@ -16,12 +17,11 @@
         &.not-open:before {
             content: "\f078";
         }  
-    }
-            
-    &:hover{
-        //background: rgba(0,0,0,.05);
-        text-decoration: none;
-        transition: all .3s ease;
-        -webkit-transition: all .3s ease;
+        &:hover{
+            background: rgba(0,0,0,.05);
+            text-decoration: none;
+            transition: all .3s ease;
+            -webkit-transition: all .3s ease;
+        }
     }
 }
