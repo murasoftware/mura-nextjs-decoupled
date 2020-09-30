@@ -110,7 +110,7 @@ const RouterlessLink = ({href,children,className})=>{
     );
   }
 
-  //need to move this to MuraHelper for Static rendering
+//need to move this to MuraHelper for Static rendering
 async function getDropdownNavData(itemid) {
   return Mura.getFeed('content')
     .where()
@@ -135,6 +135,7 @@ const NavLinkDropdown = props => {
   },[]);
   
   // if item has children create dropdown
+  // QUESTION:::can we make the navdropdown clickable/link or do we need to make a custom component to make it work on hover on desktop?
   if (Items.length) {
     return (
       <>
