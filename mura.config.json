@@ -2,7 +2,7 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["DefaultLayout","CollectionLayout","CollectionLayoutCards","CollectionLayoutList","CollectionLayoutAccordion"],
+			"collectionLayoutArray":["DefaultLayout","CollectionLayout","CollectionLayoutCards","CollectionLayoutList","CollectionLayoutAccordion","CollectionLayoutAlternatingBoxes"],
 			"collectionDefaultLayout":"DefaultLayout",
 			"SSR":false,
 			"hashurls":false,
@@ -140,6 +140,10 @@
 				"configurator":[
 					{"type":"fieldlist","name":"fields","label":"Display List"}
 				]
+			},
+			"CollectionLayoutAlternatingBoxes":{
+				"name":"AlternatingBoxes",
+				"contentypes":""
 			},
 			"PrimaryNav":{
 				"name":"PrimaryNav",

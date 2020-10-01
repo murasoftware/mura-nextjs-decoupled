@@ -15,6 +15,7 @@ import CollectionLayout,{getQueryProps as getCollectionLayoutProps} from '../com
 import CollectionLayoutCards from '../components/CollectionLayoutCards';
 import CollectionLayoutList from '../components/CollectionLayoutList';
 import CollectionLayoutAccordion from '../components/CollectionLayoutAccordion';
+import CollectionLayoutAlternatingBoxes from '../components/CollectionLayoutAlternatingBoxes';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -90,7 +91,12 @@ let moduleRegistry = [
     name: 'CollectionLayoutAccordion',
     component: CollectionLayoutAccordion,
     excludeFromClient: true
-  }, 
+  },
+  {
+    name: 'CollectionLayoutAlternatingBoxes',
+    component: CollectionLayoutAlternatingBoxes,
+    excludeFromClient: true
+  }
 ];
 
 let moduleLookup = {};
