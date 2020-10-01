@@ -16,6 +16,7 @@ import CollectionLayoutCards from '../components/CollectionLayoutCards';
 import CollectionLayoutList from '../components/CollectionLayoutList';
 import CollectionLayoutAccordion from '../components/CollectionLayoutAccordion';
 import CollectionLayoutAlternatingBoxes from '../components/CollectionLayoutAlternatingBoxes';
+import CollectionLayoutAlternatingRows from '../components/CollectionLayoutAlternatingRows';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -95,6 +96,11 @@ let moduleRegistry = [
   {
     name: 'CollectionLayoutAlternatingBoxes',
     component: CollectionLayoutAlternatingBoxes,
+    excludeFromClient: true
+  },
+  {
+    name: 'CollectionLayoutAlternatingRows',
+    component: CollectionLayoutAlternatingRows,
     excludeFromClient: true
   }
 ];

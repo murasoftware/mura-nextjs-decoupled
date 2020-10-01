@@ -2,7 +2,7 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["DefaultLayout","CollectionLayout","CollectionLayoutCards","CollectionLayoutList","CollectionLayoutAccordion","CollectionLayoutAlternatingBoxes"],
+			"collectionLayoutArray":["DefaultLayout","CollectionLayout","CollectionLayoutCards","CollectionLayoutList","CollectionLayoutAccordion","CollectionLayoutAlternatingBoxes","CollectionLayoutAlternatingRows"],
 			"collectionDefaultLayout":"DefaultLayout",
 			"SSR":false,
 			"hashurls":false,
@@ -144,6 +144,10 @@
 			"CollectionLayoutAlternatingBoxes":{
 				"name":"AlternatingBoxes",
 				"contentypes":""
+			},
+			"CollectionLayoutAlternatingRows":{
+				"name":"AlternatingRows",
+				"contenttypes":""
 			},
 			"PrimaryNav":{
 				"name":"PrimaryNav",
