@@ -42,3 +42,11 @@
         }
     }
 }
+
+.btn{
+    svg{
+        &[data-icon]{
+            width:10px;
+        }
+    }
+}
