@@ -40,15 +40,15 @@ const CurrentItems = (props) => {
     console.log(item);
 
     itemsList.push(
-      <div className="row" key={item.get('contentid')}>
-      <div className="col-12 col-md-3 mb-3 pr-0">
+      <div className="row mb-3" key={item.get('contentid')}>
+      <div className="col-12 col-md-3 mb-3 pr-md-0">
       <img
         src={item.get('images').medium}
         alt={item.get('title')}
         className="img-fluid"
       />
       </div>
-      <div className="col-12 col-md-9">
+      <div className="col-12 col-md-9 py-3">
         <div className="mura-item-meta">
         {
             fieldlist.map(field => {
