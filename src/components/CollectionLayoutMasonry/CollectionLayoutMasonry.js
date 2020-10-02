@@ -41,7 +41,7 @@ const CurrentItems = (props) => {
     item = items[i];
     itemsList.push(
       
-      <Card className="mb-3 h-100 shadow">
+      <Card className="mb-3 h-100 shadow" key={item.get('contentid')}>
         <Card.Img variant="top" src={item.get('images').landscape} />
         <Card.Body>
           <div className="mura-item-meta">

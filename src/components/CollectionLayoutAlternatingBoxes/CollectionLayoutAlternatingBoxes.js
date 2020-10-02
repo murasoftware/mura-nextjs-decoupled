@@ -66,7 +66,7 @@ const CurrentItems = (props) => {
                       return <ReactMarkdown source={item.get('summary')} key={field} />
                     case "readmore":
                       return(
-                        <Link href={`/${item.get('filename')}`} passHref className="stretched-link btn btn-primary">
+                        <Link href={`/${item.get('filename')}`} passHref className="stretched-link btn btn-primary" key={item.get('contentid')}>
                           Read More  <FontAwesomeIcon icon={faChevronRight} />
                         </Link>
                       );

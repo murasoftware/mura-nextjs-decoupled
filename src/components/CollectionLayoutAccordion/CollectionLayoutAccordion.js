@@ -55,7 +55,7 @@ const CurrentItems = (props) => {
     item = items[i];
     console.log("title:" + item.get('title') + " / " + i);
     itemsList.push(
-      <Card key={item.contentid}>
+      <Card key={item.get('contentid')}>
         <Accordion.Toggle as={Card.Header} variant="link" eventKey={item.get('contentid')} className={activeId === i ? 'open' : 'not-open'} onClick={() => toggleActive(i)}>
           {item.get('title')}
         </Accordion.Toggle>
@@ -70,6 +70,7 @@ const CurrentItems = (props) => {
                             src={item.get('images').medium}
                             alt={item.get('title')}
                             className="img-fluid"
+                            key={item.get('contentid')}
                           />
                         );
                     case "date":
