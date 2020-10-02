@@ -17,6 +17,7 @@ import CollectionLayoutList from '../components/CollectionLayoutList';
 import CollectionLayoutAccordion from '../components/CollectionLayoutAccordion';
 import CollectionLayoutAlternatingBoxes from '../components/CollectionLayoutAlternatingBoxes';
 import CollectionLayoutAlternatingRows from '../components/CollectionLayoutAlternatingRows';
+import CollectionLayoutMasonry from '../components/CollectionLayoutMasonry';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -101,6 +102,11 @@ let moduleRegistry = [
   {
     name: 'CollectionLayoutAlternatingRows',
     component: CollectionLayoutAlternatingRows,
+    excludeFromClient: true
+  },
+  {
+    name: 'CollectionLayoutMasonry',
+    component: CollectionLayoutMasonry,
     excludeFromClient: true
   }
 ];

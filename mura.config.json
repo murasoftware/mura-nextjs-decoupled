@@ -2,8 +2,8 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["DefaultLayout","CollectionLayout","CollectionLayoutCards","CollectionLayoutList","CollectionLayoutAccordion","CollectionLayoutAlternatingBoxes","CollectionLayoutAlternatingRows"],
-			"collectionDefaultLayout":"DefaultLayout",
+			"collectionLayoutArray":["DefaultLayout","CollectionLayout","CollectionLayoutCards","CollectionLayoutList","CollectionLayoutAccordion","CollectionLayoutAlternatingBoxes","CollectionLayoutAlternatingRows","CollectionLayoutMasonry"],
+			"collectionDefaultLayout":"CollectionLayoutList",
 			"SSR":false,
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
@@ -143,11 +143,24 @@
 			},
 			"CollectionLayoutAlternatingBoxes":{
 				"name":"AlternatingBoxes",
-				"contentypes":""
+				"contentypes":"",
+				"configurator":[
+					{"type":"fieldlist","name":"fields","label":"Display List"}
+				]
 			},
 			"CollectionLayoutAlternatingRows":{
 				"name":"AlternatingRows",
-				"contenttypes":""
+				"contenttypes":"",
+				"configurator":[
+					{"type":"fieldlist","name":"fields","label":"Display List"}
+				]
+			},
+			"CollectionLayoutMasonry":{
+				"name":"Masonry",
+				"contenttypes":"",
+				"configurator":[
+					{"type":"fieldlist","name":"fields","label":"Display List"}
+				]
 			},
 			"PrimaryNav":{
 				"name":"PrimaryNav",
