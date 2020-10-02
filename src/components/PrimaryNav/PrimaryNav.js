@@ -129,9 +129,11 @@ const NavLinkDropdown = props => {
   const [Items,setItems]=useState(false);
 
   useEffect(() => {
+    let isMounted = true;
     getDropdownNavData(props.contentid).then((response)=>{
-      setItems(response);
-    });
+      if (isMounted) setItems(response);
+    })
+    return () => { isMounted = false }; // use effect cleanup to set flag false, if unmounted
   },[]);
   
   // if item has children create dropdown
