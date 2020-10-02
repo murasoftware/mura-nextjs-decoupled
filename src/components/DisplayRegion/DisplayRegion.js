@@ -47,7 +47,7 @@ const DisplayRegion = ({ region, moduleStyleData,content }) => {
   const [isEditMode] = useContext(GlobalContext);
   let inherited = '';
 // Mura inheritance, where modules are inherited from parent content
-  if (region.inherited.items.length) {
+  if (region.inherited && region.inherited.items.length) {
     inherited = (
       <DisplayRegionSection
         region={region}

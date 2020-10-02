@@ -11,6 +11,20 @@
 			"imageAttributesArray":[],
 			"defaultInheritedRegions":["header","footer"]
 		},
+		"proxies":{
+			"weather":{
+				"endpoint":"https://api.weather.gov/",
+				"httpmethod":"get",
+				"credentials":[
+					{
+					"type":"header",
+					"name":"User-Agent",
+					"data":"(myweatherapp.com, contact@myweatherapp.com)"
+					}
+				],
+				"events":[]
+			}
+		},
 		"modules":{
 			"Example":{
 				"name":"My Module",
