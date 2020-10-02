@@ -1,6 +1,7 @@
 .accordion{
     .card-header{
         position:relative;
+        background-color:$white;
         cursor: pointer;
         &::before{
             font-family: 'fontawesome';
