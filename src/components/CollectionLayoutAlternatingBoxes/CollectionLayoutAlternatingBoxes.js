@@ -35,7 +35,7 @@ const CurrentItems = (props) => {
   const items = collection.get('items');
   const itemsTo = pos+nextn > items.length ? items.length : pos+nextn;
   const fieldlist = fields ? fields.toLowerCase().split(",") : [];
-  console.log(fieldlist);
+  // console.log(fieldlist);
 
   for(let i = pos;i < itemsTo;i++) {
     item = items[i];
