@@ -1,0 +1,2 @@
+import CollectionLayoutSlickSlider from './CollectionLayoutSlickSlider'
+export default CollectionLayoutSlickSlider;

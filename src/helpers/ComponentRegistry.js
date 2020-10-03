@@ -18,6 +18,7 @@ import CollectionLayoutAccordion from '../components/CollectionLayoutAccordion';
 import CollectionLayoutAlternatingBoxes from '../components/CollectionLayoutAlternatingBoxes';
 import CollectionLayoutAlternatingRows from '../components/CollectionLayoutAlternatingRows';
 import CollectionLayoutMasonry from '../components/CollectionLayoutMasonry';
+import CollectionLayoutSlickSlider from '../components/CollectionLayoutSlickSlider';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -107,6 +108,11 @@ let moduleRegistry = [
   {
     name: 'CollectionLayoutMasonry',
     component: CollectionLayoutMasonry,
+    excludeFromClient: true
+  },
+  {
+    name: 'CollectionLayoutSlickSlider',
+    component: CollectionLayoutSlickSlider,
     excludeFromClient: true
   }
 ];
