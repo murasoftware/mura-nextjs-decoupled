@@ -179,7 +179,7 @@
 					{"type":"text","name":"centerpadding","label":"Center Padding","value":"50"},
 					{"type":"radio","name":"fade","label":"Fade","labels":["Yes","No"],"options":["true","false"],"value":"false"},
 					{"type":"radio","name":"lazyload","label":"Lazy Load","labels":["Yes","No"],"options":["true","false"],"value":"false"},
-					{"type":"select","name":"rows","label":"Rows","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"1"}
+					{"type":"select","name":"rows","label":"Rows","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"1"},
 					{"type":"select","name":"slidesperrow","label":"Slides Per Row","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"3"},
 					{"type":"radio","name":"vertical","label":"Vertical","labels":["Yes","No"],"options":["true","false"],"value":"false"},
 					{"type":"radio","name":"verticalswiping","label":"Vertical Swiping","labels":["Yes","No"],"options":["true","false"],"value":"false"}					
