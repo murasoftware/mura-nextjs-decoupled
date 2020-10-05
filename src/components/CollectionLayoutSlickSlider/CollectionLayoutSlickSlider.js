@@ -56,18 +56,30 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
 
   return (
       slides != null && slides.length > 0 &&
-      <Slider 
-        dots={true}
-        arrows={true}
-        infinite={false}
-        speed={500}
+      <div className="collectionLayoutSlickSlider">
+        <Slider 
+        dots={props.dots}
+        arrows={props.arrows}
+        infinite={props.infinite}
+        speed={Number(props.speed)}
         slidesToShow={Number(props.slidestoshow)}
         slidesToScroll={Number(props.slidestoscroll)}
+        autoplay={props.autoplay}
+        autoplaySpeed={Number(props.autoplayspeed)}
+        centerMode={props.centermode}
+        centerPadding={props.centerpadding}
+        fade={props.fade}
+        lazyLoad={props.lazyload}
+        rows={Number(props.rows)}
+        slidesPerRow={Number(props.sliderperrow)}
+        vertical={props.vertical}
+        verticalSwiping={props.verticalswiping}
         nextArrow={<CustomNextArrow />}
         prevArrow={<CustomPrevArrow />}
         key={props.objectid}>
         {slides}
       </Slider>
+      </div>
   )
 }
 
