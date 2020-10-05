@@ -1,0 +1,28 @@
+.slick-track{
+    display: flex !important;
+}
+
+.slick-slide {
+    height: inherit !important;
+    > div{
+        height:100%;
+    }
+}
+
+.slick-prev,
+.slick-next{
+    height:auto;
+    &:before{
+        display:none !important;
+        color:black !important;
+    }
+}
+.slick-dots{
+    li{
+        button{
+            &:before{
+                font-size:12px;
+            }
+        }
+    }
+}

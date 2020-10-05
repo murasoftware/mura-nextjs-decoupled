@@ -166,7 +166,9 @@
 				"name":"SlickSlider",
 				"contenttypes":"",
 				"configurator":[
-					{"type":"fieldlist","name":"fields","label":"Display List"}
+					{"type":"fieldlist","name":"fields","label":"Display List"},
+					{"type":"select","name":"slidesToShow","label":"Slides to Show","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"3"},
+					{"type":"select","name":"slidesToScroll","label":"Slides to Scroll","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"3"}
 				]
 			},
 			"PrimaryNav":{
