@@ -38,34 +38,34 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
       >
         <FontAwesomeIcon icon={faChevronLeft} />
       </div>
-    );
-  }
-
-  var settings = {
-    dots: true,
-    arrows: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    nextArrow: <CustomNextArrow />,
-    prevArrow: <CustomPrevArrow />
-  }
+    );    
+  }  
   
   const slides = collection.map((item) => (
       <SliderItem 
         image={item.get('images').landscape}//why can't I get this in SliderItem
         item={item}
         link={link}
-        settings={settings}
+        slidestoshow={Number(props.slidestoshow)}
         {...props}
         key={item.get('contentid')}
       />
   ))
+  
+  //console.log('slidesToShow: ' + props.slidestoshow + ' slidesToScroll: ' + props.slidestoscroll + ' objectID: ' + props.objectid);
 
   return (
-      slides != null && slides.length > 0 && 
-      <Slider {...settings}>
+      slides != null && slides.length > 0 &&
+      <Slider 
+        dots={true}
+        arrows={true}
+        infinite={false}
+        speed={500}
+        slidesToShow={Number(props.slidestoshow)}
+        slidesToScroll={Number(props.slidestoscroll)}
+        nextArrow={<CustomNextArrow />}
+        prevArrow={<CustomPrevArrow />}
+        key={props.objectid}>
         {slides}
       </Slider>
   )
@@ -73,11 +73,11 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
 
 const SliderItem = (props) => {
   const item = props.item;
-  const slidesToShow = props.settings.slidesToShow;
+  const slidesToShow = props.slidesToShow;
   const Link = props.link;
   const fieldlist = props.fields ? props.fields.toLowerCase().split(",") : [];
-  console.log(fieldlist);
-  if (fieldlist.length === 1 && fieldlist[0] === 'image' && slidesToShow === 1) {
+  //console.log(fieldlist);
+  if (fieldlist.length === 1 && fieldlist[0] === 'image') {
     return(
       <div key={item.get('contentid')} className="h-100">
         <Link href={`/${item.get('filename')}`} passHref>
@@ -126,6 +126,9 @@ const SliderItem = (props) => {
       </div>   
     )
   }
+
+  
+
 }
 
 /*
