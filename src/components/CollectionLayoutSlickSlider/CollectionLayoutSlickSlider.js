@@ -20,7 +20,6 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", color: "black" }}
         onClick={onClick}
       >
         <FontAwesomeIcon icon={faChevronRight} />
@@ -33,7 +32,6 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", color: "black" }}
         onClick={onClick}
       >
         <FontAwesomeIcon icon={faChevronLeft} />
@@ -56,7 +54,7 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
 
   return (
       slides != null && slides.length > 0 &&
-      <div className="collectionLayoutSlickSlider">
+      <div className={`collectionLayoutSlickSlider ${props.sliderlayout}`}>
         <Slider 
         dots={props.dots}
         arrows={props.arrows}
@@ -66,12 +64,8 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
         slidesToScroll={Number(props.slidestoscroll)}
         autoplay={props.autoplay}
         autoplaySpeed={Number(props.autoplayspeed)}
-        centerMode={props.centermode}
-        centerPadding={props.centerpadding}
-        fade={props.fade}
+        
         lazyLoad={props.lazyload}
-        rows={Number(props.rows)}
-        slidesPerRow={Number(props.sliderperrow)}
         vertical={props.vertical}
         verticalSwiping={props.verticalswiping}
         nextArrow={<CustomNextArrow />}
@@ -80,6 +74,7 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
         {slides}
       </Slider>
       </div>
+      // these are causing an error: fade={props.fade} slidesPerRow={props.slidesperrow} rows={props.rows} centerMode={props.centermod} centerPadding={props.centerpadding}
   )
 }
 
@@ -89,12 +84,42 @@ const SliderItem = (props) => {
   const Link = props.link;
   const fieldlist = props.fields ? props.fields.toLowerCase().split(",") : [];
   //console.log(fieldlist);
-  if (fieldlist.length === 1 && fieldlist[0] === 'image') {
+  if (props.sliderlayout === 'banner') {//swith to props.layout
     return(
-      <div key={item.get('contentid')} className="h-100">
+      <div key={item.get('contentid')} className="h-100 position-relative">
         <Link href={`/${item.get('filename')}`} passHref>
           <img src={props.image} />
         </Link>
+        <div className="mura-item-meta">
+                {
+                fieldlist.map(field => {
+                  switch(field) {
+                    case "title":
+                      return (
+                        <div className="mura-item-meta__title" key={field}>{item.get('title')}</div>
+                      )
+                    case "date":
+                        return (
+                          <div className="mura-item-meta__date" key={item.get('releasedate')}>
+                            <ItemDate releasedate={item.get('releasedate')} lastupdate={item.get('lastupdate')}></ItemDate>
+                          </div>
+                        );
+                    case "summary":
+                      return <ReactMarkdown className="mura-item-meta__summary" source={item.get('summary')} key={field} />
+                    case "readmore":
+                      return(
+                        <div className="mura-item-meta__readmore" key={item.get('contentid')}>
+                          <Link href={`/${item.get('filename')}`} passHref className="btn btn-primary">
+                            Read More  <FontAwesomeIcon icon={faChevronRight} />
+                          </Link>
+                        </div>
+                      );
+                    default:
+                      return <div className={`mura-item-meta__${field}`} key={field} data-value={item.get(field)}>{item.get(field)}</div>
+                  }        
+                })
+                }
+              </div>
       </div>
     )
   } else {

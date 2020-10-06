@@ -167,6 +167,7 @@
 				"contenttypes":"",
 				"configurator":[
 					{"type":"fieldlist","name":"fields","label":"Display List"},
+					{"type":"select","name":"sliderLayout","label":"Slider Layout","labels":["Banner","Cards"],"options":["banner","cards"],"value":"cards"},
 					{"type":"select","name":"slidesToShow","label":"Slides to Show","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"3"},
 					{"type":"select","name":"slidesToScroll","label":"Slides to Scroll","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"3"},
 					{"type":"radio","name":"dots","label":"Show Dots","labels":["Yes","No"],"options":["true","false"],"value":"true"},
