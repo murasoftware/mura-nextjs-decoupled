@@ -124,6 +124,38 @@
                 &-prev{
                     left:15px;
                 }
+                &-dots{
+                    bottom:15px;
+                    li{
+                        button{
+                            padding:0;
+                            &:before{
+                                border:2px solid transparent;
+                                width: auto;
+                                height: auto;
+                                line-height:1;
+                                border-radius:100px;
+                                color: $white;
+                                opacity:1;
+                                font-size:14px;
+                            }
+                            &:hover{
+                                &:before{
+                                    border-color:$primary;
+                                }
+                            }
+                        }
+                    }                    
+                    .slick-active{
+                        button{                            
+                            &:before{
+                                border-color:$white;
+                                color: $primary;
+                            }
+                            
+                        }
+                    }
+                }
             }
         }
     }
