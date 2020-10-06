@@ -128,7 +128,7 @@ async function renderContent(context) {
   if(Array.isArray(filename)){
     filename=filename.join("/");
   }
-  
+  console.log(filename)
   return await Mura.renderFilename(filename, query).then(
     async rendered => {
       return rendered;
@@ -168,7 +168,7 @@ async function getRegionProps(content,isEditMode) {
   getMura();
   let moduleStyleData = {};
   const regions=Object.values(content.get('displayregions'));
-
+  
   for(const regionIdx in regions){
    const region=regions[regionIdx]; 
     if (
