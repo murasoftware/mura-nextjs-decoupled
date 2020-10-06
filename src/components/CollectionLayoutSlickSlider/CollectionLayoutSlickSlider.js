@@ -51,26 +51,86 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
   ))
   
   //console.log('slidesToShow: ' + props.slidestoshow + ' slidesToScroll: ' + props.slidestoscroll + ' objectID: ' + props.objectid);
-
+  // var slickSettings = {
+  //   dots: {props.dots},
+  //   arrows: {props.arrows},
+  //   infinite: {props.infinite},
+  //   speed: {Number(props.speed)},
+  //   slidesToShow:{Number(props.slidestoshow)},
+  //   slidesToScroll: {Number(props.slidestoshow)},
+  //   autoplay: {props.autoplay},
+  //   autoplaySpeed: {Number(props.autoplayspeed)},
+  //   lazyLoad: {props.lazyload},
+  //   vertical: {props.vertical},
+  //   verticalSwiping: {props.verticalswiping},
+  //   responsive={[
+  //     {
+  //       breakpoint: 0,
+  //       settings: {
+  //         slidesToShow: 1,
+  //         slidesToScroll: 1
+  //       }
+  //     },
+  //     {
+  //       breakpoint: 576,
+  //       settings: {
+  //         slidesToShow: 2,
+  //         slidesToScroll: 2
+  //       }
+  //     },
+  //     {
+  //       breakpoint: 992,
+  //       settings: {
+  //         slidesToShow: Number(props.slidestoshow),
+  //         slidesToScroll: Number(props.slidestoshow)
+  //       }
+  //     }
+  //   ]},
+  //   nextArrow: {<CustomNextArrow />},
+  //   prevArrow: {<CustomPrevArrow />}
+  // }
   return (
       slides != null && slides.length > 0 &&
       <div className={`collectionLayoutSlickSlider ${props.sliderlayout}`}>
         <Slider 
-        dots={props.dots}
-        arrows={props.arrows}
-        infinite={props.infinite}
-        speed={Number(props.speed)}
-        slidesToShow={Number(props.slidestoshow)}
-        slidesToScroll={Number(props.slidestoscroll)}
-        autoplay={props.autoplay}
-        autoplaySpeed={Number(props.autoplayspeed)}
-        
-        lazyLoad={props.lazyload}
-        vertical={props.vertical}
-        verticalSwiping={props.verticalswiping}
-        nextArrow={<CustomNextArrow />}
-        prevArrow={<CustomPrevArrow />}
-        key={props.objectid}>
+          dots={props.dots}
+          arrows={props.arrows}
+          infinite={props.infinite}
+          speed={Number(props.speed)}
+          slidesToShow={Number(props.slidestoshow)}
+          slidesToScroll={Number(props.slidestoshow)}
+          autoplay={props.autoplay}
+          autoplaySpeed={Number(props.autoplayspeed)}        
+          lazyLoad={props.lazyload}
+          vertical={props.vertical}
+          verticalSwiping={props.verticalswiping}
+          responsive={[
+            {
+              breakpoint: 0,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            },
+            {
+              breakpoint: 576,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+              }
+            },
+            {
+              breakpoint: 992,
+              settings: {
+                slidesToShow: Number(props.slidestoshow),
+                slidesToScroll: Number(props.slidestoshow)
+              }
+            }
+          ]}
+          nextArrow={<CustomNextArrow />}
+          prevArrow={<CustomPrevArrow />}
+          key={props.objectid}
+        >
         {slides}
       </Slider>
       </div>
