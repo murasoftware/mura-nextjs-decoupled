@@ -3,6 +3,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ReactMarkdown from "react-markdown";
 import ItemDate from '../ItemDate';
+import CollectionReadMoreBtn from '../CollectionReadMoreBtn';
 
 import Slider from "react-slick";
 
@@ -41,7 +42,8 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
   
   const slides = collection.map((item) => (
       <SliderItem 
-        image={item.get('images').landscape}//why can't I get this in SliderItem
+        bannerimage={item.get('images').hero}//why can't I get this in SliderItem
+        cardimage={item.get('images').landscape}
         item={item}
         link={link}
         slidestoshow={Number(props.slidestoshow)}
@@ -104,6 +106,9 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
           lazyLoad={props.lazyload}
           vertical={props.vertical}
           verticalSwiping={props.verticalswiping}
+          fade={props.fade}
+          centerMode={props.centermode}
+          centerPadding={props.centerpadding}
           responsive={[
             {
               breakpoint: 0,
@@ -134,7 +139,7 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
         {slides}
       </Slider>
       </div>
-      // these are causing an error: fade={props.fade} slidesPerRow={props.slidesperrow} rows={props.rows} centerMode={props.centermod} centerPadding={props.centerpadding}
+      // these are causing an error: slidesPerRow={props.slidesperrow} rows={props.rows} 
   )
 }
 
@@ -148,7 +153,7 @@ const SliderItem = (props) => {
     return(
       <div key={item.get('contentid')} className="h-100 position-relative">
         <Link href={`/${item.get('filename')}`} passHref>
-          <img src={props.image} />
+          <img src={props.bannerimage} />
         </Link>
         <div className="mura-item-meta">
                 {
@@ -185,9 +190,9 @@ const SliderItem = (props) => {
   } else {
     return(
       <div className="mx-2 h-100" key={props.contentid} >
-        <Card className="border-0 h-100">
+        <Card className="h-100">
           <Link href={`/${props.filename}`} passHref>
-            <img src={props.image} className="card-img-top" />
+            <img src={props.cardimage} className="card-img-top" />
           </Link>
           <Card.Body className="spacing-normal h-100">
               <div className="mura-item-meta">
@@ -208,7 +213,7 @@ const SliderItem = (props) => {
                       return <ReactMarkdown source={item.get('summary')} key={field} />
                     case "readmore":
                       return(
-                        <Link href={`/${item.get('filename')}`} passHref className="stretched-link btn btn-primary" key={item.get('contentid')}>
+                        <Link href={`/${item.get('filename')}`} passHref className="stretched-link btn btn-primary" key={item.get('contentid')} >
                           Read More  <FontAwesomeIcon icon={faChevronRight} />
                         </Link>
                       );
