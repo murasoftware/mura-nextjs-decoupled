@@ -65,7 +65,7 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
   //   lazyLoad: {props.lazyload},
   //   vertical: {props.vertical},
   //   verticalSwiping: {props.verticalswiping},
-  //   responsive=[
+  //   responsive={[
   //     {
   //       breakpoint: 0,
   //       settings: {
@@ -191,7 +191,7 @@ const SliderItem = (props) => {
     return(
       <div className="mx-2 h-100" key={props.contentid} >
         <Card className="h-100">
-          <Link href={`/${props.filename}`} passHref>
+          <Link href={`/${item.get('filename')}`} passHref>
             <img src={props.cardimage} className="card-img-top" />
           </Link>
           <Card.Body className="spacing-normal h-100">
