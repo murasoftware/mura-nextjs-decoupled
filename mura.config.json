@@ -204,6 +204,14 @@
 			"PrimaryNav":{
 				"name":"PrimaryNav",
 				"contenttypes":"*"
+			},
+			"HR":{
+				"name":"HR",
+				"contenttypes":"*"
+			},
+			"Embed":{
+				"name":"Embed",
+				"contenttypes":"*"
 			}
 	},
 	"sites":{
