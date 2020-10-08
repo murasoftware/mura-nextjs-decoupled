@@ -304,23 +304,23 @@
     }
   }
 
-  @include media-breakpoint-up(lg){
-    .nav-item{
-      &:hover{
-        .dropdown-menu{
-          display:block!important;
-        }
-      }
-      .dropdown-menu{
-        a{
-          &:first-child{
-            display:none;
-          }
-        }
-      }
-    }
+  // @include media-breakpoint-up(lg){
+  //   .nav-item{
+  //     &:hover{
+  //       .dropdown-menu{
+  //         display:block!important;
+  //       }
+  //     }
+  //     .dropdown-menu{
+  //       a{
+  //         &:first-child{
+  //           display:none;
+  //         }
+  //       }
+  //     }
+  //   }
     
-  }
+  // }
   @include media-breakpoint-down(md){
     .navbar-collapse{
       margin-left:-1rem;
