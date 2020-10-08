@@ -250,6 +250,30 @@ div.mura-object[data-object="container"]:not(.mura-objectclass){
     }
 }
 
+@mixin module-theme($module-bg-color) {
+    background-color: $module-bg-color;
+    color: color-yiq($module-bg-color);
+}
+
+//let's replace this with a list/each loop
+.module-brand { @include module-theme($blue); }
+.module-light-gray { @include module-theme($light-gray); }
+.module-medium-gray { @include module-theme($medium-gray); }
+.module-dark-gray { @include module-theme($dark-gray); }
+.module-black { @include module-theme($black); }
+.module-orange { @include module-theme($orange); }
+.module-red { @include module-theme($red); }
+.module-azul { @include module-theme($azul); }
+.module-sea-foam  { @include module-theme($sea-foam); }
+.module-teal { @include module-theme($teal); }
+.module-green { @include module-theme($green); }
+.module-cranberry { @include module-theme($cranberry); }
+.module-goldenrod { @include module-theme($goldenrod); }
+.module-violet { @include module-theme($violet); }
+.module-purple { @include module-theme($purple); }
+.module-blue { @include module-theme($blue); }
+.module-white { @include module-theme($white); }
+
 .module-horizontal-nav{
     .svCatSummary{
         h2{
