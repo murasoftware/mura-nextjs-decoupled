@@ -65,7 +65,7 @@ const CollectionLayoutSlickSlider = ({props,collection,link}) => {
   //   lazyLoad: {props.lazyload},
   //   vertical: {props.vertical},
   //   verticalSwiping: {props.verticalswiping},
-  //   responsive={[
+  //   responsive=[
   //     {
   //       breakpoint: 0,
   //       settings: {
