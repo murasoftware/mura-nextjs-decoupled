@@ -98,7 +98,7 @@ export const getDynamicProps = async props => {
 
 const RouterlessLink = ({href,children,className})=>{
     return (
-      <a href={href} className={classname}>
+      <a href={href} className={className}>
         {children}
       </a>
     );
