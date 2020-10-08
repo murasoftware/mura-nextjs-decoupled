@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 function CTAButton({buttontext,buttoncolor,buttonsize,buttonlink,buttontarget,buttonblock}) {
 
@@ -14,7 +16,7 @@ function CTAButton({buttontext,buttoncolor,buttonsize,buttonlink,buttontarget,bu
   return (
     <>
         <Link href={buttonlink||'https://www.murasoftware.com'} passHref>
-          <a target={buttontarget||'_self'} className={btnclass}>{buttontext || 'Press Me'}</a>
+          <a target={buttontarget||'_self'} className={btnclass}>{buttontext || 'Press Me'} <FontAwesomeIcon icon={faChevronRight} /></a>
         </Link>
     </>
   );
