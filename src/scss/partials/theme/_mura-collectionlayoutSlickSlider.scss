@@ -13,7 +13,7 @@
 
 .collectionLayoutSlickSlider{
     .card{
-        border:0;
+        border-width:1px;
         .card-footer{
             background-color:#fff;
             border-top:0;
@@ -108,14 +108,20 @@
                 &-prev,
                 &-next{
                     z-index:1;
-                    background-color: rgba($white, .75);
+                    background-color: rgba($white, 1);
                     padding:1rem;
                     color:$primary;
                     width:auto;
-                    max-width:55px;
-                    border:1px solid $primary;
+                    max-width:45px;
+                    border:1px solid $white;
+                    transition: all .2s ease;
                     &:before{
                         display:block;
+                    }
+                    &:hover{
+                        background-color: rgba($primary, 1);
+                        color:$white;
+                        border:1px solid $primary;
                     }
                 }
                 &-next{
