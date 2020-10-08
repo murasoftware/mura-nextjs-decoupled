@@ -39,7 +39,7 @@ const Render = ({ items, link }) => {
     return (
       <Navbar bg="white" variant="light" expand="lg" className="navbar-static-top py-4 shadow-sm">
       <div className="container-xl">
-        <Navbar.Brand href="/">Mura-NextJS-Decoupled</Navbar.Brand>
+        <Navbar.Brand href="/">Mura-NextJS</Navbar.Brand>
         <Navbar.Toggle aria-controls="primary-nav" />
         <Navbar.Collapse id="primary-nav">
           <Nav className="ml-auto">
@@ -60,7 +60,9 @@ const Render = ({ items, link }) => {
                 }
                 //otherwise return just the "home" link item
                 return (
-                  <Nav.Link key={item.contentid} href={`/${item.filename}`}>{item.menutitle}</Nav.Link>
+                  <li className="nav-item" key={item.contentid}>
+                    <Link href={`/${item.filename}`}>{item.menutitle}</Link>
+                  </li>
                 )
                 }
             )}
@@ -126,7 +128,7 @@ async function getDropdownNavData(itemid) {
 
 const NavLinkDropdown = props => {
   //const {contentid,filename,menutitle} = props;
-  const [Items,setItems]=useState(false);
+  const [Items,setItems]=useState(false);  
 
   useEffect(() => {
     let isMounted = true;
@@ -141,7 +143,8 @@ const NavLinkDropdown = props => {
   if (Items.length) {
     return (
       <>
-      <NavDropdown key={props.contentid} title={props.menutitle} id={`dropdown-${props.contentid}`} renderMenuOnMount={true}>
+      <NavDropdown key={props.contentid} title={props.menutitle} id={`dropdown-${props.contentid}`} href={`/${props.filename}`} renderMenuOnMount={true}>
+        <Link key={props.contentid} href={`/${props.filename}`} className="dropdown-item">{props.menutitle}</Link>
       {Items && Items.map((item) => {
         return(
           <Link key={item.contentid} href={`/${item.filename}`} className="dropdown-item">{item.menutitle}</Link>
@@ -153,7 +156,10 @@ const NavLinkDropdown = props => {
   }
   // if item doesn't have children create link
   return (
-    <Nav.Link href={`/${props.filename}`}>{props.menutitle}</Nav.Link>      
+    // <Nav.Link href={`/${props.filename}`}>{props.menutitle}</Nav.Link>
+    <li className="nav-item">
+      <Link key={props.contentid} href={`/${props.filename}`}>{props.menutitle}</Link>
+    </li>
   )
 
 }
