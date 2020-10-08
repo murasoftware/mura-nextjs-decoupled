@@ -21,7 +21,7 @@
     "@fortawesome/react-fontawesome": "^0.1.11",
     "bootstrap": "^4.5.0",
     "mura.js": "^1.0.260",
-    "next": "^9.5.2",
+    "next": "^9.5.4",
     "next-transpile-modules": "^4.1.0",
     "react": "16.13.1",
     "react-bootstrap": "^1.2.0",
