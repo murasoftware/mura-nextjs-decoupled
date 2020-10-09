@@ -203,7 +203,10 @@
 			},
 			"PrimaryNav":{
 				"name":"PrimaryNav",
-				"contenttypes":"*"
+				"contenttypes":"*",
+				"configurator":[
+					{"type":"radio","name":"displayhome","label":"Display Home?","labels":["Yes","No"],"options":["true","false"],"value":"false"}
+				]
 			},
 			"HR":{
 				"name":"HR",
