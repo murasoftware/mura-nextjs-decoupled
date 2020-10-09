@@ -303,7 +303,11 @@
       }
     }
   }
-
+  .navbar-nav{
+    .dropdown-menu{
+      transition: all .2s ease;
+    }
+  }
   // @include media-breakpoint-up(lg){
   //   .nav-item{
   //     &:hover{
