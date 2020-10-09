@@ -35,7 +35,7 @@ function PrimaryNav(props) {
 
 const Render = ({ items, link }) => {
     const Link=link;
-
+  console.log(items);
     return (
       <Navbar bg="white" variant="light" expand="lg" className="navbar-static-top py-4 shadow-sm">
       <div className="container-xl">
@@ -51,21 +51,12 @@ const Render = ({ items, link }) => {
                 </Link>
               </li>
             ))} */}
-            {items && items.map((item) => {
+            {items.filter(item => item.parentid === '00000000000000000000000000000000001').map(filteritem => (
                 //if not home, return a dropdown if the item has children
-                if (item.menutitle != 'Home') {
-                    return (
-                      <NavLinkDropdown key={item.contentid} contentid={item.contentid} filename={item.filename} menutitle={item.menutitle} />
-                    )
-                }
-                //otherwise return just the "home" link item
-                return (
-                  <li className="nav-item" key={item.contentid}>
-                    <Link href={`/${item.filename}`}>{item.menutitle}</Link>
-                  </li>
-                )
-                }
-            )}
+                //console.log('contentid: ' + item.contentid + ' parentid: ' + item.parentid);
+               
+                  <NavLinkDropdown key={filteritem.contentid} contentid={filteritem.contentid} filename={filteritem.filename} menutitle={filteritem.menutitle} />
+            ))}
             </Nav>
           </Navbar.Collapse>
         </div>
@@ -77,9 +68,11 @@ export const getDynamicProps = async props => {
 
   return {
     items: await Mura.getFeed('content')
-    .where()
-    .prop('parentid')
-    .isEQ(Mura.homeid)
+    // .where()
+    // .prop('parentid')
+    // .isEQ(Mura.homeid)
+    .maxItems(0)
+    .itemsPerPage(0)
     .sort('orderno')
     .getQuery()
     .then(collection => {
@@ -92,6 +85,8 @@ export const getDynamicProps = async props => {
         contentid: Mura.homeid,
       });
       return tempArray;
+
+      
     })
   };
 }
