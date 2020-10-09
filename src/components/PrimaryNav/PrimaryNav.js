@@ -37,7 +37,7 @@ const Render = ({ items, link, ...props }) => {
     const Link=link;
     // console.log(props.props.displayhome);
     return (
-      <Navbar bg="white" variant="light" expand="lg" className="navbar-static-top py-4 shadow-sm">
+      <Navbar bg="white" variant="light" expand="lg" className="navbar-static-top py-0 shadow-sm">
       <div className="container-xl">
         <Navbar.Brand href="/">Mura-NextJS</Navbar.Brand>
         <Navbar.Toggle aria-controls="primary-nav" />
@@ -131,11 +131,11 @@ const NavLinkDropdown = props => {
       <>
       <NavDropdown key={props.contentid} title={props.menutitle} id={`dropdown-${props.contentid}`} href={`/${props.filename}`} renderMenuOnMount={true}>
         {/* placing the main nav item in the dropdown for now since the parent nav item is not a clickable link */}
-        <Link key={props.contentid} href={`/${props.filename}`} className="dropdown-item">{props.menutitle}</Link>
+        <Link key={props.contentid} href={`/${props.filename}`}><a className="nav-link">{props.menutitle}</a></Link>
         {/* if there are children, build the rest of the dropdown */}
         {children && children.map((child) => {
           return(
-            <Link key={child.contentid} href={`/${child.filename}`} className="dropdown-item">{child.menutitle}</Link>
+            <Link key={child.contentid} href={`/${child.filename}`}><a className="nav-link">{child.menutitle}</a></Link>
           )
         })}
       </NavDropdown>
@@ -145,7 +145,7 @@ const NavLinkDropdown = props => {
   // if item doesn't have children create a link
   return (
     <li className="nav-item">
-      <Link key={props.contentid} href={`/${props.filename}`}>{props.menutitle}</Link>
+      <Link key={props.contentid} href={`/${props.filename}`}><a className="nav-link">{props.menutitle}</a></Link>
     </li>
   )
 
