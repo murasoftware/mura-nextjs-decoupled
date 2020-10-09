@@ -76,6 +76,7 @@ export const getDynamicProps = async props => {
     .maxItems(0)
     .itemsPerPage(0)
     .sort('orderno')
+    .expand("kids")
     .getQuery()
     .then(collection => {
       let tempArray = collection.getAll().items;
