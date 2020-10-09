@@ -53,12 +53,14 @@ const Render = ({ items, link, ...props }) => {
             ))} */}
             <Homelink displayhome={props.props.displayhome} />
             
-            {items.filter(item => item.parentid === '00000000000000000000000000000000001').map(filtereditem => {
-                  const children = items.filter(item => item.parentid === filtereditem.contentid);
+            {
+              items.map(item => {
+                  {/* console.log(item.kids); */}
                   return (  
-                    <NavLinkDropdown key={filtereditem.contentid} contentid={filtereditem.contentid} filename={filtereditem.filename} menutitle={filtereditem.menutitle} children={children} />
+                    <NavLinkDropdown key={item.contentid} contentid={item.contentid} filename={item.filename} menutitle={item.menutitle} kids={item.kids} />
                   )
-            })}
+              })
+            }
             </Nav>
           </Navbar.Collapse>
         </div>
@@ -70,23 +72,21 @@ export const getDynamicProps = async props => {
 
   return {
     items: await Mura.getFeed('content')
-    // .where()
-    // .prop('parentid')
-    // .isEQ(Mura.homeid)
-    .maxItems(0)
-    .itemsPerPage(0)
+    .where()
+    .prop('parentid')
+    .isEQ(Mura.homeid)
     .sort('orderno')
     .expand("kids")
     .getQuery()
     .then(collection => {
       let tempArray = collection.getAll().items;
-      tempArray.unshift({
-        url: '/',
-        menutitle: 'Home',
-        title: 'Home',
-        filename: '',
-        contentid: Mura.homeid,
-      });
+      // tempArray.unshift({
+      //   url: '/',
+      //   menutitle: 'Home',
+      //   title: 'Home',
+      //   filename: '',
+      //   contentid: Mura.homeid,
+      // });
       return tempArray;
 
       
@@ -125,16 +125,15 @@ const RouterlessLink = ({href,children,className})=>{
   }
 
 const NavLinkDropdown = props => {
-  const children = props.children;
   
-  if (children.length) {
+  if (props.kids.items.length) {
     return (
       <>
       <NavDropdown key={props.contentid} title={props.menutitle} id={`dropdown-${props.contentid}`} href={`/${props.filename}`} renderMenuOnMount={true}>
         {/* placing the main nav item in the dropdown for now since the parent nav item is not a clickable link */}
         <Link key={props.contentid} href={`/${props.filename}`}><a className="nav-link">{props.menutitle}</a></Link>
         {/* if there are children, build the rest of the dropdown */}
-        {children && children.map((child) => {
+        {props.kids.items.map((child) => {
           return(
             <Link key={child.contentid} href={`/${child.filename}`}><a className="nav-link">{child.menutitle}</a></Link>
           )
@@ -143,6 +142,7 @@ const NavLinkDropdown = props => {
       </>
     )
   }
+
   // if item doesn't have children create a link
   return (
     <li className="nav-item">
