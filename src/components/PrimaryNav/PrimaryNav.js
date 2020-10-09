@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 
 function PrimaryNav(props) {
   const objectparams = Object.assign({}, props);
-
+  // console.log(props);
   if(!objectparams.dynamicProps){
     const [items, setItems]=useState('');
 
@@ -19,7 +19,7 @@ function PrimaryNav(props) {
 
     if(items){
       return (
-        <Render items={items} link={RouterlessLink} />
+        <Render items={items} link={RouterlessLink} props={props} />
       );
     } else {
       return (
@@ -28,14 +28,14 @@ function PrimaryNav(props) {
     }
   } else {
     return (
-      <Render items={objectparams.dynamicProps.items} link={RouterLink}/>
+      <Render items={objectparams.dynamicProps.items} link={RouterLink} props={props}/>
     );
   }
 }
 
-const Render = ({ items, link }) => {
+const Render = ({ items, link, ...props }) => {
     const Link=link;
-  console.log(items);
+    // console.log(props.props.displayhome);
     return (
       <Navbar bg="white" variant="light" expand="lg" className="navbar-static-top py-4 shadow-sm">
       <div className="container-xl">
@@ -51,12 +51,14 @@ const Render = ({ items, link }) => {
                 </Link>
               </li>
             ))} */}
-            {items.filter(item => item.parentid === '00000000000000000000000000000000001').map(filteritem => (
-                //if not home, return a dropdown if the item has children
-                //console.log('contentid: ' + item.contentid + ' parentid: ' + item.parentid);
-               
-                  <NavLinkDropdown key={filteritem.contentid} contentid={filteritem.contentid} filename={filteritem.filename} menutitle={filteritem.menutitle} />
-            ))}
+            <Homelink displayhome={props.props.displayhome} />
+            
+            {items.filter(item => item.parentid === '00000000000000000000000000000000001').map(filtereditem => {
+                  const children = items.filter(item => item.parentid === filtereditem.contentid);
+                  return (  
+                    <NavLinkDropdown key={filtereditem.contentid} contentid={filtereditem.contentid} filename={filtereditem.filename} menutitle={filtereditem.menutitle} children={children} />
+                  )
+            })}
             </Nav>
           </Navbar.Collapse>
         </div>
@@ -107,51 +109,41 @@ const RouterlessLink = ({href,children,className})=>{
     );
   }
 
-//need to move this to MuraHelper for Static rendering
-async function getDropdownNavData(itemid) {
-  return Mura.getFeed('content')
-    .where()
-    .prop('parentid')
-    .isEQ(itemid)
-    .sort('orderno','asc')
-    .getQuery()
-    .then(collection => {
-      let kidsArray = collection.getAll().items;
-      return kidsArray;
-    });
-}
+  const Homelink = ({displayhome}) => {
+    // console.log(displayhome);
+    if (displayhome){
+      return (
+        <li className="nav-item">
+          <Link key={Mura.homeid} href="/" className="nav-link">Home</Link>
+        </li>        
+      )
+    }
+    return (
+      <></>
+    )
+  }
 
 const NavLinkDropdown = props => {
-  //const {contentid,filename,menutitle} = props;
-  const [Items,setItems]=useState(false);  
-
-  useEffect(() => {
-    let isMounted = true;
-    getDropdownNavData(props.contentid).then((response)=>{
-      if (isMounted) setItems(response);
-    })
-    return () => { isMounted = false }; // use effect cleanup to set flag false, if unmounted
-  },[]);
+  const children = props.children;
   
-  // if item has children create dropdown
-  // QUESTION:::can we make the navdropdown clickable/link or do we need to make a custom component to make it work on hover on desktop?
-  if (Items.length) {
+  if (children.length) {
     return (
       <>
       <NavDropdown key={props.contentid} title={props.menutitle} id={`dropdown-${props.contentid}`} href={`/${props.filename}`} renderMenuOnMount={true}>
+        {/* placing the main nav item in the dropdown for now since the parent nav item is not a clickable link */}
         <Link key={props.contentid} href={`/${props.filename}`} className="dropdown-item">{props.menutitle}</Link>
-      {Items && Items.map((item) => {
-        return(
-          <Link key={item.contentid} href={`/${item.filename}`} className="dropdown-item">{item.menutitle}</Link>
-        )
-      })}
+        {/* if there are children, build the rest of the dropdown */}
+        {children && children.map((child) => {
+          return(
+            <Link key={child.contentid} href={`/${child.filename}`} className="dropdown-item">{child.menutitle}</Link>
+          )
+        })}
       </NavDropdown>
       </>
     )
   }
-  // if item doesn't have children create link
+  // if item doesn't have children create a link
   return (
-    // <Nav.Link href={`/${props.filename}`}>{props.menutitle}</Nav.Link>
     <li className="nav-item">
       <Link key={props.contentid} href={`/${props.filename}`}>{props.menutitle}</Link>
     </li>
