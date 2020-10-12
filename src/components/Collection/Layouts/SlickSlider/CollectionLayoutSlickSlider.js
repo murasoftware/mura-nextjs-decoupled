@@ -2,8 +2,8 @@ import { useState } from "react";
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ReactMarkdown from "react-markdown";
-import ItemDate from '../ItemDate';
-import CollectionReadMoreBtn from '../CollectionReadMoreBtn';
+import ItemDate from '../../../ItemDate';
+import CollectionReadMoreBtn from '../../../CollectionReadMoreBtn';
 
 import Slider from "react-slick";
 
@@ -14,7 +14,7 @@ import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons
   reconfigured in edit mode. Hence CollectionLink
 */
 
-const CollectionLayoutSlickSlider = ({props,collection,link}) => {
+const SlickSlider = ({props,collection,link}) => {
 
   function CustomNextArrow(props) {
     const { className, style, onClick } = props;
@@ -243,4 +243,4 @@ export const getQueryProps = () => {
   return data;
 };
 
-export default CollectionLayoutSlickSlider;
+export default SlickSlider;

@@ -2,8 +2,8 @@ import { useState } from "react";
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ReactMarkdown from "react-markdown";
-import CollectionNav from '../CollectionNav/CollectionNav';
-import ItemDate from '../ItemDate';
+import CollectionNav from '../../../CollectionNav/CollectionNav';
+import ItemDate from '../../../ItemDate';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +11,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
   The link component throws an error when rerending after being 
   reconfigured in edit mode. Hence CollectionLink
 */
-const CollectionLayoutCards = ({props,collection,link}) => {
+const Cards = ({props,collection,link}) => {
   const [pos, setPos] = useState(0);
   return (
     <>
@@ -92,4 +92,4 @@ export const getQueryProps = () => {
   return data;
 };
 
-export default CollectionLayoutCards;
+export default Cards;

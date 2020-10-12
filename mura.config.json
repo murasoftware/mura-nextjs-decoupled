@@ -2,8 +2,8 @@
 	"global":{
 		"rendererProperties":{
 			"templateArray":["default"],
-			"collectionLayoutArray":["DefaultLayout","CollectionLayout","CollectionLayoutCards","CollectionLayoutList","CollectionLayoutAccordion","CollectionLayoutAlternatingBoxes","CollectionLayoutAlternatingRows","CollectionLayoutMasonry","CollectionLayoutSlickSlider"],
-			"collectionDefaultLayout":"CollectionLayoutList",
+			"collectionLayoutArray":["DefaultLayout","CollectionLayout","Cards","List","AccordionLayout","AlternatingBoxes","AlternatingRows","Masonry","SlickSlider"],
+			"collectionDefaultLayout":"List",
 			"SSR":false,
 			"hashurls":false,
 			"primaryContentTypes":"Page,Link,File",
@@ -130,7 +130,7 @@
 					{"type":"fieldlist","name":"fields","label":"Display List"}
 				]
 			},
-			"CollectionLayoutCards":{
+			"Cards":{
 				"name":"Cards",
 				"contenttypes":"",
 				"configurator":[
@@ -141,42 +141,42 @@
 					{"type":"select","name":"rowcolssm","label":"Columns > 575px","labels":["6","5","4","3","2","1"],"options":["6","5","4","3","2","1"],"value":"2"}
 				]
 			},
-			"CollectionLayoutList":{
+			"List":{
 				"name":"List",
 				"contenttypes":"",
 				"configurator":[
 					{"type":"fieldlist","name":"fields","label":"Display List"}
 				]
 			},
-			"CollectionLayoutAccordion":{
+			"AccordionLayout":{
 				"name":"Accordion",
 				"contenttypes":"",
 				"configurator":[
 					{"type":"fieldlist","name":"fields","label":"Display List"}
 				]
 			},
-			"CollectionLayoutAlternatingBoxes":{
+			"AlternatingBoxes":{
 				"name":"AlternatingBoxes",
 				"contentypes":"",
 				"configurator":[
 					{"type":"fieldlist","name":"fields","label":"Display List"}
 				]
 			},
-			"CollectionLayoutAlternatingRows":{
+			"AlternatingRows":{
 				"name":"AlternatingRows",
 				"contenttypes":"",
 				"configurator":[
 					{"type":"fieldlist","name":"fields","label":"Display List"}
 				]
 			},
-			"CollectionLayoutMasonry":{
+			"Masonry":{
 				"name":"Masonry",
 				"contenttypes":"",
 				"configurator":[
 					{"type":"fieldlist","name":"fields","label":"Display List"}
 				]
 			},
-			"CollectionLayoutSlickSlider":{
+			"SlickSlider":{
 				"name":"SlickSlider",
 				"contenttypes":"",
 				"configurator":[

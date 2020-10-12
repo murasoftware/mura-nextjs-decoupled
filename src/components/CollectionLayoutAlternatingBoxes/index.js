@@ -1,2 +1,0 @@
-import CollectionLayoutAlternatingBoxes from './CollectionLayoutAlternatingBoxes'
-export default CollectionLayoutAlternatingBoxes;

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import React from 'react';
-import Card from 'react-bootstrap/Card';
 import ReactMarkdown from "react-markdown";
-import CollectionNav from '../CollectionNav/CollectionNav';
-import ItemDate from '../ItemDate';
+import CollectionNav from '../../../CollectionNav/CollectionNav';
+import ItemDate from '../../../ItemDate';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
@@ -11,13 +10,12 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
   The link component throws an error when rerending after being 
   reconfigured in edit mode. Hence CollectionLink
 */
-const CollectionLayoutMasonry = ({props,collection,link}) => {
+const List = ({props,collection,link}) => {
   const [pos, setPos] = useState(0);
   return (
     <>
-      <div className={`collectionLayoutMasonry card-columns`}>
-          <CurrentItems collection={collection} pos={pos} link={link} {...props} /> 
-      </div>
+      <CurrentItems collection={collection} pos={pos} link={link} {...props} /> 
+      
       <div className="row">
         <div className="col-12">
         <CollectionNav collection={collection} pos={pos} setPos={setPos} link={link} {...props} />
@@ -39,18 +37,25 @@ const CurrentItems = (props) => {
 
   for(let i = pos;i < itemsTo;i++) {
     item = items[i];
+    console.log(item);
+
     itemsList.push(
-      
-      <Card className="mb-3 h-100 shadow" key={item.get('contentid')}>
-        <Card.Img variant="top" src={item.get('images').landscape} />
-        <Card.Body>
-          <div className="mura-item-meta">
-            {
+      <div className="row mb-3" key={item.get('contentid')}>
+      <div className="col-12 col-md-3 mb-3 pr-md-0">
+      <img
+        src={item.get('images').medium}
+        alt={item.get('title')}
+        className="img-fluid"
+      />
+      </div>
+      <div className="col-12 col-md-9 py-3">
+        <div className="mura-item-meta">
+        {
             fieldlist.map(field => {
               switch(field) {
                 case "title":
                   return (
-                    <Card.Title key={field}>{item.get('title')}</Card.Title>
+                    <h5 key={item.get('field')}>{item.get('title')}</h5>
                   )
                 case "date":
                     return (
@@ -60,20 +65,20 @@ const CurrentItems = (props) => {
                     );
                 case "summary":
                   return <ReactMarkdown source={item.get('summary')} key={field} />
+                case "readmore":
+                      return (
+                        <div className="mura-item-meta__readmore" key={field}>
+                          <Link href={`/${item.get('filename')}`} passHref className="btn btn-link pl-0">Read More  <FontAwesomeIcon icon={faChevronRight} /></Link>
+                        </div>
+                      )
                 default:
                   return <div className={`mura-item-meta__${field}`} key={field} data-value={item.get(field)}>{item.get(field)}</div>
               }        
             })
-            }
-          </div>
-        </Card.Body>
-        <Card.Footer>
-          <Link href={`/${item.get('filename')}`} passHref className="stretched-link btn btn-primary">
-            Read More  <FontAwesomeIcon icon={faChevronRight} />
-          </Link>
-        </Card.Footer>
-
-      </Card>
+        }
+        </div>
+      </div>
+      </div>
     );
   }
 
@@ -90,4 +95,4 @@ export const getQueryProps = () => {
   return data;
 };
 
-export default CollectionLayoutMasonry;
+export default List;

@@ -1,2 +1,0 @@
-import CollectionLayoutAlternatingRows from './CollectionLayoutAlternatingRows'
-export default CollectionLayoutAlternatingRows;

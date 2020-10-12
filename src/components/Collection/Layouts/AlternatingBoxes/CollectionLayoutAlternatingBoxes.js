@@ -2,8 +2,8 @@ import { useState } from "react";
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ReactMarkdown from "react-markdown";
-import CollectionNav from '../CollectionNav/CollectionNav';
-import ItemDate from '../ItemDate';
+import CollectionNav from '../../../CollectionNav/CollectionNav';
+import ItemDate from '../../../ItemDate';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +11,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
   The link component throws an error when rerending after being 
   reconfigured in edit mode. Hence CollectionLink
 */
-const CollectionLayoutAlternatingRows = ({props,collection,link}) => {
+const AlternatingBoxes = ({props,collection,link}) => {
   const [pos, setPos] = useState(0);
   return (
     <>
@@ -40,12 +40,11 @@ const CurrentItems = (props) => {
   for(let i = pos;i < itemsTo;i++) {
     item = items[i];
     itemsList.push(
-    
-    <div className="mb-4" key={item.get('contentid')}>
-      <Card className="mb-3 h-100 shadow">
+
+      <Card className="border-0" key={item.get('contentid')}>
         <div className="row no-gutters align-items-stretch">
           <div className={`col-12 col-md-6 ${i % 2 == 0 ? "card-img-left" : "card-img-right  order-md-2"}`}>
-            <Card.Img variant="top" src={item.get('images').landscape} />
+            <Card.Img variant="top" src={item.get('images').landscape} className="rounded-0" />
           </div>
           <div className="col-12 col-md-6 p-0">
             <Card.Body className="spacing-normal h-100">
@@ -81,7 +80,6 @@ const CurrentItems = (props) => {
           </div>
         </div>
       </Card>
-    </div>
     );
   }
 
@@ -98,4 +96,4 @@ export const getQueryProps = () => {
   return data;
 };
 
-export default CollectionLayoutAlternatingRows;
+export default AlternatingBoxes;

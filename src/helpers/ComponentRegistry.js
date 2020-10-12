@@ -10,15 +10,15 @@ import Hr from '../components/Hr';
 import PrimaryNav,{getDynamicProps as getPrimaryNavProps} from '../components/PrimaryNav';
 import CTAButton from '../components/CTAButton';
 
-import DefaultLayout from '../components/DefaultLayout';
-import CollectionLayout,{getQueryProps as getCollectionLayoutProps} from '../components/CollectionLayout';
-import CollectionLayoutCards from '../components/CollectionLayoutCards';
-import CollectionLayoutList from '../components/CollectionLayoutList';
-import CollectionLayoutAccordion from '../components/CollectionLayoutAccordion';
-import CollectionLayoutAlternatingBoxes from '../components/CollectionLayoutAlternatingBoxes';
-import CollectionLayoutAlternatingRows from '../components/CollectionLayoutAlternatingRows';
-import CollectionLayoutMasonry from '../components/CollectionLayoutMasonry';
-import CollectionLayoutSlickSlider from '../components/CollectionLayoutSlickSlider';
+import DefaultLayout from '../components/Collection/Layouts/DefaultLayout';
+import CollectionLayout,{getQueryProps as getCollectionLayoutProps} from '../components/Collection/Layouts/CollectionLayout';
+import Cards from '../components/Collection/Layouts/Cards';
+import List from '../components/Collection/Layouts/List';
+import AccordionLayout from '../components/Collection/Layouts/Accordion';
+import AlternatingBoxes from '../components/Collection/Layouts/AlternatingBoxes';
+import AlternatingRows from '../components/Collection/Layouts/AlternatingRows';
+import Masonry from '../components/Collection/Layouts/Masonry';
+import SlickSlider from '../components/Collection/Layouts/SlickSlider';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -61,6 +61,10 @@ let moduleRegistry = [
     component: Embed,
   },
   {
+    name: 'CTAButton',
+    component: CTAButton,
+  },
+  {
     name: 'CollectionLayout',
     component: CollectionLayout,
     getQueryProps: getCollectionLayoutProps,
@@ -77,42 +81,38 @@ let moduleRegistry = [
     getDynamicProps: getPrimaryNavProps,
   },
   {
-    name: 'CTAButton',
-    component: CTAButton,
-  },
-  {
-    name: 'CollectionLayoutCards',
-    component: CollectionLayoutCards,
+    name: 'Cards',
+    component: Cards,
     excludeFromClient: true
   },
   {
-    name: 'CollectionLayoutList',
-    component: CollectionLayoutList,
+    name: 'List',
+    component: List,
     excludeFromClient: true
   },
   {
-    name: 'CollectionLayoutAccordion',
-    component: CollectionLayoutAccordion,
+    name: 'AccordionLayout',
+    component: AccordionLayout,
     excludeFromClient: true
   },
   {
-    name: 'CollectionLayoutAlternatingBoxes',
-    component: CollectionLayoutAlternatingBoxes,
+    name: 'AlternatingBoxes',
+    component: AlternatingBoxes,
     excludeFromClient: true
   },
   {
-    name: 'CollectionLayoutAlternatingRows',
-    component: CollectionLayoutAlternatingRows,
+    name: 'AlternatingRows',
+    component: AlternatingRows,
     excludeFromClient: true
   },
   {
-    name: 'CollectionLayoutMasonry',
-    component: CollectionLayoutMasonry,
+    name: 'Masonry',
+    component: Masonry,
     excludeFromClient: true
   },
   {
-    name: 'CollectionLayoutSlickSlider',
-    component: CollectionLayoutSlickSlider,
+    name: 'SlickSlider',
+    component: SlickSlider,
     excludeFromClient: true
   }
 ];
