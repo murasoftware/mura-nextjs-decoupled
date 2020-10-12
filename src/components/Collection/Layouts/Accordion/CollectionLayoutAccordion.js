@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from 'react';
 import ReactMarkdown from "react-markdown";
 import CollectionNav from '../../../CollectionNav/CollectionNav';
-import ItemDate from '../../../ItemDate';
+import ItemDate from '../../../Utilities/ItemDate';
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";

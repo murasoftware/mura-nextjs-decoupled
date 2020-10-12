@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ReactMarkdown from "react-markdown";
-import ItemDate from '../../../ItemDate';
+import ItemDate from '../../../Utilities/ItemDate';
 import CollectionReadMoreBtn from '../../../CollectionReadMoreBtn';
 
 import Slider from "react-slick";

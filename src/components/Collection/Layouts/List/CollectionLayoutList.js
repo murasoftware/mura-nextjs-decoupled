@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from 'react';
 import ReactMarkdown from "react-markdown";
 import CollectionNav from '../../../CollectionNav/CollectionNav';
-import ItemDate from '../../../ItemDate';
+import ItemDate from '../../../Utilities/ItemDate';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
