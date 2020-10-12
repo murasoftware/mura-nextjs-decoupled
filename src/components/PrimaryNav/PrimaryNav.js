@@ -39,7 +39,7 @@ const Render = ({ items, link, ...props }) => {
     return (
       <Navbar bg="white" variant="light" expand="lg" className="navbar-static-top py-0 shadow-sm">
       <div className="container-xl">
-        <Navbar.Brand href="/">Mura-NextJS</Navbar.Brand>
+        <Link href="/" className="navbar-brand">Mura-NextJS</Link>
         <Navbar.Toggle aria-controls="primary-nav" />
         <Navbar.Collapse id="primary-nav">
           <Nav className="ml-auto">
