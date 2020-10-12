@@ -105,9 +105,17 @@ export const getMuraProps = async (context,isEditMode) => {
     moduleStyleData: moduleStyleData
   };
 
-  return {
-    props,
-  };
+  if(isEditMode){
+    return {
+      props
+    };
+
+  } else {
+    return {
+      props,
+      revalidate:1
+    };
+  }
 };
 
 async function renderContent(context) {
