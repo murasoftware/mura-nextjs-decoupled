@@ -25,7 +25,7 @@ export default function Page(props) {
   return (
     <MainLayout {...props}>
       <Head>
-        <title>{content.htmltitle} - {getSiteName()}</title>
+        <title>{content.htmltitle} - {content.site}</title>
         <link
           href={`${getRootPath()}/core/modules/v1/core_assets/css/mura.10.min.css`}
           rel="stylesheet"

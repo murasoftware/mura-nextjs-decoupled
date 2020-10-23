@@ -60,7 +60,6 @@ export const getMura = context => {
     siteid: 'default',
     processMarkup: false,
     editroute: '/edit',
-    sitename: 'Mura NextJS',
   };
 
   if (context && context.res) {
