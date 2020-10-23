@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { getMuraProps, getRootPath, getMuraPaths } from '@helpers/MuraHelper';
+import { getMuraProps, getRootPath, getMuraPaths, getSiteName } from '@helpers/MuraHelper';
 
 import MainLayout from '../components/MainLayout';
 import DisplayRegion from '../components/DisplayRegion';
@@ -36,13 +36,27 @@ export default function Page(props) {
     },
     moduleStyleData
   } = props;
-  
-  
 
   return (
     <MainLayout {...props}>  
       <Head>
-        <title>{content.htmltitle} - {content.site}</title>
+        <title>{content.htmltitle} - {getSiteName()}</title>
+        <meta name="description" content={content.metadesc} />
+
+        <meta property="og:site_name" content={getSiteName()} />
+        <meta property="og:title" content={content.htmltitle} />
+        <meta property="og:description" content={content.metadesc} />
+        <meta property="og:image" content={content.images.large} />
+        <meta property="og:type" content="website" />
+
+        {content.canonicalurl.length > 0 &&
+          <link rel="canonical" href={content.canonicalurl} />
+        }
+
+        {content.canonicalurl.length == 0 &&
+          <link rel="canonical" href={`${getRootPath()}/${content.filename}`} />
+        }
+
         <link
           href={`${getRootPath()}/core/modules/v1/core_assets/css/mura.10.min.css`}
           rel="stylesheet"
