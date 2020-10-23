@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-
 import MainLayout from '../components/MainLayout';
 import DisplayRegion from '../components/DisplayRegion';
 import { getMuraProps, getRootPath, getSiteName } from '../helpers/MuraHelper';
@@ -25,7 +24,7 @@ export default function Page(props) {
   return (
     <MainLayout {...props}>
       <Head>
-        <title>{content.htmltitle} - {getSiteName()}</title>
+      <title>{content.htmltitle} - {getSiteName()}</title>
         <meta name="description" content={content.metadesc} />
 
         <meta property="og:site_name" content={getSiteName()} />
@@ -41,7 +40,6 @@ export default function Page(props) {
         {content.canonicalurl.length == 0 &&
           <link rel="canonical" href={`${getRootPath()}/${content.filename}`} />
         }
-
         <link
           href={`${getRootPath()}/core/modules/v1/core_assets/css/mura.10.min.css`}
           rel="stylesheet"
