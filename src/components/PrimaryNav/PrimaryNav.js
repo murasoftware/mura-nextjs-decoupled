@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 
 function PrimaryNav(props) {
   const objectparams = Object.assign({}, props);
-  // console.log(props);
+  
   if(!objectparams.dynamicProps){
     const [items, setItems]=useState('');
 
@@ -28,36 +28,33 @@ function PrimaryNav(props) {
     }
   } else {
     return (
-      <Render items={objectparams.dynamicProps.items} link={RouterLink} props={props}/>
+      <Render items={objectparams.dynamicProps.items} link={RouterLink} props={props} />
     );
   }
 }
 
 const Render = ({ items, link, ...props }) => {
     const Link=link;
-    // console.log(props.props.displayhome);
+    const homeNavIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M16 8.5l1.53 1.53l-1.06 1.06L10 4.62l-6.47 6.47l-1.06-1.06L10 2.5l4 4v-2h2v4zm-6-2.46l6 5.99V18H4v-5.97zM12 17v-5H8v5h4z" fill="#626262"/></svg>';
+    
     return (
-      <Navbar bg="white" variant="light" expand="lg" className="navbar-static-top py-0 shadow-sm">
+      <Navbar bg="white" variant="light" expand="lg" className="navbar-static-top py-0"  collapseOnSelect>
       <div className="container-xl">
-        <Link href="/" className="navbar-brand">Mura-NextJS</Link>
+        <Link
+          href="/"
+          className="navbar-brand"
+          type="navbarbrand"
+          navlogo={props.props.navlogo} />
         <Navbar.Toggle aria-controls="primary-nav" />
         <Navbar.Collapse id="primary-nav">
           <Nav className="ml-auto">
-            {/* {items &&
-            items.map(item => (
-              <li className="nav-item" key={item.contentid}>
-                <Link href={`/${item.filename}`}>
-                  {item.menutitle}
-                </Link>
-              </li>
-            ))} */}
-            <Homelink displayhome={props.props.displayhome} />
+
+            <Homelink displayhome={props.props.displayhome} link={Link} navicon={homeNavIcon} />
             
             {
               items.map(item => {
-                  {/* console.log(item.kids); */}
                   return (  
-                    <NavLinkDropdown key={item.contentid} contentid={item.contentid} filename={item.filename} menutitle={item.menutitle} kids={item.kids} />
+                    <NavLinkDropdown key={item.contentid} contentid={item.contentid} filename={item.filename} menutitle={item.menutitle} kids={item.kids} link={Link} navicon={item.navicon} />
                   )
               })
             }
@@ -69,73 +66,138 @@ const Render = ({ items, link, ...props }) => {
 };
 
 export const getDynamicProps = async props => {
-
-  return {
-    items: await Mura.getFeed('content')
+ 
+  console.log("requesting primary nav data",props.instanceid,Date.now());
+ 
+  const collection=await Mura.getFeed('content')
     .where()
     .prop('parentid')
     .isEQ(Mura.homeid)
     .sort('orderno')
     .expand("kids")
-    .getQuery()
-    .then(collection => {
-      let tempArray = collection.getAll().items;
-      // tempArray.unshift({
-      //   url: '/',
-      //   menutitle: 'Home',
-      //   title: 'Home',
-      //   filename: '',
-      //   contentid: Mura.homeid,
-      // });
-      return tempArray;
-
-      
-    })
+    .fields('navicon,menutitle,url,filename')
+    .getQuery();
+  
+    console.log("receiving primary nav data",props.instanceid,Date.now());
+  return {
+    items:collection.getAll().items
   };
 }
 
-const RouterlessLink = ({href,children,className})=>{
-    return (
-      <a href={href} className={className}>
-        {children}
-      </a>
-    );
-  }
-  
-  const RouterLink = ({href,children,className})=>{
-    return (
-      <Link href={href}>
-        <a className={className}>{children}</a>
-      </Link>
-    );
-  }
-
-  const Homelink = ({displayhome}) => {
-    // console.log(displayhome);
-    if (displayhome){
+const RouterlessLink = ({href,className,type,menutitle,navlogo})=>{
+  switch(type) {
+    case "navdropdownitem":
       return (
-        <li className="nav-item">
-          <Link key={Mura.homeid} href="/" className="nav-link">Home</Link>
-        </li>        
+        <NavDropdown.Item href={href}>{menutitle}</NavDropdown.Item>
+      )
+    case "navlink":
+      return (
+        <Nav.Link href={href}>{menutitle}</Nav.Link>
+      )
+    case "navbarbrand":
+      return(
+        <Navbar.Brand href={href}>
+          <img src={navlogo} loading="lazy" />
+        </Navbar.Brand>
+      )
+    default:
+      return (     
+        <a className={className} href={href}>
+            {menutitle}
+        </a>
       )
     }
+  }
+  
+const RouterLink = ({href,className,type,menutitle,navlogo})=>{
+  switch(type) {
+    case "navdropdownitem":
+      return (
+        <Link 
+        href={href} passHref>
+          <NavDropdown.Item>{menutitle}</NavDropdown.Item>
+        </Link>
+      )
+    case "navlink":
+      return (
+        <Link 
+        href={href} passHref>
+          <Nav.Link>{menutitle}</Nav.Link>
+        </Link>
+      )
+    case "navbarbrand":
+      return(
+        <Link 
+        href={href} passHref>
+          <Navbar.Brand>
+            <img src={navlogo} loading="lazy" />
+          </Navbar.Brand>
+        </Link>
+      )
+    default:
+      return (
+        <Link 
+          href={href}>      
+            <a 
+              className={className}>
+                {menutitle}
+            </a>
+        </Link>
+      )
+    }
+}
+
+const Homelink = (props) => {
+  const Link=props.link;
+  const homeTitle = 'Home';
+
+  function createIcon() { 
+    return {__html: props.navicon};
+  };
+
+  if (props.displayhome){
     return (
-      <></>
+      <li className="nav-item">
+        <Link
+          key={Mura.homeid}
+          href="/"
+          className="nav-link"
+          type="navitem"
+          menutitle={<><span dangerouslySetInnerHTML={createIcon()} /> {homeTitle}</>}
+          type="navlink" />
+      </li>
     )
   }
+  return (
+    <></>
+  )
+}
 
 const NavLinkDropdown = props => {
-  
+  const Link = props.link;
+  function createIcon() { 
+    return {__html: props.navicon};
+  };
   if (props.kids.items.length) {
+       
     return (
       <>
-      <NavDropdown key={props.contentid} title={props.menutitle} id={`dropdown-${props.contentid}`} href={`/${props.filename}`} renderMenuOnMount={true}>
+      <NavDropdown key={props.contentid} title={<div style={{display: "inline-block"}}><span dangerouslySetInnerHTML={createIcon()} /> {props.menutitle} </div>} id={`dropdown-${props.contentid}`} href={`/${props.filename}`} renderMenuOnMount={true}>
         {/* placing the main nav item in the dropdown for now since the parent nav item is not a clickable link */}
-        <Link key={props.contentid} href={`/${props.filename}`}><a className="nav-link">{props.menutitle}</a></Link>
+        <Link
+          key={props.contentid}
+          href={`/${props.filename}`}
+          type="navdropdownitem"
+          menutitle={props.menutitle} />
+
         {/* if there are children, build the rest of the dropdown */}
         {props.kids.items.map((child) => {
           return(
-            <Link key={child.contentid} href={`/${child.filename}`}><a className="nav-link">{child.menutitle}</a></Link>
+            <Link
+              key={child.contentid}
+              href={`/${child.filename}`}
+              type="navdropdownitem"
+              menutitle={child.menutitle} />
           )
         })}
       </NavDropdown>
@@ -146,8 +208,12 @@ const NavLinkDropdown = props => {
   // if item doesn't have children create a link
   return (
     <li className="nav-item">
-      <Link key={props.contentid} href={`/${props.filename}`}><a className="nav-link">{props.menutitle}</a></Link>
-    </li>
+      <Link 
+        key={props.contentid}
+        href={`/${props.filename}`}
+        type="navlink"
+        menutitle={<><span dangerouslySetInnerHTML={createIcon()} /> {props.menutitle} </>} />
+    </li>    
   )
 
 }
