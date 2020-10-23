@@ -24,13 +24,14 @@ export default function Page(props) {
   return (
     <MainLayout {...props}>
       <Head>
-      <title>{content.htmltitle} - {getSiteName()}</title>
+        {/* I wanted to add a "MuraMetaTags" component here but doesn't seem possible inside the <Head> component -- see metaTags branch */}
+        <title>{content.htmltitle} - {getSiteName()}</title>
         <meta name="description" content={content.metadesc} />
 
         <meta property="og:site_name" content={getSiteName()} />
         <meta property="og:title" content={content.htmltitle} />
         <meta property="og:description" content={content.metadesc} />
-        {content.images &&
+        {content.images.large &&
           <meta property="og:image" content={content.images.large} />
         }
         <meta property="og:type" content="website" />
