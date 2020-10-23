@@ -27,8 +27,20 @@ export default function Page(props) {
       <Head>
         <title>{content.htmltitle} - {getSiteName()}</title>
         <meta name="description" content={content.metadesc} />
+
+        <meta property="og:site_name" content={getSiteName()} />
         <meta property="og:title" content={content.htmltitle} />
+        <meta property="og:description" content={content.metadesc} />
         <meta property="og:image" content={content.images.large} />
+        <meta property="og:type" content="website" />
+
+        {content.canonicalurl.length > 0 &&
+          <link rel="canonical" href={content.canonicalurl} />
+        }
+
+        {content.canonicalurl.length == 0 &&
+          <link rel="canonical" href={`${getRootPath()}/${content.filename}`} />
+        }
 
         <link
           href={`${getRootPath()}/core/modules/v1/core_assets/css/mura.10.min.css`}
