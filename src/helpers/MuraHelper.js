@@ -60,6 +60,7 @@ export const getMura = context => {
     siteid: 'default',
     processMarkup: false,
     editroute: '/edit',
+    sitename: 'Mura NextJS',
   };
 
   if (context && context.res) {
@@ -85,6 +86,10 @@ export const getMura = context => {
 
 export const getRootPath = () => {
   return getMura().rootpath;
+};
+
+export const getSiteName = () => {
+  return getMura().sitename;
 };
 
 export const getMuraProps = async (context,isEditMode) => {

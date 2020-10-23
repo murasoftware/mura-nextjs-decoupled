@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { getMuraProps, getRootPath, getMuraPaths } from '@helpers/MuraHelper';
+import { getMuraProps, getRootPath, getMuraPaths, getSiteName } from '@helpers/MuraHelper';
 
 import MainLayout from '../components/MainLayout';
 import DisplayRegion from '../components/DisplayRegion';
@@ -36,10 +36,11 @@ export default function Page(props) {
     },
     moduleStyleData
   } = props;
-
+  
   return (
-    <MainLayout {...props}>
+    <MainLayout {...props}>  
       <Head>
+        <title>{content.htmltitle} - {getSiteName()}</title>
         <link
           href={`${getRootPath()}/core/modules/v1/core_assets/css/mura.10.min.css`}
           rel="stylesheet"

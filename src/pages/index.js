@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import MainLayout from '../components/MainLayout';
 import DisplayRegion from '../components/DisplayRegion';
-import { getMuraProps, getRootPath } from '../helpers/MuraHelper';
+import { getMuraProps, getRootPath, getSiteName } from '../helpers/MuraHelper';
 
 export async function getStaticProps(context) {
   // console.log("CON",context);
@@ -21,10 +21,11 @@ export default function Page(props) {
     },
     moduleStyleData
   } = props;
-
+  console.log('content: ' + content);
   return (
     <MainLayout {...props}>
       <Head>
+        <title>{content.htmltitle} - {getSiteName()}</title>
         <link
           href={`${getRootPath()}/core/modules/v1/core_assets/css/mura.10.min.css`}
           rel="stylesheet"
