@@ -30,7 +30,9 @@ export default function Page(props) {
         <meta property="og:site_name" content={getSiteName()} />
         <meta property="og:title" content={content.htmltitle} />
         <meta property="og:description" content={content.metadesc} />
-        <meta property="og:image" content={content.images.large} />
+        {content.images &&
+          <meta property="og:image" content={content.images.large} />
+        }
         <meta property="og:type" content="website" />
 
         {content.canonicalurl.length > 0 &&
