@@ -87,10 +87,6 @@ export const getRootPath = () => {
   return getMura().rootpath;
 };
 
-export const getSiteName = () => {
-  return getMura().sitename;
-};
-
 export const getMuraProps = async (context,isEditMode) => {
   const Mura=getMura(context);
 

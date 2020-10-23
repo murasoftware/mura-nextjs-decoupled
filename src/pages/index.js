@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import MainLayout from '../components/MainLayout';
 import DisplayRegion from '../components/DisplayRegion';
-import { getMuraProps, getRootPath, getSiteName } from '../helpers/MuraHelper';
+import { getMuraProps, getRootPath } from '../helpers/MuraHelper';
 
 export async function getStaticProps(context) {
   // console.log("CON",context);

@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { getMuraProps, getRootPath, getMuraPaths, getSiteName } from '@helpers/MuraHelper';
+import { getMuraProps, getRootPath, getMuraPaths } from '@helpers/MuraHelper';
 
 import MainLayout from '../components/MainLayout';
 import DisplayRegion from '../components/DisplayRegion';
