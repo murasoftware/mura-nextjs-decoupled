@@ -35,14 +35,15 @@ export default function Page(props) {
           <meta property="og:image" content={content.images.large} />
         }
         <meta property="og:type" content="website" />
-
-        {content.canonicalurl.length > 0 &&
+        
+        {content.canonicalurl != '' &&
           <link rel="canonical" href={content.canonicalurl} />
         }
 
-        {content.canonicalurl.length == 0 &&
+        {content.canonicalurl == '' &&
           <link rel="canonical" href={`${getRootPath()}/${content.filename}`} />
         }
+
         <link
           href={`${getRootPath()}/core/modules/v1/core_assets/css/mura.10.min.css`}
           rel="stylesheet"
